@@ -137,3 +137,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# nsfw-guardian-image-hideorshow gitignore settings
+node_modules/
+models/tf-wasm-bundle.js
