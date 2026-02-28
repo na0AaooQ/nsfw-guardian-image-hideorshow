@@ -141,3 +141,4 @@ vite.config.ts.timestamp-*
 # nsfw-guardian-image-hideorshow gitignore settings
 node_modules/
 models/tf-wasm-bundle.js
+package-lock.json

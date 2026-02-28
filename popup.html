@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width: 280px; padding: 16px; font-family: sans-serif; background: #15202b; color: #e7e9ea; }
+    h2 { margin: 0 0 16px; font-size: 15px; color: #1d9bf0; }
+    .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    label { font-size: 13px; }
+    input[type="range"] { width: 120px; }
+    .threshold-val { font-size: 13px; color: #1d9bf0; min-width: 36px; text-align: right; }
+    .toggle { position: relative; width: 44px; height: 24px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; background: #333; border-radius: 24px; cursor: pointer; transition: 0.3s; }
+    .slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
+    input:checked + .slider { background: #1d9bf0; }
+    input:checked + .slider::before { transform: translateX(20px); }
+    #status { font-size: 11px; color: #888; text-align: center; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2>🛡️ NSFW Guardian v2</h2>
+  <div class="row">
+    <label>有効/無効</label>
+    <label class="toggle"><input type="checkbox" id="enabledToggle" checked><span class="slider"></span></label>
+  </div>
+  <div class="row">
+    <label>感度（閾値）</label>
+    <input type="range" id="thresholdRange" min="0.3" max="0.9" step="0.05" value="0.3">
+    <span class="threshold-val" id="thresholdVal">65%</span>
+  </div>
+  <div id="status">読み込み中...</div>
+  <script src="popup.js"></script>
+</body>
+</html>
