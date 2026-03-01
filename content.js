@@ -1,3 +1,8 @@
+// NSFWJSの画像判定の閾値
+// 0.3   厳しめ、水着画像程度でもブロック
+// 0.5   水着などの画像でもブロックされる可能性あり
+// 0.65  バランス型
+// 0.8   緩め、明確なセンシティブ画像だけブロック
 const CONFIG = { threshold: 0.3, minImageSize: 100 };
 const approvedUrls = new Set();
 let isEnabled = true;
