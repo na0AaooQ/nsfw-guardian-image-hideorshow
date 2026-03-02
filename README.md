@@ -19,11 +19,12 @@ X(旧Twitter)のDMやタイムライン上で流れてくるセンシティブ�
 
 | ライブラリ | バージョン | ライセンス | 用途 |
 |-----------|-----------|-----------|------|
-| [TensorFlow.js Core](https://github.com/tensorflow/tfjs) | 3.x | Apache 2.0 | ML推論エンジン |
-| [TensorFlow.js WASM Backend](https://github.com/tensorflow/tfjs/tree/master/tfjs-backend-wasm) | 3.x | Apache 2.0 | WASMバックエンド（eval不要） |
-| [TensorFlow.js Layers](https://github.com/tensorflow/tfjs/tree/master/tfjs-layers) | 3.x | Apache 2.0 | LayersModel読み込み |
-| [TensorFlow.js Converter](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter) | 3.x | Apache 2.0 | GraphModel読み込み |
-| [NSFWJS](https://github.com/infinitered/nsfwjs) | - | MIT | NSFWモデル（MobileNet v2ベース） |
+| [TensorFlow.js Core](https://github.com/tensorflow/tfjs) | 3.21.0 | Apache 2.0 | ML推論エンジン |
+| [TensorFlow.js WASM Backend](https://github.com/tensorflow/tfjs/tree/master/tfjs-backend-wasm) | 3.21.0 | Apache 2.0 | WASMバックエンド(eval不要) |
+| [TensorFlow.js Layers](https://github.com/tensorflow/tfjs/tree/master/tfjs-layers) | 3.21.0 | Apache 2.0 | LayersModel読み込み |
+| [TensorFlow.js Converter](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter) | 3.21.0 | Apache 2.0 | GraphModel読み込み |
+| [NSFWJS](https://github.com/infinitered/nsfwjs) | 2.4.2 | MIT | NSFWモデル(MobileNet v2ベース) |
+| Node.js | 25.6.1 | MIT | 拡張機能の実装に利用 |
 
 ## ライセンスについて
 
