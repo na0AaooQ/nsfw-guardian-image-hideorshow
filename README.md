@@ -15,6 +15,13 @@ X(旧Twitter)のDMやタイムライン上で流れてくるセンシティブ�
 - 以下は「不適切な画像」としてブロック表示した場合のサンプル画面。
 <img width="967" height="732" alt="スクリーンショット 2026-03-01 19 14 23" src="https://github.com/user-attachments/assets/6997b281-95a8-4a7c-b6ca-8e9f039e8b2d" />
 
+## 動作確認済みの環境
+
+本Chrome拡張機能は、以下の環境で動作を確認しております。  
+
+- OS: macOS Tahoe 26.3 (Apple M3)
+- Webブラウザ: Google Chrome バージョン 145.0.7632.117（公式ビルド）（arm64）
+
 ## 技術スタック
 
 | ライブラリ | バージョン | ライセンス | 用途 |
