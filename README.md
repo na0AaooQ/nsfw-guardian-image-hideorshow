@@ -63,6 +63,10 @@ nsfw-guardian-image-hideorshow/
 ├── popup.js               # ポップアップ設定保存
 ├── styles.css             # ブロック表示スタイル
 ├── entry_wasm.js          # browserifyバンドル用エントリーポイント
+├── package.json           # 本リポジトリのプロジェクト情報を保存しているファイル
+├── package-lock.json      # 本リポジトリで使用しているパッケージの依存関係、バージョン情報を保存しているファイル
+├── README.md              # 本リポジトリの説明
+├── .gitignore             # リポジトリの管理対象外とするディレクトリやファイル(ログファイル等)を定義するファイル
 ├── models/
 │   ├── tf-wasm-bundle.js              # browserifyバンドル（TF.js WASM）
 │   ├── model.json                     # NSFWJSモデル定義
