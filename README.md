@@ -74,7 +74,10 @@ nsfw-guardian-image-hideorshow/
 │   ├── tfjs-backend-wasm.wasm         # WASMバイナリ（シングルスレッド）
 │   ├── tfjs-backend-wasm-simd.wasm    # WASMバイナリ（SIMD）
 │   └── tfjs-backend-wasm-threaded-simd.wasm  # WASMバイナリ（マルチスレッド）
-└── icons/
+└── icons/                             
+│   ├── icon16.png                     # 拡張機能の画像ブロック表示の際に表示している画像ファイル
+│   ├── icon48.png                     # 拡張機能の画像ブロック表示の際に表示している画像ファイル
+│   ├── icon128.png                    # 拡張機能の画像ブロック表示の際に表示している画像ファイル
 ```
 
 ## セットアップ
