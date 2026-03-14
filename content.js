@@ -223,3 +223,22 @@ function startObserver() {
 
 document.querySelectorAll('img').forEach(img => checkImage(img));
 startObserver();
+
+// ─── テスト用エクスポート（Node.js環境でのみ有効・拡張機能動作に影響なし） ───
+if (typeof module !== 'undefined') {
+  module.exports = {
+    getMediaId, getBestImageUrl, blobUrlToBase64, replaceWithWarning, checkImage,
+    // テスト用状態操作ヘルパー
+    _setState: ({ enabled, threshold } = {}) => {
+      if (enabled   !== undefined) isEnabled = enabled;
+      if (threshold !== undefined) CONFIG.threshold = threshold;
+    },
+    _getState: () => ({ isEnabled, threshold: CONFIG.threshold }),
+    _approvedUrls: approvedUrls,
+    _resolveClassification: (requestId, result) => {
+      const handler = pendingRequests.get(requestId);
+      if (handler) { handler(result); pendingRequests.delete(requestId); }
+    },
+  };
+}
+
