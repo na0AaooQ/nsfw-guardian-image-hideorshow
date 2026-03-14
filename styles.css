@@ -9,6 +9,7 @@
   min-width: 120px;
   min-height: 120px;
   vertical-align: middle;
+  cursor: default;
 }
 .nsfw-guardian-inner {
   display: flex;
