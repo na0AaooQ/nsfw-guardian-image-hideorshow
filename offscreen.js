@@ -119,3 +119,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   return true;
 });
+
+// ─── テスト用エクスポート ───
+if (typeof module !== 'undefined') {
+  // NSFWスコア計算ロジックをテスト可能な関数として公開
+  function calcNsfwScore(predictions) {
+    const pornScore   = predictions.find(p => p.className === 'Porn')?.probability   ?? 0;
+    const hentaiScore = predictions.find(p => p.className === 'Hentai')?.probability ?? 0;
+    const sexyScore   = predictions.find(p => p.className === 'Sexy')?.probability   ?? 0;
+    return pornScore + hentaiScore + (sexyScore * 0.5);
+  }
+  module.exports = { base64ToBlob, calcNsfwScore, bitmapToTensor };
+}

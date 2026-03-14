@@ -94,3 +94,8 @@ function saveSettings() {
     });
   });
 }
+
+// ─── テスト用エクスポート ───
+if (typeof module !== 'undefined') {
+  module.exports = { getLevelInfo, updateThresholdUI, updateStatusUI, showToast, saveSettings };
+}
