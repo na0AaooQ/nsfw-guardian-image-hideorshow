@@ -32,32 +32,98 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 
 function getMediaId(url) {
-  return (url.split('/media/')[1] || '').split('?')[0] || url;
+  // blob: URL はURLそのものをIDとして使用
+  if (url.startsWith('blob:')) return url;
+  const mediaPart = url.split('/media/')[1];
+  if (mediaPart) return mediaPart.split('?')[0];
+  try {
+    const u = new URL(url);
+    return u.pathname.split('/').pop() || url;
+  } catch {
+    return url;
+  }
 }
 
-function classifyImage(imageUrl) {
+// srcset から最も解像度の高いURLを取得する
+function getBestImageUrl(imgElement) {
+  if (imgElement.srcset) {
+    const entries = imgElement.srcset.split(',').map(s => s.trim()).filter(Boolean);
+    let bestUrl = null;
+    let bestScore = -1;
+    for (const entry of entries) {
+      const parts = entry.split(/\s+/);
+      const url = parts[0];
+      const descriptor = parts[1] || '1x';
+      const score = parseFloat(descriptor) || 1;
+      if (score > bestScore) {
+        bestScore = score;
+        bestUrl = url;
+      }
+    }
+    if (bestUrl) return bestUrl;
+  }
+  return imgElement.src || null;
+}
+
+// blob: URL を canvas 経由で base64 に変換（content.js コンテキストなのでアクセス可能）
+// imgElement はすでにロード済みなので直接 canvas に描画できる
+function blobUrlToBase64(imgElement) {
+  return new Promise((resolve, reject) => {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width  = imgElement.naturalWidth  || 224;
+      canvas.height = imgElement.naturalHeight || 224;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(imgElement, 0, 0);  // imgElement を直接描画
+      resolve(canvas.toDataURL('image/jpeg', 0.85));
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+function classifyImage(imageUrl, base64Data) {
   return new Promise((resolve) => {
     const requestId = ++requestCounter;
     pendingRequests.set(requestId, resolve);
     console.log('[NSFW Guardian] 判定リクエスト送信 requestId:', requestId, imageUrl.slice(0, 60));
-    chrome.runtime.sendMessage({ type: 'CLASSIFY_IMAGE', imageUrl, requestId });
+    chrome.runtime.sendMessage({ type: 'CLASSIFY_IMAGE', imageUrl, requestId, base64Data });
     setTimeout(() => {
       if (pendingRequests.has(requestId)) {
         pendingRequests.delete(requestId);
         resolve({ nsfwScore: 0, error: 'timeout' });
       }
-    }, 10000);
+    }, 15000); // blob変換分を考慮して15秒に延長
   });
 }
 
 async function checkImage(imgElement) {
   if (!isEnabled) return;
-  if (imgElement.dataset.nsfwChecked) return;
-  imgElement.dataset.nsfwChecked = 'true';
+  if (imgElement.dataset.nsfwChecked === 'approved') return;
 
+  const imageUrl = getBestImageUrl(imgElement);
+  if (!imageUrl) return;
+
+  // svg / gif はスキップ
+  if (/\.svg(\?|$)/i.test(imageUrl)) return;
+  if (/\.gif(\?|$)/i.test(imageUrl)) return;
+
+  // http / blob 以外はスキップ
+  const isBlobUrl = imageUrl.startsWith('blob:');
+  const isHttpUrl = imageUrl.startsWith('http');
+  if (!isBlobUrl && !isHttpUrl) return;
+
+  const mediaId = getMediaId(imageUrl);
+  if (approvedUrls.has(mediaId)) return;
+  if (imgElement.dataset.nsfwCheckedUrl === imageUrl) return;
+
+  imgElement.dataset.nsfwChecked    = 'true';
+  imgElement.dataset.nsfwCheckedUrl = imageUrl;
+
+  // 画像ロード完了を待つ
   await new Promise(resolve => {
     if (imgElement.complete && imgElement.naturalWidth > 0) return resolve();
-    imgElement.addEventListener('load', resolve, { once: true });
+    imgElement.addEventListener('load',  resolve, { once: true });
     imgElement.addEventListener('error', resolve, { once: true });
   });
 
@@ -65,20 +131,23 @@ async function checkImage(imgElement) {
   const h = imgElement.naturalHeight;
   if (w < CONFIG.minImageSize || h < CONFIG.minImageSize) return;
 
-  const imageUrl = imgElement.src;
-  if (!imageUrl || !imageUrl.startsWith('http')) return;
-  if (/\.svg(\?|$)/i.test(imageUrl)) return;
-  if (/\.gif(\?|$)/i.test(imageUrl)) return;
-
-  const mediaId = getMediaId(imageUrl);
-  if (approvedUrls.has(mediaId)) return;
-
   console.log('[NSFW Guardian] 画像チェック開始:', imageUrl.slice(0, 80));
 
-  const result = await classifyImage(imageUrl);
+  // blob: URL の場合は content.js コンテキストで base64 に変換してから送る
+  let base64Data = null;
+  if (isBlobUrl) {
+    try {
+      base64Data = await blobUrlToBase64(imgElement);
+      console.log('[NSFW Guardian] blob→base64変換完了 mediaId:', mediaId);
+    } catch (e) {
+      console.warn('[NSFW Guardian] blob変換失敗:', e.message);
+      return;
+    }
+  }
+
+  const result = await classifyImage(imageUrl, base64Data);
   console.log('[NSFW Guardian] 判定結果:', result.nsfwScore?.toFixed(3), imageUrl.slice(0, 60));
 
-  // 判定後も承認済みなら表示
   if (approvedUrls.has(mediaId)) return;
 
   if (result.nsfwScore > CONFIG.threshold) {
@@ -92,13 +161,15 @@ function replaceWithWarning(imgElement, score, mediaId) {
 
   const wrapper = document.createElement('div');
   wrapper.className = 'nsfw-guardian-block';
-  wrapper.style.cssText = `width:${width}px;height:${height}px;background:#1a1a2e;border:2px solid #e74c3c;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;`;
+  wrapper.style.cssText = `width:${width}px;height:${height}px;`;
 
   wrapper.innerHTML = `
-    <span style="font-size:2em;">🚫</span>
-    <span style="color:#e74c3c;font-weight:bold;font-size:14px;">不適切な画像</span>
-    <span style="color:#888;font-size:12px;">スコア: ${(score * 100).toFixed(1)}%</span>
-    <button class="nsfw-guardian-btn" style="margin-top:4px;padding:6px 12px;background:#e74c3c;color:white;border:none;border-radius:4px;cursor:pointer;font-size:12px;">クリックで表示</button>
+    <div class="nsfw-guardian-inner">
+      <span class="nsfw-guardian-icon">🚫</span>
+      <span class="nsfw-guardian-text">不適切な画像</span>
+      <span class="nsfw-guardian-score">スコア: ${(score * 100).toFixed(1)}%</span>
+      <button class="nsfw-guardian-btn">クリックで表示</button>
+    </div>
   `;
 
   wrapper.querySelector('.nsfw-guardian-btn').addEventListener('click', (e) => {
@@ -106,31 +177,48 @@ function replaceWithWarning(imgElement, score, mediaId) {
     e.preventDefault();
     console.log('[NSFW Guardian] 承認クリック mediaId:', mediaId);
     approvedUrls.add(mediaId);
-    // wrapperをimgに戻さず、imgを直接wrapperの位置に表示
     imgElement.style.cssText = '';
     imgElement.dataset.nsfwChecked = 'approved';
     wrapper.replaceWith(imgElement);
   });
 
-  // imgをwrapperに置き換え（imgは非表示のままwrapper外に保持）
   imgElement.replaceWith(wrapper);
-  // imgはDOMから切り離すが参照は保持
 }
 
 function startObserver() {
   const observer = new MutationObserver((mutations) => {
     mutations.forEach(mutation => {
-      mutation.addedNodes.forEach(node => {
-        if (node.nodeType !== Node.ELEMENT_NODE) return;
-        const images = [];
-        if (node.tagName === 'IMG') images.push(node);
-        node.querySelectorAll('img').forEach(img => images.push(img));
-        images.forEach(img => checkImage(img));
-      });
+      // ① 新しいノードが追加された場合
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType !== Node.ELEMENT_NODE) return;
+          const images = [];
+          if (node.tagName === 'IMG') images.push(node);
+          node.querySelectorAll('img').forEach(img => images.push(img));
+          images.forEach(img => checkImage(img));
+        });
+      }
+
+      // ② 既存imgのsrc/srcset属性が変わった場合（遅延ロード対応）
+      if (mutation.type === 'attributes' && mutation.target.tagName === 'IMG') {
+        const img = mutation.target;
+        if (img.dataset.nsfwChecked === 'approved') return;
+        const newUrl = getBestImageUrl(img);
+        if (newUrl && newUrl !== img.dataset.nsfwCheckedUrl) {
+          delete img.dataset.nsfwChecked;
+          checkImage(img);
+        }
+      }
     });
   });
-  observer.observe(document.body, { childList: true, subtree: true });
-  console.log('[NSFW Guardian] MutationObserver 開始');
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['src', 'srcset'],
+  });
+  console.log('[NSFW Guardian] MutationObserver 開始（属性監視あり）');
 }
 
 document.querySelectorAll('img').forEach(img => checkImage(img));

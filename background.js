@@ -3,7 +3,6 @@ let offscreenReadyPromise = null;
 let resolveOffscreenReady = null;
 console.log('[NSFW Guardian BG] Service Worker 起動');
 
-// Offscreenの準備完了を待つPromise
 function getOffscreenReadyPromise() {
   if (!offscreenReadyPromise) {
     offscreenReadyPromise = new Promise(resolve => {
@@ -46,13 +45,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     (async () => {
       await ensureOffscreen();
-      // Offscreenが完全に準備完了するまで待つ
       await getOffscreenReadyPromise();
       console.log('[NSFW Guardian BG] Offscreenへ転送 requestId:', message.requestId);
       chrome.runtime.sendMessage({
         type: 'CLASSIFY_IMAGE_OFFSCREEN',
         imageUrl: message.imageUrl,
-        requestId: message.requestId
+        requestId: message.requestId,
+        base64Data: message.base64Data || null  // blob:URL変換データを転送
       }).catch(() => {});
     })();
     return false;
@@ -71,6 +70,5 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// 起動時にOffscreen作成開始
 ensureOffscreen();
 getOffscreenReadyPromise();
