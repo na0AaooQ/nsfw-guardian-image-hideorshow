@@ -99,3 +99,4 @@ function saveSettings() {
 if (typeof module !== 'undefined') {
   module.exports = { getLevelInfo, updateThresholdUI, updateStatusUI, showToast, saveSettings };
 }
+

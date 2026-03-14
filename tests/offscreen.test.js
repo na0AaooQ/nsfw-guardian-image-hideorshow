@@ -119,3 +119,4 @@ describe('calcNsfwScore()', () => {
     expect(calcNsfwScore([])).toBe(0);
   });
 });
+

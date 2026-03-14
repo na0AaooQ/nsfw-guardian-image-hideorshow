@@ -258,3 +258,4 @@ describe('checkImage(): 判定と表示', () => {
     await checkPromise;
   });
 });
+

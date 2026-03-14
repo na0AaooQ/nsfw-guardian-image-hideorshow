@@ -121,3 +121,4 @@ describe('updateStatusUI()', () => {
     expect(document.getElementById('statusText').classList.contains('active')).toBe(false);
   });
 });
+

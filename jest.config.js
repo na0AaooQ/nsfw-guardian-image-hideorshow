@@ -6,3 +6,4 @@ module.exports = {
   collectCoverageFrom: ['content.js', 'popup.js', 'offscreen.js'],
   coverageReporters: ['text', 'lcov'],
 };
+

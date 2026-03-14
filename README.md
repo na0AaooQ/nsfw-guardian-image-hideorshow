@@ -227,6 +227,7 @@ Offscreen DocumentからはBlob URLにアクセスできないため、content.j
 開発の詳細は Qiita の記事をご覧ください。  
 👉 [TensorFlow.js × NSFWJS × Chrome拡張機能で、センシティブ画像を自動ブロックする機能を自作しました](https://qiita.com/na0AaooQ/items/128f68328497683332cb)
 
+
 ## License
 
 MIT License

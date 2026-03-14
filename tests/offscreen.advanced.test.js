@@ -176,3 +176,4 @@ describe('CLASSIFY_IMAGE_OFFSCREEN メッセージハンドラー', () => {
     expect(capturedMessage.error).toBe('network error');
   });
 });
+

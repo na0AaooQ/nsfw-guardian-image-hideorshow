@@ -25,3 +25,4 @@ global.chrome = {
     createDocument: jest.fn().mockResolvedValue(undefined),
   },
 };
+

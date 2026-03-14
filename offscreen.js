@@ -131,3 +131,4 @@ if (typeof module !== 'undefined') {
   }
   module.exports = { base64ToBlob, calcNsfwScore, bitmapToTensor };
 }
+
