@@ -93,6 +93,9 @@ nsfw-guardian-image-hideorshow/
 
 ## セットアップ
 
+> **Note:** `models/tf-wasm-bundle.js` はビルド生成物のため git clone 後は存在しません。
+> 下記「バンドルの再生成」手順を実行してから拡張機能を読み込んでください。
+
 ### 前提条件
 
 - Node.js 16以上
