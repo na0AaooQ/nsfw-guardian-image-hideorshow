@@ -53,5 +53,6 @@
   ],
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
-  }
+  },
+  "homepage_url": "https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html"
 }
