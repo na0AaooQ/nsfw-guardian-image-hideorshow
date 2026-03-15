@@ -133,6 +133,11 @@ code = code.replace(
 fs.writeFileSync('models/tf-wasm-bundle.js', code);
 console.log('new Function:', (code.match(/new Function/g)||[]).length, '/ new Worker:', (code.match(/new Worker/g)||[]).length);
 "
+
+# 生成された不要ファイル削除
+rm -f node_modules/public-encrypt/test/test_key.pem
+rm -f node_modules/public-encrypt/test/test_rsa_pubkey.pem
+rm -f node_modules/public-encrypt/test/test_rsa_privkey.pem
 ```
 
 ### Chromeへの読み込み
