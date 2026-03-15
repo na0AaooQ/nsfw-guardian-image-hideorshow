@@ -105,6 +105,14 @@ nsfw-guardian-image-hideorshow/
 - Node.js 16以上
 - npm
 
+### 本リポジトリのclone
+
+```bash
+git clone git@github.com:na0AaooQ/nsfw-guardian-image-hideorshow.git
+
+cd nsfw-guardian-image-hideorshow
+```
+
 ### 依存関係のインストール
 
 ```bash
@@ -135,9 +143,9 @@ console.log('new Function:', (code.match(/new Function/g)||[]).length, '/ new Wo
 "
 
 # 生成された不要ファイル削除
-rm -f node_modules/public-encrypt/test/test_key.pem
-rm -f node_modules/public-encrypt/test/test_rsa_pubkey.pem
-rm -f node_modules/public-encrypt/test/test_rsa_privkey.pem
+rm -f ./node_modules/public-encrypt/test/test_key.pem
+rm -f ./node_modules/public-encrypt/test/test_rsa_pubkey.pem
+rm -f ./node_modules/public-encrypt/test/test_rsa_privkey.pem
 ```
 
 ### Chromeへの読み込み
