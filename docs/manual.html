@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>操作マニュアル | がぞうみまもり</title>
+  <style>
+    /* ============================================================
+       Base — privacy-policy.html と完全に合わせたスタイル
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+      background: #f5f7fa;
+      color: #2d3748;
+      line-height: 1.8;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 48px 48px;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #e8f4fd;
+    }
+
+    .product-name {
+      font-size: 13px;
+      color: #4299e1;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 12px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: #718096;
+    }
+
+    /* ---- Summary box ---- */
+    .summary-box {
+      background: #ebf8ff;
+      border-left: 4px solid #4299e1;
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+
+    .summary-box p {
+      font-size: 15px;
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+
+    /* ---- Section headings ---- */
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a202c;
+      margin: 36px 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid #4299e1;
+    }
+
+    /* ---- Body text ---- */
+    p {
+      font-size: 15px;
+      color: #4a5568;
+      margin-bottom: 12px;
+    }
+
+    /* ---- Lists ---- */
+    ul {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: #4a5568;
+      padding: 4px 0 4px 22px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+      font-weight: bold;
+    }
+
+    /* ---- Tables ---- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 24px;
+      font-size: 14px;
+    }
+
+    th {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid #bee3f8;
+    }
+
+    td {
+      padding: 10px 14px;
+      border: 1px solid #e2e8f0;
+      color: #4a5568;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f7fafc; }
+
+    /* ---- Code ---- */
+    code {
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 13px;
+      font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+      color: #2b6cb0;
+    }
+
+    /* ---- Info / callout boxes ---- */
+    .contact-box {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+
+    .contact-box a,
+    a { color: #4299e1; text-decoration: none; }
+    .contact-box a:hover,
+    a:hover { text-decoration: underline; }
+
+    /* ---- Warn callout (yellow) ---- */
+    .warn-box {
+      background: #fffff0;
+      border-left: 4px solid #ecc94b;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0 20px;
+    }
+    .warn-box p {
+      font-size: 14px;
+      color: #744210;
+      margin: 0;
+    }
+
+    /* ---- Tip callout (green) ---- */
+    .tip-box {
+      background: #f0fff4;
+      border-left: 4px solid #48bb78;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0 20px;
+    }
+    .tip-box p {
+      font-size: 14px;
+      color: #276749;
+      margin: 0;
+    }
+
+    /* ---- Step cards ---- */
+    .steps { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+
+    .step-num {
+      background: #4299e1;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-body h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 4px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: #4a5568;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    /* ---- Sensitivity bar ---- */
+    .sens-bar-wrap { margin: 20px 0 4px; }
+
+    .sens-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .sens-bar {
+      height: 10px;
+      border-radius: 99px;
+      background: linear-gradient(to right, #fc8181 0%, #f6e05e 50%, #68d391 100%);
+      position: relative;
+    }
+
+    .sens-bar .marker {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 3px solid #4299e1;
+      border-radius: 50%;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    }
+
+    /* ---- Tags ---- */
+    .tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .tag-red    { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+    .tag-yellow { background: #fffff0; color: #b7791f; border: 1px solid #f6e05e; }
+    .tag-green  { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+    .tag-blue   { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+
+    /* ---- Screenshot frame ---- */
+    .screenshot-frame {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px;
+      margin: 20px 0 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .screenshot-frame img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+    }
+    .screenshot-caption {
+      text-align: center;
+      font-size: 13px;
+      color: #718096;
+      margin-bottom: 8px;
+    }
+
+    /* ---- Button demo ---- */
+    .demo-btn-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 12px 0 4px;
+    }
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: default;
+    }
+    .demo-btn-outline { background: #fff5f5; border: 2px solid #fc8181; color: #c53030; }
+    .demo-btn-fill    { background: #e53e3e; border: 2px solid #e53e3e; color: #fff; }
+
+    /* ---- Info grid ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0 20px;
+    }
+    @media (max-width: 520px) { .info-grid { grid-template-columns: 1fr; } }
+
+    .info-card {
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .info-card .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #2b6cb0;
+      margin-bottom: 4px;
+    }
+    .info-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2b6cb0;
+      line-height: 1.2;
+    }
+    .info-card p {
+      font-size: 13px;
+      color: #2c5282;
+      margin-top: 6px;
+      margin-bottom: 0;
+      line-height: 1.65;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 13px;
+      color: #a0aec0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      color: #4299e1;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 28px 20px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <div class="product-name">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</div>
+    <h1>操作マニュアル</h1>
+    <div class="updated">最終更新日：2026年3月18日　／　対応バージョン：v2.0.0</div>
+  </div>
+
+  <!-- ===== SUMMARY ===== -->
+  <div class="summary-box">
+    <p>📌 本Google Chrome拡張機能は、あなたの画像データや個人情報を外部サーバーへ一切送信しません。すべての処理はお使いのブラウザ内のみで完結します。無料でご利用いただける機能です。</p>
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <h2>目次</h2>
+  <ul>
+    <li><a href="#install">1. Chrome拡張機能のインストール手順</a></li>
+    <li><a href="#sensitivity">2. 画像ブロック感度（閾値）について</a></li>
+    <li><a href="#slider">3. スライダーで感度を変更する</a></li>
+    <li><a href="#dm">4. XのDMでブロックされた画像の表示例</a></li>
+    <li><a href="#timeline">5. Xのタイムラインでブロックされた画像の表示例</a></li>
+    <li><a href="#show-image">6. ブロックされた画像を表示する方法</a></li>
+  </ul>
+
+
+  <!-- ===== 1. インストール ===== -->
+  <h2 id="install">1. Chrome拡張機能のインストール手順</h2>
+  <p>現在、本拡張機能はベータ版のため、開発者モード（デベロッパーモード）を使ったサイドロード形式でのインストールとなります。以下の手順に沿って進めてください。</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>ソースコードをダウンロードする</h3>
+        <p>
+          <a href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">GitHubリポジトリ</a>
+          を開き、<code>Code ▼</code> → <code>Download ZIP</code> をクリックして ZIP ファイルをダウンロードします。
+        </p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>ZIP ファイルを解凍する</h3>
+        <p>ダウンロードした <code>.zip</code> ファイルを任意のフォルダーに解凍してください。解凍後のフォルダーは削除しないでください。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Chrome の拡張機能管理画面を開く</h3>
+        <p>Chrome のアドレスバーに <code>chrome://extensions</code> と入力して Enter キーを押します。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>デベロッパーモードをオンにする</h3>
+        <p>画面右上にある <strong>「デベロッパーモード」</strong> のトグルスイッチをオンにします。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>「パッケージ化されていない拡張機能を読み込む」をクリックする</h3>
+        <p>画面左上に表示される <strong>「パッケージ化されていない拡張機能を読み込む」</strong> ボタンをクリックします。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3>解凍したフォルダーを選択する</h3>
+        <p>手順②で解凍したフォルダー（<code>manifest.json</code> が含まれるフォルダー）を選択して「フォルダーの選択」をクリックします。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h3>インストール完了！</h3>
+        <p>
+          拡張機能の一覧に <strong>🛡️ がぞうみまもり | Xセンシティブ画像フィルター</strong> が表示されれば完了です。
+          ブラウザ右上のパズルアイコン（🧩）から本拡張機能をピン留めすると、アイコンにすぐアクセスできて便利です。
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== 2. 感度 ===== -->
+  <h2 id="sensitivity">2. 画像ブロック感度（閾値）について</h2>
+  <p>本拡張機能は AI（機械学習モデル）によって画像がセンシティブである確率をスコア（0〜100%）で算出します。スコアが設定した閾値（しきい値）を上回った画像がブロックされます。</p>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">初期設定（デフォルト値）</div>
+      <div class="value">50%</div>
+      <p>インストール直後の閾値は <strong>50%（バランスモード）</strong> です。多くの方に適した標準設定です。</p>
+    </div>
+    <div class="info-card">
+      <div class="label">スコアの見方</div>
+      <div class="value">0 〜 100%</div>
+      <p>AI が算出するセンシティブ確率です。スコアが高いほど、ブロックされる可能性の高い画像です。</p>
+    </div>
+  </div>
+
+  <div class="sens-bar-wrap">
+    <div class="sens-labels">
+      <span>🔴 厳しめ（0%）</span>
+      <span>🟡 バランス（50%）</span>
+      <span>🟢 緩め（100%）</span>
+    </div>
+    <div class="sens-bar">
+      <div class="marker" style="left: 50%;"></div>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>モード</th>
+      <th>閾値の目安</th>
+      <th>特徴</th>
+    </tr>
+    <tr>
+      <td><span class="tag tag-red">厳しめ</span></td>
+      <td>0〜40%</td>
+      <td>水着・露出度の高い画像もブロックします。多めにブロックしたい場合に使います。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-yellow">バランス</span></td>
+      <td>50%（初期値）</td>
+      <td>標準設定です。明らかにセンシティブな画像をブロックします。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-green">緩め</span></td>
+      <td>60〜100%</td>
+      <td>確信度の高い画像のみブロックします。誤検知を減らしたい場合に使います。</td>
+    </tr>
+  </table>
+
+  <div class="warn-box">
+    <p>⚠️ <strong>ご注意：</strong>AI による自動判定のため、センシティブでない画像がブロックされたり（誤検知）、センシティブな画像がブロックされない場合があります。感度スライダーを調整してお使いください。</p>
+  </div>
+
+
+  <!-- ===== 3. スライダー ===== -->
+  <h2 id="slider">3. スライダーで感度を変更する</h2>
+  <p>ブラウザ右上の拡張機能アイコンをクリックすると、感度設定パネルが開きます。</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>拡張機能アイコンをクリックする</h3>
+        <p>Chrome ブラウザ右上のアドレスバー横にある <strong>🛡️ シールドアイコン</strong> をクリックします。パズルアイコン（🧩）からピン留めすると、すぐにアクセスできます。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>「フィルタリング」トグルを確認する</h3>
+        <p>パネル上部の <strong>「フィルタリング」</strong> トグルが <span class="tag tag-blue">オン（青色）</span> になっていることを確認してください。オフになっていると、画像はブロックされません。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>スライダーを左右に動かして感度を設定する</h3>
+        <p>「感度設定」のスライダーを左右にドラッグします。<strong>左（厳しめ）</strong> にするほど多くの画像がブロックされます。<strong>右（緩め）</strong> にするほどブロックされにくくなります。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>「動作中」の表示を確認する</h3>
+        <p>パネル下部に <span class="tag tag-green">● 動作中</span> と表示されていれば、設定は有効です。X のページをリロードすると新しい感度が反映されます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+    <img src="./sensitivity_adjust_filter_x_block_images.png"
+         alt="感度調整フィルターパネルのスクリーンショット" />
+  </div>
+  <p class="screenshot-caption">▲ 感度調整パネルの表示例（厳しめ・35% に設定した状態）</p>
+
+
+  <!-- ===== 4. DM ===== -->
+  <h2 id="dm">4. X の DM でブロックされた画像の表示例</h2>
+  <p>X のダイレクトメッセージ（DM）でセンシティブと判定された画像は、以下のように暗いオーバーレイに置き換えられて表示されます。</p>
+
+  <div class="screenshot-frame">
+    <img src="./x_dm_blockd_images_example.png"
+         alt="X の DM で画像がブロックされた状態のスクリーンショット" />
+  </div>
+  <p class="screenshot-caption">▲ DM 画面での画像ブロック表示例（スコア: 46.2%）</p>
+
+  <div class="tip-box">
+    <p>💡 <strong>表示内容の説明：</strong>ブロックされた画像の上には「🚫 不適切な画像」と AI が算出したスコアが表示されます。スコアは設定した感度閾値を超えた割合を示しています。</p>
+  </div>
+
+
+  <!-- ===== 5. タイムライン ===== -->
+  <h2 id="timeline">5. X のタイムラインでブロックされた画像の表示例</h2>
+  <p>X のタイムラインや検索結果でも、センシティブと判定された画像は同様にブロック表示されます。</p>
+
+  <div class="screenshot-frame">
+    <img src="./x_timeline_blockd_images_example.png"
+         alt="X のタイムラインで画像がブロックされた状態のスクリーンショット" />
+  </div>
+  <p class="screenshot-caption">▲ タイムライン（検索結果）での画像ブロック表示例（スコア: 56.8%）</p>
+
+  <div class="tip-box">
+    <p>💡 <strong>対応している場所：</strong>ホームタイムライン・検索結果・プロフィールのメディアタブ・DM など、X 上のあらゆる画像表示箇所に対応しています。</p>
+  </div>
+
+
+  <!-- ===== 6. ブロック解除 ===== -->
+  <h2 id="show-image">6. ブロックされた画像を表示する方法</h2>
+  <p>ブロックされた画像でも、必要に応じて 1 枚ずつ確認することができます。</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>「クリックで表示」ボタンを確認する</h3>
+        <p>センシティブと判定された画像のオーバーレイ中央に、以下のようなボタンが表示されます。</p>
+        <div class="demo-btn-wrap">
+          <span class="demo-btn demo-btn-outline">クリックで表示</span>
+          <span style="font-size: 13px; color: #718096;">または</span>
+          <span class="demo-btn demo-btn-fill">クリックで表示</span>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>「クリックで表示」ボタンをクリックする</h3>
+        <p>ボタンをクリックすると、その画像のブロックが解除されて元の画像が表示されます。他の画像には影響しません。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>ページをリロードするとブロックが再適用される</h3>
+        <p>「クリックで表示」は一時的な解除です。ページを再読み込みすると、同じ画像が再びブロックされます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <p>⚠️ <strong>誤検知が気になる場合：</strong>特定の画像が繰り返し誤ってブロックされる場合は、感度スライダーを「緩め」方向に調整するとブロックされにくくなります。→ <a href="#slider">スライダーの調整方法（3 節）</a></p>
+  </div>
+
+
+  <!-- ===== BACK LINK & FOOTER ===== -->
+  <a class="back-link" href="./privacy-policy.html">← プライバシーポリシーを表示する</a>
+  <br>
+  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← 拡張機能のGitHub リポジトリを表示する</a>
+
+  <div class="footer">
+    <p>© 2026 na0AaooQ（青木 直之）. All rights reserved.</p>
+  </div>
+
+</div>
+</body>
+</html>
