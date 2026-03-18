@@ -63,6 +63,16 @@ function base64ToBlob(base64Data) {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // ★修正箇所: SW再起動時にREADY再送を要求された場合
+  if (message.type === 'CHECK_MODEL_READY') {
+    if (model) {
+      console.log('[NSFW Guardian Offscreen] モデルロード済み → READY を再送');
+      chrome.runtime.sendMessage({ type: 'OFFSCREEN_READY' });
+    }
+    // model が null の場合は loadModel() 完了時に OFFSCREEN_READY が送られるので何もしない
+    return;
+  }
+
   if (message.type !== 'CLASSIFY_IMAGE_OFFSCREEN') return;
 
   (async () => {
@@ -131,4 +141,3 @@ if (typeof module !== 'undefined') {
   }
   module.exports = { base64ToBlob, calcNsfwScore, bitmapToTensor };
 }
-

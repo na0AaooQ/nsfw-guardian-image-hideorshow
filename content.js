@@ -11,10 +11,13 @@ let requestCounter = 0;
 
 console.log('[NSFW Guardian] content.js 起動');
 
+// ★修正箇所: 設定読み込み完了後にスキャン開始（threshold確定前に動かない）
 chrome.storage.sync.get({ enabled: true, threshold: 0.3 }, (items) => {
   isEnabled = items.enabled;
   CONFIG.threshold = items.threshold;
   console.log('[NSFW Guardian] 設定読み込み完了:', items);
+  document.querySelectorAll('img').forEach(img => checkImage(img));
+  startObserver();
 });
 
 chrome.runtime.onMessage.addListener((message) => {
@@ -97,6 +100,17 @@ function classifyImage(imageUrl, base64Data) {
   });
 }
 
+// ★修正箇所: タイムアウト時に最大3回リトライ
+async function classifyImageWithRetry(imageUrl, base64Data, maxRetry = 3) {
+  for (let attempt = 1; attempt <= maxRetry; attempt++) {
+    const result = await classifyImage(imageUrl, base64Data);
+    if (!result.error) return result; // 成功
+    console.log(`[NSFW Guardian] タイムアウト (${attempt}/${maxRetry})、2秒後にリトライ...`);
+    if (attempt < maxRetry) await new Promise(r => setTimeout(r, 2000));
+  }
+  return { nsfwScore: 0, error: 'timeout' }; // 全リトライ失敗
+}
+
 async function checkImage(imgElement) {
   if (!isEnabled) return;
   if (imgElement.dataset.nsfwChecked === 'approved') return;
@@ -145,8 +159,16 @@ async function checkImage(imgElement) {
     }
   }
 
-  const result = await classifyImage(imageUrl, base64Data);
+  const result = await classifyImageWithRetry(imageUrl, base64Data); // ★修正箇所: リトライ付き関数を使用
   console.log('[NSFW Guardian] 判定結果:', result.nsfwScore?.toFixed(3), imageUrl.slice(0, 60));
+
+  // ★修正箇所: 全リトライ失敗時はフラグをリセットして再チェック可能にする
+  if (result.error === 'timeout') {
+    console.warn('[NSFW Guardian] 全リトライ失敗 → フラグリセット:', imageUrl.slice(0, 60));
+    delete imgElement.dataset.nsfwChecked;
+    delete imgElement.dataset.nsfwCheckedUrl;
+    return;
+  }
 
   if (approvedUrls.has(mediaId)) return;
 
@@ -221,9 +243,6 @@ function startObserver() {
   console.log('[NSFW Guardian] MutationObserver 開始（属性監視あり）');
 }
 
-document.querySelectorAll('img').forEach(img => checkImage(img));
-startObserver();
-
 // ─── テスト用エクスポート（Node.js環境でのみ有効・拡張機能動作に影響なし） ───
 if (typeof module !== 'undefined') {
   module.exports = {
@@ -241,4 +260,3 @@ if (typeof module !== 'undefined') {
     },
   };
 }
-
