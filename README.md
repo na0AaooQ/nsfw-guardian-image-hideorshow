@@ -161,12 +161,38 @@ rm -f ./node_modules/public-encrypt/test/test_rsa_pubkey.pem
 rm -f ./node_modules/public-encrypt/test/test_rsa_privkey.pem
 ```
 
+### Google Developers DashboardでChrome ウェブストアへ審査申請をする時のZIPパッケージ作成手順
+
+# バンドルの再作成後、拡張機能を動作させるために必要なファイルをZIP化
+
+```
+cd ..
+zip -r nsfw-guardian-beta.zip nsfw-guardian-image-hideorshow \
+  --exclude "*/node_modules/*" \
+  --exclude "*/.git/*" \
+  --exclude "*/tests/*" \
+  --exclude "*/docs/*" \
+  --exclude "*/entry_wasm.js" \
+  --exclude "*/package.json" \
+  --exclude "*/package-lock.json" \
+  --exclude "*/.gitignore" \
+  --exclude "*/jest.config.js" \
+  --exclude "*/STORE_LISTING.md" \
+  --exclude "*/README.md"
+```
+
+# ZIPファイルが正常に生成できたか確認
+
+```
+unzip -l nsfw-guardian-beta.zip
+```
+
 ### Chromeへの読み込み
 
 1. Chrome 右上のケバブメニュー(縦の三点リーダー)から「拡張機能」→「拡張機能の管理」を開く。
 2. 「デベロッパーモード」をONにする。
 3. 「パッケージ化されていない拡張機能を読み込む」をクリックする。
-4. このリポジトリのフォルダを選択する。
+4. nsfw-guardian-beta.zip を展開し、展開されたフォルダを選択する。
 
 ## ユニットテスト
 
