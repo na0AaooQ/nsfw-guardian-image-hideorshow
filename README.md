@@ -163,9 +163,8 @@ rm -f ./node_modules/public-encrypt/test/test_rsa_privkey.pem
 
 ### Google Developers DashboardでChrome ウェブストアへ審査申請をする時のZIPパッケージ作成手順
 
-# バンドルの再作成後、拡張機能を動作させるために必要なファイルをZIP化
-
 ```
+# バンドルの再作成後、拡張機能を動作させるために必要なファイルをZIP化
 cd ..
 zip -r nsfw-guardian-beta.zip nsfw-guardian-image-hideorshow \
   --exclude "*/node_modules/*" \
@@ -181,10 +180,41 @@ zip -r nsfw-guardian-beta.zip nsfw-guardian-image-hideorshow \
   --exclude "*/README.md"
 ```
 
-# ZIPファイルが正常に生成できたか確認
-
 ```
+# ZIPファイルが正常に生成できたか確認
 unzip -l nsfw-guardian-beta.zip
+
+Archive:  nsfw-guardian-beta.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  03-18-2026 23:02   nsfw-guardian-image-hideorshow/
+     3107  03-18-2026 22:50   nsfw-guardian-image-hideorshow/popup.js
+      168  03-18-2026 22:50   nsfw-guardian-image-hideorshow/offscreen.html
+      901  03-18-2026 22:50   nsfw-guardian-image-hideorshow/styles.css
+     2708  03-18-2026 22:50   nsfw-guardian-image-hideorshow/background.js
+     5416  03-18-2026 22:50   nsfw-guardian-image-hideorshow/popup.html
+        0  03-18-2026 22:51   nsfw-guardian-image-hideorshow/models/
+  1294424  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tf.min.js
+   128949  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/model.json
+  6798317  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/nsfwjs_bundle.js
+  4515615  03-18-2026 22:51   nsfw-guardian-image-hideorshow/models/tf-wasm-bundle.js
+   275675  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm.wasm
+  2619461  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/group1-shard1of1.bin
+  2692917  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/nsfwjs.min.js
+   386833  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm-threaded-simd.wasm
+   118554  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tf-backend-wasm.min.js
+   274215  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tf-core.min.js
+   377757  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm-simd.wasm
+        0  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/
+     1046  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/icon16.png
+     4760  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/icon48.png
+    20861  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/icon128.png
+     1598  03-18-2026 23:02   nsfw-guardian-image-hideorshow/manifest.json
+     5291  03-18-2026 22:50   nsfw-guardian-image-hideorshow/offscreen.js
+     9650  03-18-2026 22:50   nsfw-guardian-image-hideorshow/content.js
+      173  03-18-2026 22:50   nsfw-guardian-image-hideorshow/entry.js
+---------                     -------
+ 19538396                     26 files
 ```
 
 ### Chromeへの読み込み
