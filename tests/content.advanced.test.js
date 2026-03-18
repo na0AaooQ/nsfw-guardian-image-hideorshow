@@ -209,17 +209,32 @@ describe('checkImage(): 判定と表示', () => {
   });
 
   test('タイムアウト時（error: timeout）はブロックされない', async () => {
+    // ★修正: classifyImageWithRetry のリトライ待機（2秒×2回）を即座に進めるため
+    //        fakeTimers を使用し、sendMessage モックで全リトライを自動タイムアウト解決する
+    jest.useFakeTimers();
+
     const img = makeImg({ src: 'https://pbs.twimg.com/media/timeout.jpg' });
     container.appendChild(img);
 
-    const requestIdPromise = captureNextRequestId();
-    const checkPromise = checkImage(img);
-    const requestId = await requestIdPromise;
+    // 全リトライのリクエストを即座にタイムアウトで解決
+    chrome.runtime.sendMessage.mockImplementation((msg) => {
+      if (msg.type === 'CLASSIFY_IMAGE') {
+        Promise.resolve().then(() => {
+          _resolveClassification(msg.requestId, { nsfwScore: 0, error: 'timeout' });
+        });
+      }
+    });
 
-    _resolveClassification(requestId, { nsfwScore: 0, error: 'timeout' });
+    const checkPromise = checkImage(img);
+    await jest.runAllTimersAsync(); // リトライ間の setTimeout(2秒) を即座に進める
     await checkPromise;
 
+    jest.useRealTimers();
+
     expect(container.querySelector('.nsfw-guardian-block')).toBeNull();
+    // ★フラグがリセットされていることも確認（content.js の修正箇所の検証）
+    expect(img.dataset.nsfwChecked).toBeUndefined();
+    expect(img.dataset.nsfwCheckedUrl).toBeUndefined();
   });
 
   test('判定後に approvedUrls に追加されていたらブロックしない', async () => {

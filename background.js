@@ -23,6 +23,11 @@ async function ensureOffscreen() {
         justification: 'NSFW画像判定のためTensorFlow.jsを実行'
       });
       console.log('[NSFW Guardian BG] Offscreen Document 作成完了');
+      // 新規作成の場合は offscreen.js の loadModel() 完了時に OFFSCREEN_READY が届く
+    } else {
+      // ★修正箇所: SW再起動時、既存のOffscreenに READY 再送を要求
+      console.log('[NSFW Guardian BG] 既存 Offscreen 検出 → READY 確認を要求');
+      chrome.runtime.sendMessage({ type: 'CHECK_MODEL_READY' }).catch(() => {});
     }
     offscreenCreated = true;
   } catch (e) {
@@ -72,4 +77,3 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 ensureOffscreen();
 getOffscreenReadyPromise();
-
