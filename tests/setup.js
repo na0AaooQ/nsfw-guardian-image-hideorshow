@@ -4,7 +4,7 @@ global.chrome = {
       get: jest.fn((defaults, callback) => {
         if (typeof callback === 'function') callback(defaults);
       }),
-      set: jest.fn((items, callback) => {
+      set: jest.fn((_items, callback) => {
         if (typeof callback === 'function') callback();
       }),
     },
@@ -25,4 +25,3 @@ global.chrome = {
     createDocument: jest.fn().mockResolvedValue(undefined),
   },
 };
-

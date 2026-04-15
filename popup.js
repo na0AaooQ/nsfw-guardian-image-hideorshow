@@ -29,11 +29,11 @@ function getLevelInfo(value) {
 // UIを閾値に合わせて更新
 function updateThresholdUI(value) {
   const pct = Math.round(value * 100);
-  thresholdVal.textContent = pct + '%';
+  thresholdVal.textContent = `${pct}%`;
 
   const info = getLevelInfo(value);
   levelBadge.textContent = info.label;
-  levelBadge.className = 'level-badge ' + info.cls;
+  levelBadge.className = `level-badge ${info.cls}`;
   levelDesc.textContent = info.desc;
 }
 
@@ -89,7 +89,9 @@ function saveSettings() {
     showToast();
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { type: 'UPDATE_SETTINGS', ...settings }).catch(() => {});
+        chrome.tabs.sendMessage(tabs[0].id, { type: 'UPDATE_SETTINGS', ...settings }).catch(() => {
+          // 対象タブに content script がいない場合は通知失敗を無視する
+        });
       }
     });
   });
@@ -99,4 +101,3 @@ function saveSettings() {
 if (typeof module !== 'undefined') {
   module.exports = { getLevelInfo, updateThresholdUI, updateStatusUI, showToast, saveSettings };
 }
-

@@ -271,17 +271,26 @@ All files     |   91.15 |    76.00 |   90.00 |   91.69 |
 --------------|---------|----------|---------|---------|
 ```
 
-## ESLint 実行方法
+## Biome 実行方法
 
-### ESLint 利用準備
+### Biome 利用準備
 
-ESLint および関連パッケージをインストールします。
+Biome を開発依存関係としてインストールします。
 
 ```
-npm install --save-dev eslint @eslint/js globals
+npm install --save-dev --save-exact @biomejs/biome
 ```
 
-### ESLint による静的解析の実行
+設定ファイルはリポジトリ直下の `biome.json` を使用します。
+
+### このプロジェクトでの Biome 運用方針
+
+- Linter は Biome を使用します。
+- Formatter は無効化しており、`npm run lint` は静的解析専用です。
+- 解析対象は主に JavaScript ファイルで、`models/` と `coverage/` は除外しています。
+- Chrome拡張機能の `chrome` グローバル、TensorFlow.js の `tf` グローバル、Jest のテスト用グローバルは `biome.json` で許可しています。
+
+### Biome による静的解析の実行
 
 以下のコマンドで、JavaScriptファイルの静的解析を実行します。
 
@@ -296,20 +305,22 @@ npm run lint
 % npm run lint                                                           
 
 > nsfw-guardian-v2@1.0.0 lint
-> eslint .
+> biome lint .
 
 % 
 ```
 
-### ESLint による自動修正
+### Biome による自動修正
 
-以下のコマンドで、ESLintが自動修正可能な問題を修正します。
+以下のコマンドで、Biome が安全に自動修正できる問題を修正します。
 
 ```
 npm run lint:fix
 ```
 
-> **注意**: ESLintが自動修正できない問題については、手動での修正が必要です。
+`lint:fix` は lint ルールに基づく safe fix を適用します。フォーマッタは無効化しているため、コード整形だけを目的にした変更は行いません。
+
+> **注意**: Biome が自動修正できない問題については、手動での修正が必要です。
 
 ## 技術的背景
 

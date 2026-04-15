@@ -7,8 +7,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write ."
   },
   "keywords": [],
   "author": "",
@@ -23,9 +23,7 @@
     "nsfwjs": "^2.4.2"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.2.0",
-    "globals": "^17.5.0",
+    "@biomejs/biome": "2.4.12",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0"
   }
