@@ -62,6 +62,13 @@ function base64ToBlob(base64Data) {
   return new Blob([bytes], { type: mime });
 }
 
+function calcNsfwScore(predictions) {
+  const pornScore = predictions.find(p => p.className === 'Porn')?.probability ?? 0;
+  const hentaiScore = predictions.find(p => p.className === 'Hentai')?.probability ?? 0;
+  const sexyScore = predictions.find(p => p.className === 'Sexy')?.probability ?? 0;
+  return pornScore + hentaiScore + (sexyScore * 0.5);
+}
+
 chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
   // ★修正箇所: SW再起動時にREADY再送を要求された場合
   if (message.type === 'CHECK_MODEL_READY') {
@@ -103,10 +110,7 @@ chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
         probability: prob
       }));
 
-      const pornScore   = predictions.find(p => p.className === 'Porn')?.probability   ?? 0;
-      const hentaiScore = predictions.find(p => p.className === 'Hentai')?.probability ?? 0;
-      const sexyScore   = predictions.find(p => p.className === 'Sexy')?.probability   ?? 0;
-      const nsfwScore   = pornScore + hentaiScore + (sexyScore * 0.5);
+      const nsfwScore = calcNsfwScore(predictions);
 
       console.log('[NSFW Guardian Offscreen] 判定完了 score:', nsfwScore.toFixed(3));
 
@@ -132,12 +136,5 @@ chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
 
 // ─── テスト用エクスポート ───
 if (typeof module !== 'undefined') {
-  // NSFWスコア計算ロジックをテスト可能な関数として公開
-  function calcNsfwScore(predictions) {
-    const pornScore   = predictions.find(p => p.className === 'Porn')?.probability   ?? 0;
-    const hentaiScore = predictions.find(p => p.className === 'Hentai')?.probability ?? 0;
-    const sexyScore   = predictions.find(p => p.className === 'Sexy')?.probability   ?? 0;
-    return pornScore + hentaiScore + (sexyScore * 0.5);
-  }
   module.exports = { base64ToBlob, calcNsfwScore, bitmapToTensor };
 }

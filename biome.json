@@ -1,0 +1,62 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["**", "!models", "!coverage"]
+  },
+  "formatter": {
+    "enabled": false
+  },
+  "assist": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true,
+    "includes": ["**/*.js"],
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "noUnusedFunctionParameters": "warn"
+      },
+      "style": {
+        "useConst": "warn"
+      },
+      "suspicious": {
+        "noConsole": "off",
+        "noDoubleEquals": "error",
+        "noVar": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["content.js", "background.js", "popup.js", "offscreen.js"],
+      "javascript": {
+        "globals": ["chrome", "tf"]
+      }
+    },
+    {
+      "includes": ["tests/**/*.js"],
+      "javascript": {
+        "globals": [
+          "chrome",
+          "tf",
+          "jest",
+          "describe",
+          "test",
+          "it",
+          "expect",
+          "beforeEach",
+          "beforeAll",
+          "afterEach",
+          "afterAll"
+        ]
+      }
+    }
+  ]
+}

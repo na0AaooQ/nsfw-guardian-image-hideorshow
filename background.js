@@ -27,7 +27,9 @@ async function ensureOffscreen() {
     } else {
       // ★修正箇所: SW再起動時、既存のOffscreenに READY 再送を要求
       console.log('[NSFW Guardian BG] 既存 Offscreen 検出 → READY 確認を要求');
-      chrome.runtime.sendMessage({ type: 'CHECK_MODEL_READY' }).catch(() => {});
+      chrome.runtime.sendMessage({ type: 'CHECK_MODEL_READY' }).catch(() => {
+        // 既存 Offscreen がまだ応答できない場合は次の判定要求時に再試行する
+      });
     }
     offscreenCreated = true;
   } catch (e) {
@@ -57,7 +59,9 @@ chrome.runtime.onMessage.addListener((message, sender, _sendResponse) => {
         imageUrl: message.imageUrl,
         requestId: message.requestId,
         base64Data: message.base64Data || null  // blob:URL変換データを転送
-      }).catch(() => {});
+      }).catch(() => {
+        // 送信先が閉じている場合は content script 側でタイムアウト処理に委ねる
+      });
     })();
     return false;
   }
@@ -66,10 +70,16 @@ chrome.runtime.onMessage.addListener((message, sender, _sendResponse) => {
     const tabId = requestTabMap.get(message.requestId);
     requestTabMap.delete(message.requestId);
     if (tabId) {
-      chrome.tabs.sendMessage(tabId, message).catch(() => {});
+      chrome.tabs.sendMessage(tabId, message).catch(() => {
+        // タブ遷移などで受信側が消えていても後続処理は継続する
+      });
     } else {
       chrome.tabs.query({ url: ['https://twitter.com/*', 'https://x.com/*'] }, (tabs) => {
-        tabs.forEach(tab => chrome.tabs.sendMessage(tab.id, message).catch(() => {}));
+        tabs.forEach((tab) => {
+          chrome.tabs.sendMessage(tab.id, message).catch(() => {
+            // 対象タブがすでに閉じているケースは無視する
+          });
+        });
       });
     }
   }

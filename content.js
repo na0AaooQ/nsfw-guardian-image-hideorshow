@@ -16,7 +16,9 @@ chrome.storage.sync.get({ enabled: true, threshold: 0.3 }, (items) => {
   isEnabled = items.enabled;
   CONFIG.threshold = items.threshold;
   console.log('[NSFW Guardian] 設定読み込み完了:', items);
-  document.querySelectorAll('img').forEach(img => checkImage(img));
+  document.querySelectorAll('img').forEach((img) => {
+    checkImage(img);
+  });
   startObserver();
 });
 
@@ -239,8 +241,12 @@ function startObserver() {
           if (node.nodeType !== Node.ELEMENT_NODE) return;
           const images = [];
           if (node.tagName === 'IMG') images.push(node);
-          node.querySelectorAll('img').forEach(img => images.push(img));
-          images.forEach(img => checkImage(img));
+          node.querySelectorAll('img').forEach((img) => {
+            images.push(img);
+          });
+          images.forEach((img) => {
+            checkImage(img);
+          });
         });
       }
 
