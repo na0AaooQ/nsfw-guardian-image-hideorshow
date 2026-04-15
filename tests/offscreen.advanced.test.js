@@ -18,7 +18,7 @@ global.tf = {
     })),
   }),
   zeros: jest.fn(() => ({ dispose: jest.fn() })),
-  tensor4d: jest.fn((data, shape) => ({
+  tensor4d: jest.fn((data, _shape) => ({
     dispose: jest.fn(),
     data: jest.fn().mockResolvedValue(data),
   })),
@@ -40,7 +40,7 @@ global.OffscreenCanvas = class {
 // createImageBitmap のモック
 global.createImageBitmap = jest.fn().mockResolvedValue({ width: 224, height: 224 });
 
-const { base64ToBlob, calcNsfwScore, bitmapToTensor } = require('../offscreen.js');
+const { bitmapToTensor } = require('../offscreen.js');
 
 // onMessage リスナーを取得（offscreen.js が登録したもの）
 const messageListener =
@@ -176,4 +176,3 @@ describe('CLASSIFY_IMAGE_OFFSCREEN メッセージハンドラー', () => {
     expect(capturedMessage.error).toBe('network error');
   });
 });
-

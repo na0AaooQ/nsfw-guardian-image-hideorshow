@@ -37,7 +37,7 @@ async function ensureOffscreen() {
 
 const requestTabMap = new Map();
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, _sendResponse) => {
   if (message.type === 'OFFSCREEN_READY') {
     console.log('[NSFW Guardian BG] Offscreen Ready!');
     if (resolveOffscreenReady) resolveOffscreenReady();
