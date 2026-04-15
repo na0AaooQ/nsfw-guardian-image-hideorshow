@@ -9,7 +9,6 @@ document.body.innerHTML = '<div id="root"></div>';
 
 const {
   checkImage,
-  replaceWithWarning,
   _setState,
   _getState,
   _approvedUrls,
@@ -69,7 +68,6 @@ describe('onMessage: UPDATE_SETTINGS', () => {
 
 describe('onMessage: CLASSIFICATION_RESULT', () => {
   test('対応する handler が呼ばれ pendingRequests から削除される', () => {
-    const handler = jest.fn();
     // pendingRequests に直接登録はできないので _resolveClassification で確認
     // (内部に handler を登録する唯一の方法は classifyImage を呼ぶこと)
     // ここでは _resolveClassification 自体が handler 削除まで行うことを確認

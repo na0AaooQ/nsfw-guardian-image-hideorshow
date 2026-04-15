@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +20,12 @@
     "@tensorflow/tfjs-converter": "^3.21.0",
     "@tensorflow/tfjs-core": "^3.21.0",
     "@tensorflow/tfjs-layers": "^3.21.0",
-    "browserify": "^17.0.1",
     "nsfwjs": "^2.4.2"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.0",
+    "globals": "^17.5.0",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0"
   }

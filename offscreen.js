@@ -62,7 +62,7 @@ function base64ToBlob(base64Data) {
   return new Blob([bytes], { type: mime });
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
   // ★修正箇所: SW再起動時にREADY再送を要求された場合
   if (message.type === 'CHECK_MODEL_READY') {
     if (model) {

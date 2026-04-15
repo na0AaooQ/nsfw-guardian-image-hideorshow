@@ -11,7 +11,7 @@ let requestCounter = 0;
 
 console.log('[NSFW Guardian] content.js 起動');
 
-// ★修正箇所: 設定読み込み完了後にスキャン開始（threshold確定前に動かない）
+// 設定読み込み完了後にスキャン開始（threshold確定前に動かない）
 chrome.storage.sync.get({ enabled: true, threshold: 0.3 }, (items) => {
   isEnabled = items.enabled;
   CONFIG.threshold = items.threshold;
@@ -100,7 +100,7 @@ function classifyImage(imageUrl, base64Data) {
   });
 }
 
-// ★修正箇所: タイムアウト時に最大3回リトライ
+//  タイムアウト時に最大3回リトライ
 async function classifyImageWithRetry(imageUrl, base64Data, maxRetry = 3) {
   for (let attempt = 1; attempt <= maxRetry; attempt++) {
     const result = await classifyImage(imageUrl, base64Data);
@@ -134,6 +134,10 @@ async function checkImage(imgElement) {
   imgElement.dataset.nsfwChecked    = 'true';
   imgElement.dataset.nsfwCheckedUrl = imageUrl;
 
+  // 判定が完了するまで画像を非表示にする（一瞬の表示を防ぐ）
+  // visibility: hidden はレイアウト上のスペースを保持したまま視覚的に隠す
+  imgElement.style.visibility = 'hidden';
+
   // 画像ロード完了を待つ
   await new Promise(resolve => {
     if (imgElement.complete && imgElement.naturalWidth > 0) return resolve();
@@ -143,7 +147,11 @@ async function checkImage(imgElement) {
 
   const w = imgElement.naturalWidth;
   const h = imgElement.naturalHeight;
-  if (w < CONFIG.minImageSize || h < CONFIG.minImageSize) return;
+  if (w < CONFIG.minImageSize || h < CONFIG.minImageSize) {
+    // 小さい画像はスキップ → 表示を戻す
+    imgElement.style.visibility = '';
+    return;
+  }
 
   console.log('[NSFW Guardian] 画像チェック開始:', imageUrl.slice(0, 80));
 
@@ -155,25 +163,40 @@ async function checkImage(imgElement) {
       console.log('[NSFW Guardian] blob→base64変換完了 mediaId:', mediaId);
     } catch (e) {
       console.warn('[NSFW Guardian] blob変換失敗:', e.message);
+      // 変換失敗時は表示を戻す
+      imgElement.style.visibility = '';
       return;
     }
   }
 
-  const result = await classifyImageWithRetry(imageUrl, base64Data); // ★修正箇所: リトライ付き関数を使用
+  const result = await classifyImageWithRetry(imageUrl, base64Data); // リトライ付き関数を使用
   console.log('[NSFW Guardian] 判定結果:', result.nsfwScore?.toFixed(3), imageUrl.slice(0, 60));
 
-  // ★修正箇所: 全リトライ失敗時はフラグをリセットして再チェック可能にする
+  // 全リトライ失敗時はフラグをリセットして再チェック可能にする
   if (result.error === 'timeout') {
     console.warn('[NSFW Guardian] 全リトライ失敗 → フラグリセット:', imageUrl.slice(0, 60));
     delete imgElement.dataset.nsfwChecked;
     delete imgElement.dataset.nsfwCheckedUrl;
+    // タイムアウト時は表示を戻す（非表示のまま放置しない）
+    imgElement.style.visibility = '';
     return;
   }
 
-  if (approvedUrls.has(mediaId)) return;
+  if (approvedUrls.has(mediaId)) {
+    // 判定中にユーザーが承認した場合は表示を戻す
+    imgElement.style.visibility = '';
+    return;
+  }
 
   if (result.nsfwScore > CONFIG.threshold) {
+    // replaceWithWarning の前に visibility をリセットする
+    // （wrapper への差し替え後、「クリックで表示」時に imgElement.style.cssText='' で
+    //   再表示するため、ここでリセットしておく必要がある）
+    imgElement.style.visibility = '';
     replaceWithWarning(imgElement, result.nsfwScore, mediaId);
+  } else {
+    // 安全な画像 → 表示を戻す
+    imgElement.style.visibility = '';
   }
 }
 
