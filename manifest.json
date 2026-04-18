@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "がぞうみまもり | Xセンシティブ画像フィルター BETA",
-  "version": "2.0.0",
-  "description": "THIS EXTENSION IS FOR BETA TESTING. X（Twitter）のタイムライン・DMのセンシティブ画像をAIで自動検出しブロック。クリックで個別表示、感度調整も可能。画像データは外部送信しません。",
+  "name": "がぞうみまもり | Xセンシティブ画像フィルター",
+  "version": "2.1.0",
+  "description": "X（Twitter）のタイムライン・DMの不快な画像や過激な画像をAIで自動検出しブロック。クリックで個別表示、感度調整も可能。画像データは外部送信しません。",
   "permissions": [
     "storage",
     "offscreen"
