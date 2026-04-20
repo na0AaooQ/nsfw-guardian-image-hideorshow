@@ -167,7 +167,7 @@ rm -f ./node_modules/public-encrypt/test/test_rsa_privkey.pem
 ```
 # バンドルの再作成後、拡張機能を動作させるために必要なファイルをZIP化
 cd ..
-zip -r nsfw-guardian-beta.zip nsfw-guardian-image-hideorshow \
+zip -r nsfw-guardian-official-version.zip nsfw-guardian-image-hideorshow \
   --exclude "*/node_modules/*" \
   --exclude "*/.git/*" \
   --exclude "*/tests/*" \
@@ -185,9 +185,9 @@ zip -r nsfw-guardian-beta.zip nsfw-guardian-image-hideorshow \
 
 ```
 # ZIPファイルが正常に生成できたか確認
-unzip -l nsfw-guardian-beta.zip
+unzip -l nsfw-guardian-official-version.zip
 
-Archive:  nsfw-guardian-beta.zip
+Archive:  nsfw-guardian-official-version.zip
   Length      Date    Time    Name
 ---------  ---------- -----   ----
         0  03-18-2026 23:02   nsfw-guardian-image-hideorshow/
