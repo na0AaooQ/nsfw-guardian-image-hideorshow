@@ -184,13 +184,28 @@
       <p>📌 本Google Chrome拡張機能は、あなたの画像データや個人情報を外部サーバーへ一切送信しません。すべての処理はお使いのブラウザ内のみで完結します。無料でご利用いただける機能です。</p>
     </div>
 
-    <h2>1. はじめに</h2>
+    <h2>目次</h2>
+    <ul>
+      <li><a href="#introduction">1. はじめに</a></li>
+      <li><a href="#information_we_collect">2. 収集する情報</a></li>
+      <li><a href="#information_not_collect">3. 収集しない情報</a></li>
+      <li><a href="#how_information_is_processed">4. 情報の処理方法</a></li>
+      <li><a href="#information_provision_to_third_parties">5. 第三者への情報提供</a></li>
+      <li><a href="#authority_to_use">6. 利用する権限について</a></li>
+      <li><a href="#security">7. セキュリティ</a></li>
+      <li><a href="#childrens_privacy">8. お子様のプライバシー</a></li>
+      <li><a href="#changes_to_privacy_policy">9. プライバシーポリシーの変更</a></li>
+      <li><a href="#developer_information">10. 開発者情報</a></li>
+      <li><a href="#inquiry">11. お問い合わせ</a></li>
+    </ul>
+
+    <h2 id="introduction">1. はじめに</h2>
     <p>「がぞうみまもり | Xセンシティブ画像フィルター」（以下「本拡張機能」）は、X（旧Twitter）のタイムラインおよびDMに表示される不快な画像や過激な画像を自動的に検出・ブロックするChrome拡張機能です。</p>
     <p>本ページでは、本拡張機能が取り扱う情報の内容とその扱い方について説明します。</p>
     <p>本拡張機能の機能概要については、<a href="./gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 がぞうみまもり紹介資料(PDF)</a> をご参照ください。</p>
     <p>本拡張機能の使い方については、<a href="./manual.html" target="_blank" rel="noopener">📖 操作マニュアルページ</a> をご参照ください。</p>
 
-    <h2>2. 収集する情報</h2>
+    <h2 id="information_we_collect">2. 収集する情報</h2>
     <p>本拡張機能が収集・処理する情報は以下の通りです。</p>
     <table>
       <tr>
@@ -210,7 +225,7 @@
       </tr>
     </table>
 
-    <h2>3. 収集しない情報</h2>
+    <h2 id="information_not_collect">3. 収集しない情報</h2>
     <p>本拡張機能は以下の情報を収集・記録・送信しません。</p>
     <ul class="warn-list">
       <li>氏名・メールアドレス・住所等の個人を特定できる情報</li>
@@ -220,7 +235,7 @@
       <li>判定結果・スコアのログ</li>
     </ul>
 
-    <h2>4. 情報の処理方法</h2>
+    <h2 id="how_information_is_processed">4. 情報の処理方法</h2>
     <p>本拡張機能のすべての処理はお使いのブラウザ（Chrome）内で完結します。</p>
     <ul>
       <li>画像判定はブラウザ内の Offscreen Document API 上で実行されます</li>
@@ -229,10 +244,10 @@
       <li>設定値（有効/無効・感度）はChromeの <code>storage.sync</code> に保存されます</li>
     </ul>
 
-    <h2>5. 第三者への情報提供</h2>
+    <h2 id="information_provision_to_third_parties">5. 第三者への情報提供</h2>
     <p>本拡張機能は、いかなる第三者に対しても情報の提供・販売・共有を行いません。</p>
 
-    <h2>6. 利用する権限について</h2>
+    <h2 id="authority_to_use">6. 利用する権限について</h2>
     <p>本拡張機能が要求するChrome権限とその理由は以下の通りです。</p>
     <table>
       <tr>
@@ -253,19 +268,19 @@
       </tr>
     </table>
 
-    <h2>7. セキュリティ</h2>
+    <h2 id="security">7. セキュリティ</h2>
     <p>本拡張機能は Chrome拡張機能 Manifest V3 に準拠しており、Content Security Policy（CSP）により <code>eval</code> や外部スクリプトの実行が禁止されています。すべてのコードはリポジトリ上で公開されており、誰でも確認できます。</p>
     <ul>
       <li>ソースコード：<a href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank">GitHub リポジトリ</a></li>
     </ul>
 
-    <h2>8. お子様のプライバシー</h2>
+    <h2 id="childrens_privacy">8. お子様のプライバシー</h2>
     <p>本拡張機能は13歳未満のお子様を対象としたサービスではありません。13歳未満のお子様の個人情報を意図的に収集することはありません。</p>
 
-    <h2>9. プライバシーポリシーの変更</h2>
+    <h2 id="changes_to_privacy_policy">9. プライバシーポリシーの変更</h2>
     <p>本プライバシーポリシーは予告なく変更される場合があります。変更があった場合は、本ページ上部の「最終更新日」を更新します。重要な変更がある場合は、リポジトリの README にも記載します。</p>
 
-    <h2>10. 開発者情報</h2>
+    <h2 id="developer_information">10. 開発者情報</h2>
     <p>本拡張機能の開発者・運営者は以下の個人事業主になります。</p>
     <div class="contact-box">
       <p><strong>屋号：</strong>こころみまもり</p>
@@ -279,13 +294,16 @@
       <p><strong>ポートフォリオサイト：</strong><a href="https://portfolio.na0aaooq.com/" target="_blank" rel="noopener">https://portfolio.na0aaooq.com/</a></p>
     </div>
 
-    <h2>11. お問い合わせ</h2>
+    <h2 id="inquiry">11. お問い合わせ</h2>
     <p>本拡張機能に関するご質問・ご意見は以下よりお問い合わせください。</p>
     <div class="contact-box">
       <p><strong>開発者：</strong>na0AaooQ（青木 直之）</p>
       <p><strong>開発者の連絡先メールアドレス：</strong><a href="mailto:na0aaooq+contact@gmail.com">na0aaooq+contact@gmail.com</a></p>
     </div>
 
+    <!-- ===== BACK LINK & FOOTER ===== -->
+    <a class="back-link" href="./manual.html" target="_blank" rel="noopener">← 操作マニュアルを表示する</a>
+    <br>
     <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← 拡張機能のGitHub リポジトリを表示する</a>
       
     <div class="footer">
