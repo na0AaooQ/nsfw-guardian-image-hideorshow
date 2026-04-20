@@ -178,6 +178,7 @@ zip -r nsfw-guardian-beta.zip nsfw-guardian-image-hideorshow \
   --exclude "*/.gitignore" \
   --exclude "*/jest.config.js" \
   --exclude "*/STORE_LISTING.md" \
+  --exclude "*/coverage/*" \
   --exclude "*/biome.json" \
   --exclude "*/README.md"
 ```
