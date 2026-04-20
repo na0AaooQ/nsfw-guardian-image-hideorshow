@@ -86,6 +86,7 @@ nsfw-guardian-image-hideorshow/
 ├── styles.css             # ブロック表示スタイル
 ├── entry_wasm.js          # browserifyバンドル用エントリーポイント
 ├── jest.config.js         # Jestテスト設定
+├── biome.json             # Biome(静的解析ツール)設定
 ├── package.json           # プロジェクト情報・依存関係
 ├── package-lock.json      # パッケージの依存関係・バージョン情報
 ├── README.md              # 本リポジトリの説明
