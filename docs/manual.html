@@ -414,65 +414,83 @@
 
   <!-- ===== 2. インストール ===== -->
   <h2 id="install">2. Chrome拡張機能のインストール手順</h2>
-  <p>現在、本拡張機能はベータ版のため、開発者モード（デベロッパーモード）を使った形式でのインストールとなります。以下の手順に沿って進めてください。</p>
-  
-  <p>※今後、<a href="https://chromewebstore.google.com/" target="_blank" rel="noopener">Google Chrome ウェブストア</a> へ本拡張機能の審査を申請し、審査完了しましたら、正式な手順に変更します。</p>
+  <p>本拡張機能はGoogle社さま審査済みの機能です。<a href="https://chromewebstore.google.com/" target="_blank" rel="noopener">Google Chrome ウェブストア</a> からChromeに追加いただけます。</p>
+  <p>Chromeへの拡張機能「がぞうみまもり」の追加は、以下の手順に沿って進めてください。</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>ソースコードをダウンロードする</h3>
+        <h3>ChromeからChrome ウェブストアの「がぞうみまもり」ページへアクセスします。</h3>
         <p>
-          <a href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">GitHubリポジトリ</a>
-          を開き、<code>Code ▼</code> → <code>Download ZIP</code> をクリックして ZIP ファイルをダウンロードします。
+          <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome ウェブストアの「がぞうみまもり」ページ</a>
+          を開きます。「Chrome に追加」 をクリックします。
         </p>
       </div>
     </div>
+    <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+       <img src="./manual_install_image_001.png"
+         alt="「Chrome に追加」のスクリーンショット" />
+    </div>
+    
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>ZIP ファイルを解凍する</h3>
-        <p>ダウンロードした <code>.zip</code> ファイルを任意のフォルダーに解凍してください。解凍後のフォルダーは削除しないでください。</p>
+        <h3>確認ウィンドウが表示されますので、「インストールに進む」ボタンをクリックします。</h3>
+        <p>確認ウィンドウが表示されますので、「インストールに進む」ボタンをクリックします。</p>
       </div>
     </div>
+    <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+       <img src="./manual_install_image_002.png"
+         alt="「インストールに進む」のスクリーンショット" />
+    </div>
+    
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>Chrome の拡張機能管理画面を開く</h3>
-        <p>Chrome のアドレスバーに <code>chrome://extensions</code> と入力して Enter キーを押します。</p>
+        <h3>確認ウィンドウが表示されますので、「拡張機能を追加」ボタンをクリックします。</h3>
+        <p>確認ウィンドウが表示されますので、「拡張機能を追加」ボタンをクリックします。</p>
       </div>
     </div>
+    <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+       <img src="./manual_install_image_003.png"
+         alt="「拡張機能を追加」ボタンのスクリーンショット" />
+    </div>
+    
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>デベロッパーモードをオンにする</h3>
-        <p>画面右上にある <strong>「デベロッパーモード」</strong> のトグルスイッチをオンにします。</p>
+        <h3>画面右上に「がぞうみまもり」が追加されました。と表示されます。</h3>
+        <p>画面右上に「「がぞうみまもり | Xセンシティブ画像フィルター」が Chrome に追加されました。」と表示されます。</p>
       </div>
     </div>
+    <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+       <img src="./manual_install_image_004.png"
+         alt="「がぞうみまもり」が追加されました。のスクリーンショット" />
+    </div>
+    
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h3>「パッケージ化されていない拡張機能を読み込む」をクリックする</h3>
-        <p>画面左上に表示される <strong>「パッケージ化されていない拡張機能を読み込む」</strong> ボタンをクリックします。</p>
+        <h3>画面右上のボタンをクリックします。「がぞうみまもり」のピンをクリックします。</h3>
+        <p>画面右上のボタンをクリックします。「がぞうみまもり」のピンをクリックして、Chrome上に「がぞうみまもり」アイコンを表示します。</p>
       </div>
     </div>
+    <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+       <img src="./manual_install_image_005.png"
+         alt="「がぞうみまもり」のピンをクリックするスクリーンショット" />
+    </div>
+    
     <div class="step">
       <div class="step-num">6</div>
       <div class="step-body">
-        <h3>解凍したフォルダーを選択する</h3>
-        <p>手順②で解凍したフォルダー（<code>manifest.json</code> が含まれるフォルダー）を選択して「フォルダーの選択」をクリックします。</p>
+        <h3>Chrome上に「がぞうみまもり」アイコンが表示されたことを確認します。</h3>
+        <p>Chrome上に「がぞうみまもり」アイコンが表示されたことを確認します。</p>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num">7</div>
-      <div class="step-body">
-        <h3>インストール完了！</h3>
-        <p>
-          拡張機能の一覧に <strong>🛡️ がぞうみまもり | Xセンシティブ画像フィルター</strong> が表示されれば完了です。
-          ブラウザ右上のパズルアイコン（🧩）から本拡張機能をピン留めすると、アイコンにすぐアクセスできて便利です。
-        </p>
-      </div>
+    <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+       <img src="./manual_install_image_006.png"
+         alt="「がぞうみまもり」アイコン表示確認のスクリーンショット" />
     </div>
   </div>
 
