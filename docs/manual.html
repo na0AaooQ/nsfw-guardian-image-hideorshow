@@ -287,6 +287,13 @@
       border-radius: 6px;
       display: block;
     }
+    .manual-zoomable-image {
+      cursor: zoom-in;
+    }
+    .manual-zoomable-image:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 4px;
+    }
     .screenshot-caption {
       text-align: center;
       font-size: 13px;
@@ -370,6 +377,55 @@
     }
     .back-link:hover { text-decoration: underline; }
 
+    /* ---- Image modal ---- */
+    body.image-modal-open {
+      overflow: hidden;
+    }
+    .image-modal[hidden] {
+      display: none;
+    }
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(26,32,44,0.78);
+    }
+    .image-modal__content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 85vh;
+    }
+    .image-modal__image {
+      display: block;
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 10px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+    }
+    .image-modal__close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: #2d3748;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .image-modal__close:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 3px;
+    }
+
     @media (max-width: 600px) {
       .container { padding: 28px 20px; }
       h1 { font-size: 22px; }
@@ -384,7 +440,7 @@
   <div class="header">
     <div class="product-name">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</div>
     <h1>操作マニュアル</h1>
-    <div class="updated">最終更新日：2026年4月21日 ／ 対応バージョン：v2.1.0</div>
+    <div class="updated">最終更新日：2026年5月09日 ／ 対応バージョン：v2.1.0</div>
   </div>
 
   <!-- ===== SUMMARY ===== -->
@@ -675,5 +731,68 @@
   </div>
 
 </div>
+<div class="image-modal" id="imageModal" hidden>
+  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
+    <button type="button" class="image-modal__close" aria-label="拡大画像を閉じる">×</button>
+    <img class="image-modal__image" alt="" />
+  </div>
+</div>
+<script>
+  (() => {
+    const modal = document.getElementById('imageModal');
+    const modalImage = modal.querySelector('.image-modal__image');
+    const closeButton = modal.querySelector('.image-modal__close');
+    const manualImages = document.querySelectorAll('.screenshot-frame img');
+    let lastFocusedImage = null;
+
+    const openModal = (image) => {
+      lastFocusedImage = image;
+      modalImage.src = image.getAttribute('src') || '';
+      modalImage.alt = image.getAttribute('alt') || '';
+      modal.hidden = false;
+      document.body.classList.add('image-modal-open');
+      closeButton.focus();
+    };
+
+    const closeModal = () => {
+      modal.hidden = true;
+      document.body.classList.remove('image-modal-open');
+      modalImage.removeAttribute('src');
+      modalImage.alt = '';
+
+      if (lastFocusedImage) {
+        lastFocusedImage.focus();
+      }
+    };
+
+    manualImages.forEach((image) => {
+      const imageAlt = image.getAttribute('alt') || '画像';
+
+      image.classList.add('manual-zoomable-image');
+      image.tabIndex = 0;
+      image.setAttribute('role', 'button');
+      image.setAttribute('aria-label', `${imageAlt}を拡大表示`);
+      image.addEventListener('click', () => openModal(image));
+      image.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openModal(image);
+        }
+      });
+    });
+
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
