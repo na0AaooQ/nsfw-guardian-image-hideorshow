@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>操作マニュアル | がぞうみまもり</title>
-  <meta name="description" content="Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フィルター」の操作マニュアルです。インストール手順、感度調整、ブロック画像の表示方法を説明します。">
-  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
+  <title>User Manual | Gazou Mimamori</title>
+  <meta name="description" content="User manual for Gazou Mimamori | Sensitive image filter for X, a Chrome extension that detects and blocks sensitive images on X while processing images locally in your browser.">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
   <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
   <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
   <link rel="alternate" hreflang="x-default" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
@@ -473,148 +473,147 @@
 <body>
 <div class="container">
 
-  <nav class="language-switch" aria-label="言語切り替え">
-    <a href="./manual.html" lang="ja" aria-current="page">日本語</a>
-    <a href="./en/manual.html" lang="en">English</a>
+  <nav class="language-switch" aria-label="Language switcher">
+    <a href="../manual.html" lang="ja">日本語</a>
+    <a href="./manual.html" lang="en" aria-current="page">English</a>
   </nav>
 
   <!-- ===== HEADER ===== -->
   <div class="header">
-    <div class="product-name">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</div>
-    <h1>操作マニュアル</h1>
-    <div class="updated">最終更新日：2026年5月10日 ／ 対応バージョン：v2.1.0</div>
+    <div class="product-name">🛡️ Gazou Mimamori | Sensitive image filter for X</div>
+    <h1>User Manual</h1>
+    <div class="updated">Last updated: May 9, 2026 / Supported version: v2.1.0</div>
   </div>
 
   <!-- ===== SUMMARY ===== -->
   <div class="summary-box">
-    <p>📌 本Google Chrome拡張機能は、あなたの画像データや個人情報を外部サーバーへ一切送信しません。すべての処理はお使いのブラウザ内のみで完結します。無料でご利用いただける機能です。</p>
+    <p>📌 This Google Chrome extension never sends your image data or personal information to any external server. All processing is completed inside your browser. The extension is free to use.</p>
   </div>
 
   <!-- ===== TOC ===== -->
-  <h2>目次</h2>
+  <h2>Table of Contents</h2>
   <ul>
-    <li><a href="#introduction">1. はじめに</a></li>
-    <li><a href="#install">2. Chrome拡張機能のインストール手順</a></li>
-    <li><a href="#sensitivity">3. 画像ブロック感度（閾値）について</a></li>
-    <li><a href="#slider">4. スライダーで感度を変更する</a></li>
-    <li><a href="#dm">5. XのDMでブロックされた画像の表示例</a></li>
-    <li><a href="#timeline">6. Xのタイムラインでブロックされた画像の表示例</a></li>
-    <li><a href="#show-image">7. ブロックされた画像を表示する方法</a></li>
-    <li><a href="#inquiry">8. 本拡張機能に関するお問い合わせ先</a></li>
+    <li><a href="#introduction">1. Introduction</a></li>
+    <li><a href="#install">2. How to Install the Chrome Extension</a></li>
+    <li><a href="#sensitivity">3. Image Blocking Sensitivity Threshold</a></li>
+    <li><a href="#slider">4. Change Sensitivity with the Slider</a></li>
+    <li><a href="#dm">5. Example: Blocked Images in X Direct Messages</a></li>
+    <li><a href="#timeline">6. Example: Blocked Images in the X Timeline</a></li>
+    <li><a href="#show-image">7. How to Show a Blocked Image</a></li>
+    <li><a href="#inquiry">8. Contact</a></li>
   </ul>
 
-  <!-- ===== 1. はじめに ===== -->
-  <h2 id="introduction">1. はじめに</h2>
-  <p>「がぞうみまもり | Xセンシティブ画像フィルター」（以下「本拡張機能」）は、X（旧Twitter）のタイムラインおよびDMに表示される不快な画像や過激な画像を自動的に検出・ブロックするChrome拡張機能です。</p>
-  <p>本ページでは、本拡張機能が取り扱う情報の内容とその扱い方について説明します。</p>
-  <p>本拡張機能の機能概要については、<a href="./gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 がぞうみまもり紹介資料(PDF)</a> をご参照ください。</p>
-  <p>本拡張機能の情報の取り扱いについては、<a href="./privacy-policy.html" target="_blank" rel="noopener">📖 プライバシーポリシーページ</a> をご参照ください。</p>
+  <!-- ===== 1. Introduction ===== -->
+  <h2 id="introduction">1. Introduction</h2>
+  <p>“Gazou Mimamori | Sensitive image filter for X” (the “Extension”) is a Chrome extension that automatically detects and blocks uncomfortable or explicit images displayed in your X (formerly Twitter) timeline and direct messages.</p>
+  <p>This page explains how to use the Extension.</p>
+  <p>For an overview of the Extension, please see the <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 Gazou Mimamori overview PDF</a>.</p>
+  <p>For details about how information is handled, please see the <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 Privacy Policy</a>.</p>
 
-  <!-- ===== 2. インストール ===== -->
-  <h2 id="install">2. Chrome拡張機能のインストール手順</h2>
-  <p>本拡張機能はGoogle社さま審査済みの機能です。<a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Google Chrome ウェブストア</a> からChromeに追加いただけます。</p>
-  <p>Chromeへの拡張機能「がぞうみまもり」の追加は、以下の手順に沿って進めてください。</p>
+  <!-- ===== 2. Install ===== -->
+  <h2 id="install">2. How to Install the Chrome Extension</h2>
+  <p>The Extension has been reviewed by Google and is available from the <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a>.</p>
+  <p>Please follow the steps below to add “Gazou Mimamori” to Chrome.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>ChromeからChrome ウェブストアの「がぞうみまもり」ページへアクセスします。</h3>
+        <h3>Open the “Gazou Mimamori” page in the Chrome Web Store from Chrome.</h3>
         <p>
-          <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome ウェブストアの「がぞうみまもり」ページ</a>
-          を開きます。「Chrome に追加」 をクリックします。
+          Open the <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">“Gazou Mimamori” page in the Chrome Web Store</a>, then click “Add to Chrome”.
         </p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="./manual_install_image_001.png"
-         alt="「Chrome に追加」のスクリーンショット" />
+       <img src="../manual_install_image_001.png"
+         alt="Screenshot of the Add to Chrome button" />
     </div>
-    
+
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>確認ウィンドウが表示されますので、「インストールに進む」ボタンをクリックします。</h3>
-        <p>確認ウィンドウが表示されますので、「インストールに進む」ボタンをクリックします。</p>
+        <h3>When the confirmation window appears, click the button to continue installation.</h3>
+        <p>A confirmation window will be shown. Click the button to proceed with installation.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="./manual_install_image_002.png"
-         alt="「インストールに進む」のスクリーンショット" />
+       <img src="../manual_install_image_002.png"
+         alt="Screenshot of the continue installation button" />
     </div>
-    
+
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>確認ウィンドウが表示されますので、「拡張機能を追加」ボタンをクリックします。</h3>
-        <p>確認ウィンドウが表示されますので、「拡張機能を追加」ボタンをクリックします。</p>
+        <h3>When the next confirmation window appears, click “Add extension”.</h3>
+        <p>Confirm the permission prompt and click “Add extension”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="./manual_install_image_003.png"
-         alt="「拡張機能を追加」ボタンのスクリーンショット" />
+       <img src="../manual_install_image_003.png"
+         alt="Screenshot of the Add extension button" />
     </div>
-    
+
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>画面右上に「がぞうみまもり」が追加されました。と表示されます。</h3>
-        <p>画面右上に「「がぞうみまもり | Xセンシティブ画像フィルター」が Chrome に追加されました。」と表示されます。</p>
+        <h3>Confirm that Chrome shows a message saying Gazou Mimamori has been added.</h3>
+        <p>A message will appear in the top-right area of the screen indicating that “Gazou Mimamori | Sensitive image filter for X” has been added to Chrome.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="./manual_install_image_004.png"
-         alt="「がぞうみまもり」が追加されました。のスクリーンショット" />
+       <img src="../manual_install_image_004.png"
+         alt="Screenshot of the message showing Gazou Mimamori was added" />
     </div>
-    
+
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h3>画面右上のボタンをクリックします。「がぞうみまもり」のピンをクリックします。</h3>
-        <p>画面右上のボタンをクリックします。「がぞうみまもり」のピンをクリックして、Chrome上に「がぞうみまもり」アイコンを表示します。</p>
+        <h3>Open the extensions menu at the top right and pin Gazou Mimamori.</h3>
+        <p>Click the extensions button in the top-right area, then click the pin for “Gazou Mimamori” so that its icon is visible in Chrome.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="./manual_install_image_005.png"
-         alt="「がぞうみまもり」のピンをクリックするスクリーンショット" />
+       <img src="../manual_install_image_005.png"
+         alt="Screenshot showing how to pin Gazou Mimamori" />
     </div>
-    
+
     <div class="step">
       <div class="step-num">6</div>
       <div class="step-body">
-        <h3>Chrome上に「がぞうみまもり」アイコンが表示されたことを確認します。</h3>
-        <p>Chrome上に「がぞうみまもり」アイコンが表示されたことを確認します。</p>
+        <h3>Confirm that the Gazou Mimamori icon is visible in Chrome.</h3>
+        <p>Once the icon is shown in Chrome, the Extension is ready to use.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="./manual_install_image_006.png"
-         alt="「がぞうみまもり」アイコン表示確認のスクリーンショット" />
+       <img src="../manual_install_image_006.png"
+         alt="Screenshot confirming the Gazou Mimamori icon is visible" />
     </div>
   </div>
 
 
-  <!-- ===== 3. 感度 ===== -->
-  <h2 id="sensitivity">3. 画像ブロック感度（閾値）について</h2>
-  <p>本拡張機能は AI（機械学習モデル）によって画像が不快な画像や過激な画像である確率をスコア（0〜100%）で算出します。スコアが設定した閾値（しきい値）を上回った画像がブロックされます。</p>
+  <!-- ===== 3. Sensitivity ===== -->
+  <h2 id="sensitivity">3. Image Blocking Sensitivity Threshold</h2>
+  <p>The Extension uses an AI machine-learning model to calculate a score from 0 to 100% that represents how likely an image is to be uncomfortable or explicit. Images whose score is higher than your selected threshold are blocked.</p>
 
   <div class="info-grid">
     <div class="info-card">
-      <div class="label">初期設定（デフォルト値）</div>
+      <div class="label">Default setting</div>
       <div class="value">30%</div>
-      <p>拡張機能のインストール直後の閾値は <strong>30%（厳しめモード）</strong> です。水着・露出度の高い画像もブロックする設定です。</p>
+      <p>Immediately after installation, the threshold is set to <strong>30% (strict mode)</strong>. This setting may also block images with swimwear or high exposure.</p>
     </div>
     <div class="info-card">
-      <div class="label">スコアの見方</div>
-      <div class="value">0 〜 100%</div>
-      <p>AI が算出する不快な画像や過激である確率です。スコアが高いほど、ブロックされる可能性の高い画像です。</p>
+      <div class="label">How to read the score</div>
+      <div class="value">0 to 100%</div>
+      <p>This is the probability calculated by AI that an image may be uncomfortable or explicit. The higher the score, the more likely the image is to be blocked.</p>
     </div>
   </div>
 
   <div class="sens-bar-wrap">
     <div class="sens-labels">
-      <span>🔴 厳しめ（0%）</span>
-      <span>🟡 バランス（50%）</span>
-      <span>🟢 緩め（100%）</span>
+      <span>🔴 Strict (0%)</span>
+      <span>🟡 Balanced (50%)</span>
+      <span>🟢 Gentle (100%)</span>
     </div>
     <div class="sens-bar">
       <div class="marker" style="left: 50%;"></div>
@@ -623,159 +622,159 @@
 
   <table>
     <tr>
-      <th>モード</th>
-      <th>閾値の目安</th>
-      <th>特徴</th>
+      <th>Mode</th>
+      <th>Threshold guide</th>
+      <th>Behavior</th>
     </tr>
     <tr>
-      <td><span class="tag tag-red">厳しめ</span></td>
-      <td>0〜40%</td>
-      <td>水着・露出度の高い画像もブロックします。多めにブロックしたい場合に使います。</td>
+      <td><span class="tag tag-red">Strict</span></td>
+      <td>0 to 40%</td>
+      <td>Blocks more images, including swimwear or images with high exposure. Use this when you want stronger filtering.</td>
     </tr>
     <tr>
-      <td><span class="tag tag-yellow">バランス</span></td>
-      <td>50%（初期値）</td>
-      <td>標準設定です。明らかに不快な画像や過激な画像をブロックします。</td>
+      <td><span class="tag tag-yellow">Balanced</span></td>
+      <td>50% (standard)</td>
+      <td>A standard setting that blocks images that are clearly uncomfortable or explicit.</td>
     </tr>
     <tr>
-      <td><span class="tag tag-green">緩め</span></td>
-      <td>60〜100%</td>
-      <td>確信度の高い画像のみブロックします。誤検知を減らしたい場合に使います。</td>
+      <td><span class="tag tag-green">Gentle</span></td>
+      <td>60 to 100%</td>
+      <td>Blocks only images with higher confidence. Use this if you want to reduce false positives.</td>
     </tr>
   </table>
 
   <div class="warn-box">
-    <p>⚠️ <strong>ご注意：</strong>AI による自動判定のため、不快な画像や過激でない画像がブロックされたり（誤検知）、不快な画像や過激な画像がブロックされない場合があります。感度スライダーを調整してお使いください。</p>
+    <p>⚠️ <strong>Please note:</strong> Because images are judged automatically by AI, images that are not uncomfortable or explicit may be blocked by mistake, and some uncomfortable or explicit images may not be blocked. Please adjust the sensitivity slider to match your needs.</p>
   </div>
 
 
-  <!-- ===== 4. スライダー ===== -->
-  <h2 id="slider">4. スライダーで感度を変更する</h2>
-  <p>ブラウザ右上の拡張機能アイコンをクリックすると、感度設定パネルが開きます。</p>
+  <!-- ===== 4. Slider ===== -->
+  <h2 id="slider">4. Change Sensitivity with the Slider</h2>
+  <p>Click the extension icon in the top-right area of your browser to open the sensitivity settings panel.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>拡張機能アイコンをクリックする</h3>
-        <p>Chrome ブラウザ右上のアドレスバー横にある <strong>🛡️ シールドアイコン</strong> をクリックします。パズルアイコン（🧩）からピン留めすると、すぐにアクセスできます。</p>
+        <h3>Click the extension icon</h3>
+        <p>Click the <strong>🛡️ shield icon</strong> next to the address bar in the top-right area of Chrome. If needed, pin the Extension from the puzzle icon (🧩) so that you can access it quickly.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>「フィルタリング」トグルを確認する</h3>
-        <p>パネル上部の <strong>「フィルタリング」</strong> トグルが <span class="tag tag-blue">オン（青色）</span> になっていることを確認してください。オフになっていると、画像はブロックされません。</p>
+        <h3>Check the “Filtering” toggle</h3>
+        <p>Make sure the <strong>“Filtering”</strong> toggle at the top of the panel is <span class="tag tag-blue">on (blue)</span>. If it is off, images will not be blocked.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>スライダーを左右に動かして感度を設定する</h3>
-        <p>「感度設定」のスライダーを左右にドラッグします。<strong>左（厳しめ）</strong> にするほど多くの画像がブロックされます。<strong>右（緩め）</strong> にするほどブロックされにくくなります。</p>
+        <h3>Move the slider left or right to set sensitivity</h3>
+        <p>Drag the “Sensitivity” slider left or right. Moving it <strong>left (strict)</strong> blocks more images. Moving it <strong>right (gentle)</strong> makes images less likely to be blocked.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>「動作中」の表示を確認する</h3>
-        <p>パネル下部に <span class="tag tag-green">● 動作中</span> と表示されていれば、設定は有効です。X のページをリロードすると新しい感度が反映されます。</p>
+        <h3>Confirm that the panel says “Running”</h3>
+        <p>If <span class="tag tag-green">● Running</span> appears at the bottom of the panel, the setting is active. Reload the X page to apply the new sensitivity.</p>
       </div>
     </div>
   </div>
 
   <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
-    <img src="./sensitivity_adjust_filter_x_block_images.png"
-         alt="感度調整フィルターパネルのスクリーンショット" />
+    <img src="../sensitivity_adjust_filter_x_block_images.png"
+         alt="Screenshot of the sensitivity adjustment panel" />
   </div>
-  <p class="screenshot-caption">▲ 感度調整パネルの表示例（厳しめ・30% に設定した状態）</p>
+  <p class="screenshot-caption">▲ Example sensitivity panel set to strict, 30%</p>
 
 
   <!-- ===== 5. DM ===== -->
-  <h2 id="dm">5. X の DM でブロックされた画像の表示例</h2>
-  <p>X のダイレクトメッセージ（DM）で不快な画像や過激な画像と判定された画像は、以下のように暗いオーバーレイに置き換えられて表示されます。</p>
+  <h2 id="dm">5. Example: Blocked Images in X Direct Messages</h2>
+  <p>When an image in an X direct message is judged to be uncomfortable or explicit, it is replaced with a dark overlay like the example below.</p>
 
   <div class="screenshot-frame">
-    <img src="./x_dm_blockd_images_example.png"
-         alt="X の DM で画像がブロックされた状態のスクリーンショット" />
+    <img src="../x_dm_blockd_images_example.png"
+         alt="Screenshot showing a blocked image in an X direct message" />
   </div>
-  <p class="screenshot-caption">▲ DM 画面での画像ブロック表示例（スコア: 46.2%）</p>
+  <p class="screenshot-caption">▲ Example blocked image in a DM screen (score: 46.2%)</p>
 
   <div class="tip-box">
-    <p>💡 <strong>表示内容の説明：</strong>ブロックされた画像の上には「🚫 不適切な画像」と AI が算出したスコアが表示されます。スコアは設定した感度閾値を超えた割合を示しています。</p>
+    <p>💡 <strong>What you see:</strong> Over a blocked image, the Extension displays “🚫 Inappropriate image” and the score calculated by AI. The score shows how far the image exceeded your selected sensitivity threshold.</p>
   </div>
 
 
-  <!-- ===== 6. タイムライン ===== -->
-  <h2 id="timeline">6. X のタイムラインでブロックされた画像の表示例</h2>
-  <p>X のタイムラインや検索結果でも、不快な画像や過激な画像と判定された画像は同様にブロック表示されます。</p>
+  <!-- ===== 6. Timeline ===== -->
+  <h2 id="timeline">6. Example: Blocked Images in the X Timeline</h2>
+  <p>Images judged to be uncomfortable or explicit are also blocked in the X timeline, search results, and other image areas.</p>
 
   <div class="screenshot-frame">
-    <img src="./x_timeline_blockd_images_example.png"
-         alt="X のタイムラインで画像がブロックされた状態のスクリーンショット" />
+    <img src="../x_timeline_blockd_images_example.png"
+         alt="Screenshot showing a blocked image in the X timeline" />
   </div>
-  <p class="screenshot-caption">▲ タイムライン（検索結果）での画像ブロック表示例（スコア: 56.8%）</p>
+  <p class="screenshot-caption">▲ Example blocked image in timeline search results (score: 56.8%)</p>
 
   <div class="tip-box">
-    <p>💡 <strong>対応している場所：</strong>ホームタイムライン・検索結果・プロフィールのメディアタブ・DM など、X 上のあらゆる画像表示箇所に対応しています。</p>
+    <p>💡 <strong>Supported areas:</strong> The Extension works across image areas on X, including the home timeline, search results, profile media tabs, and direct messages.</p>
   </div>
 
 
-  <!-- ===== 7. 画像のブロック解除 ===== -->
-  <h2 id="show-image">7. ブロックされた画像を表示する方法</h2>
-  <p>ブロックされた画像でも、必要に応じて 1 枚ずつ確認することができます。</p>
+  <!-- ===== 7. Show image ===== -->
+  <h2 id="show-image">7. How to Show a Blocked Image</h2>
+  <p>Even when an image is blocked, you can choose to show it one image at a time when necessary.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>「クリックで表示」ボタンを確認する</h3>
-        <p>不快な画像や過激な画像と判定された画像のオーバーレイ中央に、以下のようなボタンが表示されます。</p>
+        <h3>Find the “Click to show” button</h3>
+        <p>A button like the one below appears in the center of the overlay on images judged to be uncomfortable or explicit.</p>
         <div class="demo-btn-wrap">
-          <span class="demo-btn demo-btn-outline">クリックで表示</span>
-          <span style="font-size: 13px; color: #718096;">または</span>
-          <span class="demo-btn demo-btn-fill">クリックで表示</span>
+          <span class="demo-btn demo-btn-outline">Click to show</span>
+          <span style="font-size: 13px; color: #718096;">or</span>
+          <span class="demo-btn demo-btn-fill">Click to show</span>
         </div>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>「クリックで表示」ボタンをクリックする</h3>
-        <p>ボタンをクリックすると、その画像のブロックが解除されて元の画像が表示されます。他の画像には影響しません。</p>
+        <h3>Click the “Click to show” button</h3>
+        <p>Clicking the button removes the block for that image and shows the original image. Other images are not affected.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>ページをリロードするとブロックが再適用される</h3>
-        <p>「クリックで表示」は一時的な解除です。ページを再読み込みすると、同じ画像が再びブロックされます。</p>
+        <h3>Reloading the page reapplies the block</h3>
+        <p>“Click to show” is temporary. If you reload the page, the same image will be blocked again if it still exceeds the threshold.</p>
       </div>
     </div>
   </div>
 
   <div class="warn-box">
-    <p>⚠️ <strong>誤検知が気になる場合：</strong>特定の画像が繰り返し誤ってブロックされる場合は、感度スライダーを「緩め」方向に調整するとブロックされにくくなります。→ <a href="#slider">スライダーの調整方法（3 節）</a></p>
+    <p>⚠️ <strong>If you notice false positives:</strong> If a specific image is blocked repeatedly by mistake, move the sensitivity slider toward “Gentle” to make it less likely to be blocked. → <a href="#slider">How to adjust the slider (Section 4)</a></p>
   </div>
 
-  <!-- ===== 8. 本拡張機能に関するお問い合わせ先 ===== -->
-  <h2 id="inquiry">8. 本拡張機能に関するお問い合わせ先</h2>
-  <p>本拡張機能に関して、ご不明な点・ご意見・ご感想などありましたら、プライバシーポリシーページの「お問い合わせ」先までご連絡ください。</p>
-  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 お問い合わせ</a></p>
+  <!-- ===== 8. Contact ===== -->
+  <h2 id="inquiry">8. Contact</h2>
+  <p>If you have any questions, feedback, or comments about the Extension, please use the contact information on the Privacy Policy page.</p>
+  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 Contact</a></p>
 
   <!-- ===== BACK LINK & FOOTER ===== -->
-  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← プライバシーポリシーを表示する</a>
+  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← View the Privacy Policy</a>
   <br>
-  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← 拡張機能のGitHub リポジトリを表示する</a>
+  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← View the GitHub repository</a>
 
   <div class="footer">
-    <p>&copy; がぞうみまもり 2026 青木直之 (@na0AaooQ) All Rights Reserved.</p>
+    <p>&copy; Gazou Mimamori 2026 Naoyuki Aoki (@na0AaooQ) All Rights Reserved.</p>
   </div>
 
 </div>
 <div class="image-modal" id="imageModal" hidden>
-  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
-    <button type="button" class="image-modal__close" aria-label="拡大画像を閉じる">×</button>
+  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="Enlarged image view">
+    <button type="button" class="image-modal__close" aria-label="Close enlarged image">×</button>
     <img class="image-modal__image" alt="" />
   </div>
 </div>
@@ -808,12 +807,12 @@
     };
 
     manualImages.forEach((image) => {
-      const imageAlt = image.getAttribute('alt') || '画像';
+      const imageAlt = image.getAttribute('alt') || 'image';
 
       image.classList.add('manual-zoomable-image');
       image.tabIndex = 0;
       image.setAttribute('role', 'button');
-      image.setAttribute('aria-label', `${imageAlt}を拡大表示`);
+      image.setAttribute('aria-label', 'Open enlarged view for ' + imageAlt);
       image.addEventListener('click', () => openModal(image));
       image.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
