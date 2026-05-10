@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>プライバシーポリシー | がぞうみまもり</title>
+  <meta name="description" content="Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フィルター」のプライバシーポリシーです。画像データや個人情報を外部送信しない仕組みと利用権限を説明します。">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
+  <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
+  <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/privacy-policy.html">
+  <link rel="alternate" hreflang="x-default" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,6 +28,37 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       padding: 48px 48px;
     }
+
+    /* ---- Language switch ---- */
+    .language-switch {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin: -20px 0 28px;
+      font-size: 13px;
+    }
+    .language-switch a {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #bee3f8;
+      border-radius: 999px;
+      color: #2b6cb0;
+      padding: 4px 10px;
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .language-switch a:hover {
+      background: #ebf8ff;
+      text-decoration: none;
+    }
+    .language-switch a[aria-current="page"] {
+      background: #2b6cb0;
+      color: #fff;
+      border-color: #2b6cb0;
+    }
+
 
     .header {
       text-align: center;
@@ -167,12 +203,18 @@
 
     @media (max-width: 600px) {
       .container { padding: 28px 20px; }
+      .language-switch { justify-content: center; margin: -8px 0 24px; }
       h1 { font-size: 22px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+
+    <nav class="language-switch" aria-label="言語切り替え">
+      <a href="./privacy-policy.html" lang="ja" aria-current="page">日本語</a>
+      <a href="./en/privacy-policy.html" lang="en">English</a>
+    </nav>
 
     <div class="header">
       <div class="product-name">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</div>
