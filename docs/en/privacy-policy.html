@@ -8,6 +8,7 @@
   <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/privacy-policy.html">
   <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
   <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/privacy-policy.html">
+  <link rel="alternate" hreflang="hi" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/hi/privacy-policy.html">
   <link rel="alternate" hreflang="x-default" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,25 +39,34 @@
       margin: -20px 0 28px;
       font-size: 13px;
     }
-    .language-switch a {
-      display: inline-flex;
-      align-items: center;
+    .language-switch select {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 132px;
       border: 1px solid #bee3f8;
       border-radius: 999px;
       color: #2b6cb0;
-      padding: 4px 10px;
-      text-decoration: none;
+      background-color: #ffffff;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #2b6cb0 50%),
+        linear-gradient(135deg, #2b6cb0 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 13px) 50%;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding: 6px 34px 6px 14px;
+      font: inherit;
       font-weight: 600;
       line-height: 1.4;
+      cursor: pointer;
     }
-    .language-switch a:hover {
+    .language-switch select:hover {
       background: #ebf8ff;
-      text-decoration: none;
     }
-    .language-switch a[aria-current="page"] {
-      background: #2b6cb0;
-      color: #fff;
-      border-color: #2b6cb0;
+    .language-switch select:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 3px;
     }
 
 
@@ -227,8 +237,11 @@
   <div class="container">
 
     <nav class="language-switch" aria-label="Language switcher">
-      <a href="../privacy-policy.html" lang="ja">日本語</a>
-      <a href="./privacy-policy.html" lang="en" aria-current="page">English</a>
+      <select aria-label="Select language" onchange="if (this.value) window.location.href = this.value;">
+        <option value="../privacy-policy.html">日本語</option>
+        <option value="./privacy-policy.html" selected>English</option>
+        <option value="../hi/privacy-policy.html">हिन्दी</option>
+      </select>
     </nav>
 
     <div class="header">

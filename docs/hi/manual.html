@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>がぞうみまもり का उपयोगकर्ता मैनुअल</title>
+  <meta name="description" content="Chrome एक्सटेंशन がぞうみまもり (Gazou Mimamori) | X संवेदनशील इमेज फिल्टर का उपयोगकर्ता मैनुअल। इंस्टॉल करने, संवेदनशीलता समायोजित करने और ब्लॉक की गई इमेज दिखाने का तरीका समझें।">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/hi/manual.html">
+  <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
+  <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
+  <link rel="alternate" hreflang="hi" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/hi/manual.html">
+  <link rel="alternate" hreflang="x-default" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
+  <style>
+    /* ============================================================
+       Base — privacy-policy.html と完全に合わせたスタイル
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans Devanagari', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+      background: #f5f7fa;
+      color: #2d3748;
+      line-height: 1.8;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 48px 48px;
+    }
+
+    /* ---- Language switch ---- */
+    .language-switch {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin: -20px 0 28px;
+      font-size: 13px;
+    }
+    .language-switch select {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 132px;
+      border: 1px solid #bee3f8;
+      border-radius: 999px;
+      color: #2b6cb0;
+      background-color: #ffffff;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #2b6cb0 50%),
+        linear-gradient(135deg, #2b6cb0 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 13px) 50%;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding: 6px 34px 6px 14px;
+      font: inherit;
+      font-weight: 600;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+    .language-switch select:hover {
+      background: #ebf8ff;
+    }
+    .language-switch select:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 3px;
+    }
+
+
+    /* ---- Header ---- */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #e8f4fd;
+    }
+
+    .product-name {
+      font-size: 13px;
+      color: #4299e1;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 12px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: #718096;
+    }
+
+    /* ---- Summary box ---- */
+    .summary-box {
+      background: #ebf8ff;
+      border-left: 4px solid #4299e1;
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+
+    .summary-box p {
+      font-size: 15px;
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+
+    /* ---- Section headings ---- */
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a202c;
+      margin: 36px 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid #4299e1;
+    }
+
+    /* ---- Body text ---- */
+    p {
+      font-size: 15px;
+      color: #4a5568;
+      margin-bottom: 12px;
+    }
+
+    /* ---- Lists ---- */
+    ul {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: #4a5568;
+      padding: 4px 0 4px 22px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+      font-weight: bold;
+    }
+
+    /* ---- Tables ---- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 24px;
+      font-size: 14px;
+    }
+
+    th {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid #bee3f8;
+    }
+
+    td {
+      padding: 10px 14px;
+      border: 1px solid #e2e8f0;
+      color: #4a5568;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f7fafc; }
+
+    /* ---- Code ---- */
+    code {
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 13px;
+      font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+      color: #2b6cb0;
+    }
+
+    /* ---- Info / callout boxes ---- */
+    .contact-box {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+
+    .contact-box a,
+    a { color: #4299e1; text-decoration: none; }
+    .contact-box a:hover,
+    a:hover { text-decoration: underline; }
+
+    /* ---- Warn callout (yellow) ---- */
+    .warn-box {
+      background: #fffff0;
+      border-left: 4px solid #ecc94b;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0 20px;
+    }
+    .warn-box p {
+      font-size: 14px;
+      color: #744210;
+      margin: 0;
+    }
+
+    /* ---- Tip callout (green) ---- */
+    .tip-box {
+      background: #f0fff4;
+      border-left: 4px solid #48bb78;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0 20px;
+    }
+    .tip-box p {
+      font-size: 14px;
+      color: #276749;
+      margin: 0;
+    }
+
+    /* ---- Step cards ---- */
+    .steps { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+
+    .step-num {
+      background: #4299e1;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-body h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 4px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: #4a5568;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    /* ---- Sensitivity bar ---- */
+    .sens-bar-wrap { margin: 20px 0 4px; }
+
+    .sens-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .sens-bar {
+      height: 10px;
+      border-radius: 99px;
+      background: linear-gradient(to right, #fc8181 0%, #f6e05e 50%, #68d391 100%);
+      position: relative;
+    }
+
+    .sens-bar .marker {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 3px solid #4299e1;
+      border-radius: 50%;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    }
+
+    /* ---- Tags ---- */
+    .tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .tag-red    { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+    .tag-yellow { background: #fffff0; color: #b7791f; border: 1px solid #f6e05e; }
+    .tag-green  { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+    .tag-blue   { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+
+    /* ---- Screenshot frame ---- */
+    .screenshot-frame {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px;
+      margin: 20px 0 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .screenshot-frame img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
+    }
+    .manual-zoomable-image {
+      cursor: zoom-in;
+    }
+    .manual-zoomable-image:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 4px;
+    }
+    .screenshot-caption {
+      text-align: center;
+      font-size: 13px;
+      color: #718096;
+      margin-bottom: 8px;
+    }
+
+    /* ---- Button demo ---- */
+    .demo-btn-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 12px 0 4px;
+    }
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: default;
+    }
+    .demo-btn-outline { background: #fff5f5; border: 2px solid #fc8181; color: #c53030; }
+    .demo-btn-fill    { background: #e53e3e; border: 2px solid #e53e3e; color: #fff; }
+
+    /* ---- Info grid ---- */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0 20px;
+    }
+    @media (max-width: 520px) { .info-grid { grid-template-columns: 1fr; } }
+
+    .info-card {
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .info-card .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #2b6cb0;
+      margin-bottom: 4px;
+    }
+    .info-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2b6cb0;
+      line-height: 1.2;
+    }
+    .info-card p {
+      font-size: 13px;
+      color: #2c5282;
+      margin-top: 6px;
+      margin-bottom: 0;
+      line-height: 1.65;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 13px;
+      color: #a0aec0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      color: #4299e1;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ---- Image modal ---- */
+    body.image-modal-open {
+      overflow: hidden;
+    }
+    .image-modal[hidden] {
+      display: none;
+    }
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(26,32,44,0.78);
+    }
+    .image-modal__content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 85vh;
+    }
+    .image-modal__image {
+      display: block;
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 10px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+    }
+    .image-modal__close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: #2d3748;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .image-modal__close:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 28px 20px; }
+      .language-switch { justify-content: center; margin: -8px 0 24px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <nav class="language-switch" aria-label="भाषा बदलें">
+    <select aria-label="भाषा चुनें" onchange="if (this.value) window.location.href = this.value;">
+      <option value="../manual.html">日本語</option>
+      <option value="../en/manual.html">English</option>
+      <option value="./manual.html" selected>हिन्दी</option>
+    </select>
+  </nav>
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <div class="product-name">🛡️ がぞうみまもり (Gazou Mimamori) | X संवेदनशील इमेज फिल्टर</div>
+    <h1>उपयोगकर्ता मैनुअल</h1>
+    <div class="updated">अंतिम अपडेट: 10 मई 2026 / समर्थित संस्करण: v2.1.0</div>
+  </div>
+
+  <!-- ===== SUMMARY ===== -->
+  <div class="summary-box">
+    <p>📌 यह Google Chrome एक्सटेंशन आपकी इमेज का डेटा या व्यक्तिगत जानकारी किसी भी बाहरी सर्वर पर नहीं भेजता। सारी प्रक्रिया आपके ब्राउज़र के अंदर ही पूरी होती है। यह एक्सटेंशन मुफ्त में उपयोग किया जा सकता है।</p>
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <h2>विषय सूची</h2>
+  <ul>
+    <li><a href="#introduction">1. परिचय</a></li>
+    <li><a href="#install">2. Chrome एक्सटेंशन इंस्टॉल करने का तरीका</a></li>
+    <li><a href="#sensitivity">3. इमेज ब्लॉकिंग संवेदनशीलता सीमा</a></li>
+    <li><a href="#slider">4. स्लाइडर से संवेदनशीलता बदलना</a></li>
+    <li><a href="#dm">5. उदाहरण: X Direct Messages में ब्लॉक की गई इमेज</a></li>
+    <li><a href="#timeline">6. उदाहरण: X टाइमलाइन में ब्लॉक की गई इमेज</a></li>
+    <li><a href="#show-image">7. ब्लॉक की गई इमेज दिखाने का तरीका</a></li>
+    <li><a href="#inquiry">8. संपर्क</a></li>
+  </ul>
+
+  <!-- ===== 1. Introduction ===== -->
+  <h2 id="introduction">1. परिचय</h2>
+  <p>“がぞうみまもり (Gazou Mimamori) | X संवेदनशील इमेज फिल्टर” (“यह एक्सटेंशन”) एक Chrome एक्सटेंशन है, जो X (पूर्व में Twitter) की टाइमलाइन और direct messages में दिखाई देने वाली असहज या स्पष्ट/उत्तेजक इमेज को अपने आप पहचानकर ब्लॉक करता है।</p>
+  <p>यह पेज बताता है कि इस एक्सटेंशन का उपयोग कैसे करें।</p>
+  <p>एक्सटेंशन का संक्षिप्त परिचय देखने के लिए <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 がぞうみまもり परिचय PDF</a> देखें।</p>
+  <p>जानकारी को कैसे संभाला जाता है, इसके विवरण के लिए <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 प्राइवेसी पॉलिसी</a> देखें।</p>
+
+  <!-- ===== 2. Install ===== -->
+  <h2 id="install">2. Chrome एक्सटेंशन इंस्टॉल करने का तरीका</h2>
+  <p>इस एक्सटेंशन की Google द्वारा समीक्षा की गई है और यह <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a> पर उपलब्ध है।</p>
+  <p>“がぞうみまもり” को Chrome में जोड़ने के लिए नीचे दिए गए चरणों का पालन करें।</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Chrome से Chrome Web Store में “がぞうみまもり” का पेज खोलें।</h3>
+        <p>
+          <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store में “がぞうみまもり” का पेज</a> खोलें और “Add to Chrome” पर क्लिक करें।
+        </p>
+      </div>
+    </div>
+    <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
+       <img src="../manual_install_image_001.png"
+         alt="Add to Chrome बटन का स्क्रीनशॉट" />
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>पुष्टि विंडो दिखाई देने पर, इंस्टॉल जारी रखने वाला बटन क्लिक करें।</h3>
+        <p>एक पुष्टि विंडो दिखाई देगी। इंस्टॉल प्रक्रिया आगे बढ़ाने के लिए बटन क्लिक करें।</p>
+      </div>
+    </div>
+    <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
+       <img src="../manual_install_image_002.png"
+         alt="इंस्टॉल जारी रखने वाले बटन का स्क्रीनशॉट" />
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>अगली पुष्टि विंडो दिखाई देने पर “Add extension” पर क्लिक करें।</h3>
+        <p>अनुमति संबंधी संदेश की पुष्टि करें और “Add extension” पर क्लिक करें।</p>
+      </div>
+    </div>
+    <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
+       <img src="../manual_install_image_003.png"
+         alt="Add extension बटन का स्क्रीनशॉट" />
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>पुष्टि करें कि Chrome में がぞうみまもり जोड़े जाने का संदेश दिख रहा है।</h3>
+        <p>स्क्रीन के ऊपर दाईं ओर एक संदेश दिखाई देगा कि “がぞうみまもり | X संवेदनशील इमेज फिल्टर” Chrome में जोड़ दिया गया है।</p>
+      </div>
+    </div>
+    <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
+       <img src="../manual_install_image_004.png"
+         alt="がぞうみまもり जोड़े जाने का संदेश दिखाने वाला स्क्रीनशॉट" />
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>ऊपर दाईं ओर extensions मेनू खोलें और がぞうみまもり को pin करें।</h3>
+        <p>ऊपर दाईं ओर extensions बटन क्लिक करें, फिर “がぞうみまもり” के pin पर क्लिक करें ताकि उसका आइकन Chrome में दिखाई दे।</p>
+      </div>
+    </div>
+    <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
+       <img src="../manual_install_image_005.png"
+         alt="がぞうみまもり को pin करने का तरीका दिखाने वाला स्क्रीनशॉट" />
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3>पुष्टि करें कि がぞうみまもり का आइकन Chrome में दिखाई दे रहा है।</h3>
+        <p>आइकन Chrome में दिखाई देने लगे, तो एक्सटेंशन उपयोग के लिए तैयार है।</p>
+      </div>
+    </div>
+    <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
+       <img src="../manual_install_image_006.png"
+         alt="がぞうみまもり आइकन दिखाई दे रहा है, इसकी पुष्टि करने वाला स्क्रीनशॉट" />
+    </div>
+  </div>
+
+
+  <!-- ===== 3. Sensitivity ===== -->
+  <h2 id="sensitivity">3. इमेज ब्लॉकिंग संवेदनशीलता सीमा</h2>
+  <p>यह एक्सटेंशन AI मशीन लर्निंग मॉडल का उपयोग करके 0 से 100% तक का स्कोर निकालता है, जो बताता है कि किसी इमेज के असहज या स्पष्ट/उत्तेजक होने की संभावना कितनी है। आपके चुने हुए threshold से अधिक स्कोर वाली इमेज ब्लॉक कर दी जाती हैं।</p>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">डिफ़ॉल्ट सेटिंग</div>
+      <div class="value">30%</div>
+      <p>इंस्टॉल के तुरंत बाद threshold <strong>30% (strict mode)</strong> पर सेट होता है। इस सेटिंग में swimwear या अधिक exposure वाली इमेज भी ब्लॉक हो सकती हैं।</p>
+    </div>
+    <div class="info-card">
+      <div class="label">स्कोर को कैसे समझें</div>
+      <div class="value">0 to 100%</div>
+      <p>यह AI द्वारा निकाली गई संभावना है कि कोई इमेज असहज या स्पष्ट/उत्तेजक हो सकती है। स्कोर जितना अधिक होगा, इमेज के ब्लॉक होने की संभावना उतनी अधिक होगी।</p>
+    </div>
+  </div>
+
+  <div class="sens-bar-wrap">
+    <div class="sens-labels">
+      <span>🔴 सख्त (0%)</span>
+      <span>🟡 संतुलित (50%)</span>
+      <span>🟢 सौम्य (100%)</span>
+    </div>
+    <div class="sens-bar">
+      <div class="marker" style="left: 50%;"></div>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>मोड</th>
+      <th>Threshold गाइड</th>
+      <th>व्यवहार</th>
+    </tr>
+    <tr>
+      <td><span class="tag tag-red">सख्त</span></td>
+      <td>0 to 40%</td>
+      <td>swimwear या अधिक exposure वाली इमेज सहित अधिक इमेज ब्लॉक करता है। जब आप मजबूत filtering चाहते हों, तब इसका उपयोग करें।</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-yellow">संतुलित</span></td>
+      <td>50% (standard)</td>
+      <td>यह standard सेटिंग है, जो स्पष्ट रूप से असहज या स्पष्ट/उत्तेजक इमेज को ब्लॉक करती है।</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-green">सौम्य</span></td>
+      <td>60 to 100%</td>
+      <td>केवल अधिक confidence वाली इमेज ब्लॉक करता है। अगर आप गलत तरीके से ब्लॉक होने वाली इमेज कम करना चाहते हैं, तो इसका उपयोग करें।</td>
+    </tr>
+  </table>
+
+  <div class="warn-box">
+    <p>⚠️ <strong>कृपया ध्यान दें:</strong> इमेज का निर्णय AI द्वारा अपने आप किया जाता है, इसलिए कुछ ऐसी इमेज भी गलती से ब्लॉक हो सकती हैं जो असहज या स्पष्ट/उत्तेजक नहीं हैं, और कुछ असहज या स्पष्ट/उत्तेजक इमेज ब्लॉक न भी हों। कृपया अपनी आवश्यकता के अनुसार sensitivity slider समायोजित करें।</p>
+  </div>
+
+
+  <!-- ===== 4. Slider ===== -->
+  <h2 id="slider">4. स्लाइडर से संवेदनशीलता बदलना</h2>
+  <p>ब्राउज़र के ऊपर दाईं ओर मौजूद extension icon पर क्लिक करके sensitivity settings panel खोलें।</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>extension icon पर क्लिक करें</h3>
+        <p>Chrome के ऊपर दाईं ओर address bar के पास मौजूद <strong>🛡️ shield icon</strong> पर क्लिक करें। जरूरत हो तो puzzle icon (🧩) से एक्सटेंशन को pin करें, ताकि आप इसे जल्दी खोल सकें।</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>“Filtering” toggle की जांच करें</h3>
+        <p>पैनल के ऊपर मौजूद <strong>“Filtering”</strong> toggle <span class="tag tag-blue">on (नीला)</span> है, यह सुनिश्चित करें। अगर यह off है, तो इमेज ब्लॉक नहीं होंगी।</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>sensitivity सेट करने के लिए slider को बाएं या दाएं ले जाएं</h3>
+        <p>“Sensitivity” slider को बाएं या दाएं drag करें। इसे <strong>बाएं (strict)</strong> ले जाने पर अधिक इमेज ब्लॉक होंगी। इसे <strong>दाएं (gentle)</strong> ले जाने पर इमेज ब्लॉक होने की संभावना कम होगी।</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>पुष्टि करें कि पैनल में “Running” दिख रहा है</h3>
+        <p>अगर पैनल के नीचे <span class="tag tag-green">● Running</span> दिखाई देता है, तो सेटिंग सक्रिय है। नई sensitivity लागू करने के लिए X पेज reload करें।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
+    <img src="../sensitivity_adjust_filter_x_block_images.png"
+         alt="sensitivity adjustment panel का स्क्रीनशॉट" />
+  </div>
+  <p class="screenshot-caption">▲ strict, 30% पर सेट sensitivity panel का उदाहरण</p>
+
+
+  <!-- ===== 5. DM ===== -->
+  <h2 id="dm">5. उदाहरण: X Direct Messages में ब्लॉक की गई इमेज</h2>
+  <p>जब X direct message में कोई इमेज असहज या स्पष्ट/उत्तेजक मानी जाती है, तो वह नीचे दिए गए उदाहरण की तरह dark overlay से बदल दी जाती है।</p>
+
+  <div class="screenshot-frame">
+    <img src="../x_dm_blockd_images_example.png"
+         alt="X direct message में ब्लॉक की गई इमेज दिखाने वाला स्क्रीनशॉट" />
+  </div>
+  <p class="screenshot-caption">▲ DM स्क्रीन में ब्लॉक की गई इमेज का उदाहरण (score: 46.2%)</p>
+
+  <div class="tip-box">
+    <p>💡 <strong>क्या दिखाई देता है:</strong> ब्लॉक की गई इमेज के ऊपर यह एक्सटेंशन “🚫 Inappropriate image” और AI द्वारा निकाला गया score दिखाता है। score बताता है कि इमेज आपके चुने हुए sensitivity threshold से कितनी अधिक थी।</p>
+  </div>
+
+
+  <!-- ===== 6. Timeline ===== -->
+  <h2 id="timeline">6. उदाहरण: X टाइमलाइन में ब्लॉक की गई इमेज</h2>
+  <p>असहज या स्पष्ट/उत्तेजक मानी गई इमेज X टाइमलाइन, search results और अन्य image areas में भी ब्लॉक की जाती हैं।</p>
+
+  <div class="screenshot-frame">
+    <img src="../x_timeline_blockd_images_example.png"
+         alt="X टाइमलाइन में ब्लॉक की गई इमेज दिखाने वाला स्क्रीनशॉट" />
+  </div>
+  <p class="screenshot-caption">▲ timeline search results में ब्लॉक की गई इमेज का उदाहरण (score: 56.8%)</p>
+
+  <div class="tip-box">
+    <p>💡 <strong>समर्थित क्षेत्र:</strong> यह एक्सटेंशन X के home timeline, search results, profile media tabs और direct messages सहित image areas में काम करता है।</p>
+  </div>
+
+
+  <!-- ===== 7. Show image ===== -->
+  <h2 id="show-image">7. ब्लॉक की गई इमेज दिखाने का तरीका</h2>
+  <p>इमेज ब्लॉक होने पर भी, जरूरत पड़ने पर आप एक बार में एक इमेज दिखाने का विकल्प चुन सकते हैं।</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>“Click to show” बटन ढूंढें</h3>
+        <p>असहज या स्पष्ट/उत्तेजक मानी गई इमेज पर overlay के बीच में नीचे जैसा बटन दिखाई देता है।</p>
+        <div class="demo-btn-wrap">
+          <span class="demo-btn demo-btn-outline">Click to show</span>
+          <span style="font-size: 13px; color: #718096;">या</span>
+          <span class="demo-btn demo-btn-fill">Click to show</span>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>“Click to show” बटन पर क्लिक करें</h3>
+        <p>बटन क्लिक करने से केवल उस इमेज का block हटता है और original image दिखाई देती है। अन्य इमेज पर इसका असर नहीं पड़ता।</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>पेज reload करने पर block फिर लागू हो जाता है</h3>
+        <p>“Click to show” अस्थायी है। यदि आप पेज reload करते हैं, तो वही इमेज threshold से ऊपर होने पर फिर से ब्लॉक हो जाएगी।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <p>⚠️ <strong>अगर कोई इमेज गलती से ब्लॉक हो:</strong> यदि कोई विशेष इमेज बार-बार गलती से ब्लॉक हो रही है, तो sensitivity slider को “Gentle” की ओर ले जाएं ताकि उसके ब्लॉक होने की संभावना कम हो। → <a href="#slider">slider समायोजित करने का तरीका (Section 4)</a></p>
+  </div>
+
+  <!-- ===== 8. Contact ===== -->
+  <h2 id="inquiry">8. संपर्क</h2>
+  <p>इस एक्सटेंशन के बारे में कोई सवाल, प्रतिक्रिया या टिप्पणी हो, तो कृपया प्राइवेसी पॉलिसी पेज पर दी गई संपर्क जानकारी का उपयोग करें।</p>
+  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 संपर्क</a></p>
+
+  <!-- ===== BACK LINK & FOOTER ===== -->
+  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← प्राइवेसी पॉलिसी देखें</a>
+  <br>
+  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← GitHub repository देखें</a>
+
+  <div class="footer">
+    <p>&copy; がぞうみまもり 2026 Naoyuki Aoki (@na0AaooQ) All Rights Reserved.</p>
+  </div>
+
+</div>
+<div class="image-modal" id="imageModal" hidden>
+  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="बड़ी इमेज देखें">
+    <button type="button" class="image-modal__close" aria-label="बड़ी इमेज बंद करें">×</button>
+    <img class="image-modal__image" alt="" />
+  </div>
+</div>
+<script>
+  (() => {
+    const modal = document.getElementById('imageModal');
+    const modalImage = modal.querySelector('.image-modal__image');
+    const closeButton = modal.querySelector('.image-modal__close');
+    const manualImages = document.querySelectorAll('.screenshot-frame img');
+    let lastFocusedImage = null;
+
+    const openModal = (image) => {
+      lastFocusedImage = image;
+      modalImage.src = image.getAttribute('src') || '';
+      modalImage.alt = image.getAttribute('alt') || '';
+      modal.hidden = false;
+      document.body.classList.add('image-modal-open');
+      closeButton.focus();
+    };
+
+    const closeModal = () => {
+      modal.hidden = true;
+      document.body.classList.remove('image-modal-open');
+      modalImage.removeAttribute('src');
+      modalImage.alt = '';
+
+      if (lastFocusedImage) {
+        lastFocusedImage.focus();
+      }
+    };
+
+    manualImages.forEach((image) => {
+      const imageAlt = image.getAttribute('alt') || 'इमेज';
+
+      image.classList.add('manual-zoomable-image');
+      image.tabIndex = 0;
+      image.setAttribute('role', 'button');
+      image.setAttribute('aria-label', imageAlt + ' को बड़ा करके खोलें');
+      image.addEventListener('click', () => openModal(image));
+      image.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openModal(image);
+        }
+      });
+    });
+
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
