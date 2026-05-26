@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보 처리방침 | がぞうみまもり</title>
+  <meta name="description" content="Chrome 확장 프로그램 'がぞうみまもり (Gazou Mimamori) | X 민감한 이미지 필터'의 개인정보 처리방침입니다. 이미지 판정은 브라우저 내부에서 처리되며 이미지 데이터나 개인정보를 외부 서버로 전송하지 않습니다.">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/ko/privacy-policy.html">
+  <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
+  <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/privacy-policy.html">
+  <link rel="alternate" hreflang="hi" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/hi/privacy-policy.html">
+  <link rel="alternate" hreflang="ko" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/ko/privacy-policy.html">
+  <link rel="alternate" hreflang="x-default" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+      background: #f5f7fa;
+      color: #2d3748;
+      line-height: 1.8;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 48px 48px;
+    }
+
+    /* ---- Language switch ---- */
+    .language-switch {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin: -20px 0 28px;
+      font-size: 13px;
+    }
+    .language-switch select {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 132px;
+      border: 1px solid #bee3f8;
+      border-radius: 999px;
+      color: #2b6cb0;
+      background-color: #ffffff;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #2b6cb0 50%),
+        linear-gradient(135deg, #2b6cb0 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 13px) 50%;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding: 6px 34px 6px 14px;
+      font: inherit;
+      font-weight: 600;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+    .language-switch select:hover {
+      background: #ebf8ff;
+    }
+    .language-switch select:focus-visible {
+      outline: 3px solid #4299e1;
+      outline-offset: 3px;
+    }
+
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #e8f4fd;
+    }
+
+    .product-name {
+      font-size: 13px;
+      color: #4299e1;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 12px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: #718096;
+    }
+
+    .summary-box {
+      background: #ebf8ff;
+      border-left: 4px solid #4299e1;
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+
+    .summary-box p {
+      font-size: 15px;
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+
+    .notice-box {
+      background: #fffaf0;
+      border-left: 4px solid #ed8936;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: -20px 0 40px;
+    }
+
+    .notice-box p {
+      font-size: 14px;
+      color: #7b341e;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a202c;
+      margin: 36px 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid #4299e1;
+    }
+
+    p {
+      font-size: 15px;
+      color: #4a5568;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: #4a5568;
+      padding: 4px 0 4px 22px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+      font-weight: bold;
+    }
+
+    .warn-list li::before {
+      content: '×';
+      color: #fc8181;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 24px;
+      font-size: 14px;
+    }
+
+    th {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid #bee3f8;
+    }
+
+    td {
+      padding: 10px 14px;
+      border: 1px solid #e2e8f0;
+      color: #4a5568;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f7fafc; }
+
+    .contact-box {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+
+    .contact-box a {
+      color: #4299e1;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover { text-decoration: underline; }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 13px;
+      color: #a0aec0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      color: #4299e1;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 28px 20px; }
+      .language-switch { justify-content: center; margin: -8px 0 24px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="language-switch" aria-label="언어 전환">
+      <select aria-label="언어 선택" onchange="if (this.value) window.location.href = this.value;">
+        <option value="../privacy-policy.html">日本語</option>
+        <option value="../en/privacy-policy.html">English</option>
+        <option value="../hi/privacy-policy.html">हिन्दी</option>
+        <option value="./privacy-policy.html" selected>한국어</option>
+      </select>
+    </nav>
+
+    <div class="header">
+      <div class="product-name">🛡️ がぞうみまもり (Gazou Mimamori) | X 민감한 이미지 필터</div>
+      <h1>개인정보 처리방침</h1>
+      <div class="updated">최종 업데이트: 2026년 4월 20일</div>
+    </div>
+
+    <div class="summary-box">
+      <p>📌 이 Google Chrome 확장 프로그램은 사용자의 이미지 데이터나 개인정보를 외부 서버로 전송하지 않습니다. 모든 처리는 사용자의 브라우저 내부에서 완료됩니다. 확장 프로그램은 무료로 이용할 수 있습니다.</p>
+    </div>
+
+    <div class="notice-box">
+      <p>이 한국어 버전은 참고를 위해 제공됩니다. 일본어 버전과 이 한국어 버전의 내용이 일치하지 않는 경우에는 일본어 버전이 우선합니다.</p>
+    </div>
+
+    <h2>목차</h2>
+    <ul>
+      <li><a href="#introduction">1. 소개</a></li>
+      <li><a href="#information_we_collect">2. 수집 및 처리하는 정보</a></li>
+      <li><a href="#information_not_collect">3. 수집하지 않는 정보</a></li>
+      <li><a href="#how_information_is_processed">4. 정보 처리 방법</a></li>
+      <li><a href="#information_provision_to_third_parties">5. 제3자 제공</a></li>
+      <li><a href="#authority_to_use">6. 사용하는 권한</a></li>
+      <li><a href="#security">7. 보안</a></li>
+      <li><a href="#childrens_privacy">8. 아동의 개인정보 보호</a></li>
+      <li><a href="#changes_to_privacy_policy">9. 개인정보 처리방침 변경</a></li>
+      <li><a href="#developer_information">10. 개발자 정보</a></li>
+      <li><a href="#inquiry">11. 문의</a></li>
+    </ul>
+
+    <h2 id="introduction">1. 소개</h2>
+    <p>“がぞうみまもり (Gazou Mimamori) | X 민감한 이미지 필터”(이하 “본 확장 프로그램”)는 X(구 Twitter)의 타임라인 및 다이렉트 메시지에 표시되는 불쾌감을 줄 수 있거나 노골적인 이미지를 자동으로 감지하여 차단하는 Chrome 확장 프로그램입니다.</p>
+    <p>이 페이지에서는 본 확장 프로그램이 취급하는 정보와 그 처리 방법을 안내합니다.</p>
+    <p>본 확장 프로그램의 기능 개요는 <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 がぞうみまもり 소개 자료(PDF)</a>를 참조해 주세요.</p>
+    <p>본 확장 프로그램의 사용 방법은 <a href="./manual.html" target="_blank" rel="noopener">📖 사용 설명서</a>를 참조해 주세요.</p>
+
+    <h2 id="information_we_collect">2. 수집 및 처리하는 정보</h2>
+    <p>본 확장 프로그램은 다음 정보를 처리합니다.</p>
+    <table>
+      <tr>
+        <th>정보 유형</th>
+        <th>이용 목적</th>
+        <th>외부 전송</th>
+      </tr>
+      <tr>
+        <td>X에 표시되는 이미지 데이터</td>
+        <td>불쾌감을 줄 수 있거나 노골적인 이미지인지 판정하기 위해 사용하며, 사용자의 브라우저 내부에서만 처리합니다.</td>
+        <td>없음</td>
+      </tr>
+      <tr>
+        <td>확장 프로그램 설정값<br>(활성화/비활성화 상태 및 민감도 임계값)</td>
+        <td>브라우저의 Chrome <code>storage.sync</code>에 저장됩니다(동기화 가능).</td>
+        <td>없음</td>
+      </tr>
+    </table>
+
+    <h2 id="information_not_collect">3. 수집하지 않는 정보</h2>
+    <p>본 확장 프로그램은 다음 정보를 수집, 기록 또는 전송하지 않습니다.</p>
+    <ul class="warn-list">
+      <li>이름, 이메일 주소, 주소 등 개인을 식별할 수 있는 정보</li>
+      <li>X 계정 정보 또는 로그인 정보</li>
+      <li>열람 기록, 게시물 내용 또는 다이렉트 메시지 내용</li>
+      <li>판정 후의 이미지 데이터 자체</li>
+      <li>판정 결과 또는 점수의 로그</li>
+    </ul>
+
+    <h2 id="how_information_is_processed">4. 정보 처리 방법</h2>
+    <p>본 확장 프로그램의 모든 처리는 사용자의 브라우저(Chrome) 내부에서 완료됩니다.</p>
+    <ul>
+      <li>이미지 판정은 브라우저 내에서 Offscreen Document API를 사용하여 실행됩니다.</li>
+      <li>AI 모델(NSFWJS / TensorFlow.js)은 브라우저에 로드되어 로컬에서 추론을 수행합니다.</li>
+      <li>이미지 처리를 위해 외부 API 또는 외부 서버를 사용하지 않습니다.</li>
+      <li>판정 결과는 화면 표시 제어에만 사용되며 저장되거나 전송되지 않습니다.</li>
+      <li>설정값(활성화/비활성화 상태 및 민감도)은 브라우저의 Chrome <code>storage.sync</code>에 저장됩니다.</li>
+    </ul>
+
+    <h2 id="information_provision_to_third_parties">5. 제3자 제공</h2>
+    <p>본 확장 프로그램은 어떠한 제3자에게도 정보를 제공, 판매 또는 공유하지 않습니다.</p>
+
+    <h2 id="authority_to_use">6. 사용하는 권한</h2>
+    <p>본 확장 프로그램이 요청하는 Chrome 권한과 사용 이유는 다음과 같습니다.</p>
+    <table>
+      <tr>
+        <th>권한</th>
+        <th>이유</th>
+      </tr>
+      <tr>
+        <td><code>storage</code></td>
+        <td>활성화/비활성화 상태 및 민감도 설정을 브라우저에 저장하기 위해 사용합니다.</td>
+      </tr>
+      <tr>
+        <td><code>offscreen</code></td>
+        <td>백그라운드에서 AI 이미지 판정을 실행하기 위해 사용합니다.</td>
+      </tr>
+      <tr>
+        <td>호스트 접근<br>(x.com / twitter.com / pbs.twimg.com)</td>
+        <td>X에 표시되는 이미지를 가져와 판정하기 위해 사용합니다.</td>
+      </tr>
+    </table>
+
+    <h2 id="security">7. 보안</h2>
+    <p>본 확장 프로그램은 Chrome Extension Manifest V3를 준수하며, Content Security Policy(CSP)에 따라 <code>eval</code> 및 외부 스크립트 실행이 금지되어 있습니다. 모든 코드는 리포지토리에 공개되어 누구나 확인할 수 있습니다.</p>
+    <ul>
+      <li>소스 코드: <a href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">GitHub 리포지토리</a></li>
+    </ul>
+
+    <h2 id="childrens_privacy">8. 아동의 개인정보 보호</h2>
+    <p>본 확장 프로그램은 만 13세 미만의 아동을 대상으로 하지 않으며, 만 13세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다.</p>
+
+    <h2 id="changes_to_privacy_policy">9. 개인정보 처리방침 변경</h2>
+    <p>본 개인정보 처리방침은 사전 고지 없이 변경될 수 있습니다. 변경 시 이 페이지 상단의 “최종 업데이트” 날짜를 갱신합니다. 중요한 변경 사항은 리포지토리의 README에도 기재할 수 있습니다.</p>
+
+    <h2 id="developer_information">10. 개발자 정보</h2>
+    <p>본 확장 프로그램의 개발자 및 운영자는 다음의 개인사업자입니다.</p>
+    <div class="contact-box">
+      <p><strong>상호:</strong> こころみまもり (Kokoro Mimamori)</p>
+      <p><strong>대표자:</strong> 青木 直之 (Naoyuki Aoki)</p>
+      <p><strong>직종:</strong> 프리랜서 엔지니어</p>
+      <p><strong>사업 내용:</strong> 웹 서비스의 기획, 개발 및 운영, 소프트웨어 개발업</p>
+      <p><strong>사업장 주소:</strong> Nishishinjuku Mizuma Building 2F,<br>3-3-13 Nishishinjuku, Shinjuku-ku, Tokyo 160-0023, Japan</p>
+      <p><strong>Qiita:</strong> <a href="https://qiita.com/na0AaooQ" target="_blank" rel="noopener">https://qiita.com/na0AaooQ</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/na0AaooQ" target="_blank" rel="noopener">https://github.com/na0AaooQ</a></p>
+      <p><strong>X (구 Twitter):</strong> <a href="https://x.com/na0AaooQ" target="_blank" rel="noopener">https://x.com/na0AaooQ</a></p>
+      <p><strong>포트폴리오 사이트:</strong> <a href="https://portfolio.na0aaooq.com/" target="_blank" rel="noopener">https://portfolio.na0aaooq.com/</a></p>
+    </div>
+
+    <h2 id="inquiry">11. 문의</h2>
+    <p>본 확장 프로그램에 관한 질문이나 의견이 있으시면 아래 연락처로 문의해 주세요.</p>
+    <div class="contact-box">
+      <p><strong>개발자:</strong> na0AaooQ (Naoyuki Aoki)</p>
+      <p><strong>개발자 연락 이메일:</strong> <a href="mailto:na0aaooq+contact@gmail.com">na0aaooq+contact@gmail.com</a></p>
+    </div>
+
+    <!-- ===== BACK LINK & FOOTER ===== -->
+    <a class="back-link" href="./manual.html" target="_blank" rel="noopener">← 사용 설명서 보기</a>
+    <br>
+    <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← GitHub 리포지토리 보기</a>
+
+    <div class="footer">
+      <p>&copy; がぞうみまもり 2026 青木直之 (@na0AaooQ) 모든 권리 보유.</p>
+    </div>
+
+  </div>
+</body>
+</html>
