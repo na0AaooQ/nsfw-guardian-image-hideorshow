@@ -112,6 +112,7 @@ nsfw-guardian-image-hideorshow/
 ├── package.json           # プロジェクト情報・依存関係
 ├── package-lock.json      # パッケージの依存関係・バージョン情報
 ├── README.md              # 本リポジトリの説明
+├── LICENSE                # ライセンス条項を示すファイル
 ├── .gitignore             # リポジトリ管理対象外のファイル定義
 ├── models/
 │   ├── tf-wasm-bundle.js              # browserifyバンドル（TF.js WASM）
@@ -202,6 +203,7 @@ zip -r nsfw-guardian-official-version.zip nsfw-guardian-image-hideorshow \
   --exclude "*/STORE_LISTING.md" \
   --exclude "*/coverage/*" \
   --exclude "*/biome.json" \
+  --exclude "*/LICENSE" \
   --exclude "*/README.md"
 ```
 
