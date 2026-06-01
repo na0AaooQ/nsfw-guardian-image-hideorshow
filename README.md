@@ -37,19 +37,23 @@ Google ChromeでX（旧Twitter）をご利用いただく方が、本拡張機�
 ## 本機能の紹介資料
 
 - 以下の資料をご参照ください。
-  - [がぞうみまもり紹介.pdf](https://github.com/user-attachments/files/26086930/default.pdf)
+  - [がぞうみまもり紹介.pdf](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/gazou_mimamori_overview.pdf)
 
-## 本機能のプライバシーポリシー
+## 本機能のプライバシーポリシーページ
 
-- プライバシーポリシーは日本語・英語で公開しています。英語版は `docs/en/` 配下に配置しています。
-  - [がぞうみまもり プライバシーポリシー](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html)
-  - [Gazou Mimamori Privacy Policy (English)](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/privacy-policy.html)
+- プライバシーポリシーページは以下になります。
+  - プライバシーポリシーページは日本語・英語・ヒンディー語・韓国語・中国語（繁体字 簡体字）で公開しています。
+    - [がぞうみまもり プライバシーポリシー](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/privacy-policy.html)
+    - [Gazou Mimamori Privacy Policy (English)](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/privacy-policy.html)
+  - 各言語のページはGitHubリポジトリ内の `docs/**/` 配下に配置しています。
 
-## 本機能の操作マニュアル
+## 本機能の操作マニュアルページ
 
-- 操作マニュアルは日本語・英語で公開しています。英語版は `docs/en/` 配下に配置しています。
-  - [がぞうみまもり 操作マニュアル](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html)
-  - [Gazou Mimamori User Manual (English)](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html)
+- 操作マニュアルページは以下になります。
+  - 操作マニュアルページは日本語・英語・ヒンディー語・韓国語・中国語（繁体字 簡体字）で公開しています。
+    - [がぞうみまもり 操作マニュアル](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html)
+    - [Gazou Mimamori User Manual (English)](https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html)
+  - 各言語のページはGitHubリポジトリ内の `docs/**/` 配下に配置しています。
 
 ## 本機能のGoogle Chrome ウェブストアの掲載URL
 
