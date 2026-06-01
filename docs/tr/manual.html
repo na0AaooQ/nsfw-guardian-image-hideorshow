@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>사용 설명서 | がぞうみまもり</title>
-  <meta name="description" content="Chrome 확장 프로그램 'がぞうみまもり (Gazou Mimamori) | X 민감한 이미지 필터'의 사용 설명서입니다. 설치 방법, 민감도 조정, 차단된 이미지 표시 방법을 안내합니다.">
-  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/ko/manual.html">
+  <title>Kullanım Kılavuzu | がぞうみまもり</title>
+  <meta name="description" content="がぞうみまもり | Xセンシティブ画像フィルター kullanım kılavuzu. Bu Chrome uzantısı X üzerindeki hassas görüntüleri tarayıcı içinde değerlendirir ve engeller.">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/tr/manual.html">
   <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
   <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
   <link rel="alternate" hreflang="hi" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/hi/manual.html">
@@ -21,7 +21,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
       background: #f5f7fa;
       color: #2d3748;
       line-height: 1.8;
@@ -492,155 +492,159 @@
 <body>
 <div class="container">
 
-  <nav class="language-switch" aria-label="언어 전환">
-    <span class="language-switch__label">표시 언어</span>
-    <select aria-label="언어 선택" onchange="if (this.value) window.location.href = this.value;">
+  <nav class="language-switch" aria-label="Dil değiştirici">
+    <span class="language-switch__label">Görüntüleme dili</span>
+    <select aria-label="Dil seç" onchange="if (this.value) window.location.href = this.value;">
       <option value="../manual.html">日本語</option>
       <option value="../en/manual.html">English</option>
       <option value="../hi/manual.html">हिन्दी</option>
-      <option value="./manual.html" selected>한국어</option>
+      <option value="../ko/manual.html">한국어</option>
       <option value="../zh-Hans/manual.html">简体中文</option>
       <option value="../zh-Hant/manual.html">繁體中文</option>
-      <option value="../tr/manual.html">Türkçe</option>
+      <option value="./manual.html" selected>Türkçe</option>
     </select>
   </nav>
 
   <!-- ===== HEADER ===== -->
   <div class="header">
-    <div class="product-name">🛡️ がぞうみまもり (Gazou Mimamori) | X 민감한 이미지 필터</div>
-    <h1>사용 설명서</h1>
-    <div class="updated">최종 업데이트: 2026년 5월 10일 / 지원 버전: v2.1.0</div>
+    <div class="product-name">🛡️ がぞうみまもり | <span style="white-space: nowrap;">Xセンシティブ画像フィルター</span></div>
+    <h1>Kullanım Kılavuzu</h1>
+    <div class="updated">Son güncelleme: 1 Haziran 2026 / Desteklenen sürüm: v2.1.0</div>
   </div>
 
   <!-- ===== SUMMARY ===== -->
   <div class="summary-box">
-    <p>📌 이 Google Chrome 확장 프로그램은 사용자의 이미지 데이터나 개인정보를 외부 서버로 전송하지 않습니다. 모든 처리는 사용자의 브라우저 내부에서 완료됩니다. 확장 프로그램은 무료로 이용할 수 있습니다.</p>
+    <p>📌 Bu Google Chrome uzantısı, görüntü verilerinizi veya kişisel bilgilerinizi hiçbir dış sunucuya göndermez. Tüm işlemler tarayıcınızın içinde tamamlanır. Uzantı ücretsiz olarak kullanılabilir.</p>
   </div>
 
   <!-- ===== TOC ===== -->
-  <h2>목차</h2>
+  <h2>İçindekiler</h2>
   <ul>
-    <li><a href="#introduction">1. 소개</a></li>
-    <li><a href="#install">2. Chrome 확장 프로그램 설치 방법</a></li>
-    <li><a href="#sensitivity">3. 이미지 차단 민감도 임계값</a></li>
-    <li><a href="#slider">4. 슬라이더로 민감도 변경하기</a></li>
-    <li><a href="#dm">5. X 다이렉트 메시지의 차단 이미지 예시</a></li>
-    <li><a href="#timeline">6. X 타임라인의 차단 이미지 예시</a></li>
-    <li><a href="#show-image">7. 차단된 이미지 표시 방법</a></li>
-    <li><a href="#inquiry">8. 문의</a></li>
+    <li><a href="#introduction">1. Giriş</a></li>
+    <li><a href="#install">2. Chrome Uzantısını Yükleme</a></li>
+    <li><a href="#sensitivity">3. Görüntü Engelleme Hassasiyet Eşiği</a></li>
+    <li><a href="#slider">4. Hassasiyeti Kaydırıcıyla Değiştirme</a></li>
+    <li><a href="#dm">5. Örnek: X Doğrudan Mesajlarında Engellenen Görüntüler</a></li>
+    <li><a href="#timeline">6. Örnek: X Zaman Akışında Engellenen Görüntüler</a></li>
+    <li><a href="#show-image">7. Engellenen Görüntüyü Gösterme</a></li>
+    <li><a href="#inquiry">8. İletişim</a></li>
   </ul>
 
   <!-- ===== 1. Introduction ===== -->
-  <h2 id="introduction">1. 소개</h2>
-  <p>“がぞうみまもり (Gazou Mimamori) | X 민감한 이미지 필터”(이하 “본 확장 프로그램”)는 X(구 Twitter)의 타임라인 및 다이렉트 메시지에 표시되는 불쾌감을 줄 수 있거나 노골적인 이미지를 자동으로 감지하여 차단하는 Chrome 확장 프로그램입니다.</p>
-  <p>이 페이지에서는 본 확장 프로그램의 사용 방법을 안내합니다.</p>
-  <p>본 확장 프로그램의 기능 개요는 <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 がぞうみまもり 소개 자료(PDF)</a>를 참조해 주세요.</p>
-  <p>정보 처리 방법에 관한 자세한 내용은 <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 개인정보 처리방침</a>을 참조해 주세요.</p>
+  <h2 id="introduction">1. Giriş</h2>
+  <p>“がぞうみまもり | Xセンシティブ画像フィルター” (bu sayfada “Uzantı” olarak anılır), X'te (eski adıyla Twitter) zaman akışında ve doğrudan mesajlarda görüntülenen rahatsız edici, hassas veya cinsel içerikli görüntüleri otomatik olarak tespit edip engelleyen bir Chrome uzantısıdır.</p>
+  <p>Bu sayfa, Uzantı'nın nasıl kullanılacağını açıklar.</p>
+  <p>Uzantının genel tanıtımı için <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 Gazou Mimamori tanıtım PDF'ine</a> bakabilirsiniz.</p>
+  <p>Bilgilerin nasıl işlendiğine ilişkin ayrıntılar için <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 Gizlilik Politikası</a> sayfasına bakabilirsiniz.</p>
+
+  <div class="tip-box">
+    <p>💡 Bu kılavuzdaki ekran görüntülerine tıklayarak büyütülmüş görünümde inceleyebilirsiniz. Büyütülmüş görüntüyü kapatmak için kapatma düğmesini, arka planı veya Esc tuşunu kullanabilirsiniz.</p>
+  </div>
 
   <!-- ===== 2. Install ===== -->
-  <h2 id="install">2. Chrome 확장 프로그램 설치 방법</h2>
-  <p>본 확장 프로그램은 Google의 심사를 거쳤으며 <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome 웹 스토어</a>에서 이용할 수 있습니다.</p>
-  <p>“がぞうみまもり”를 Chrome에 추가하려면 아래 단계를 따라 주세요.</p>
+  <h2 id="install">2. Chrome Uzantısını Yükleme</h2>
+  <p>Uzantı Google tarafından incelenmiştir ve <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a> üzerinden kullanılabilir.</p>
+  <p>“Gazou Mimamori” uzantısını Chrome'a eklemek için aşağıdaki adımları izleyin.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>Chrome에서 Chrome 웹 스토어의 “がぞうみまもり” 페이지를 엽니다.</h3>
+        <h3>Chrome'dan Chrome Web Store'daki “Gazou Mimamori” sayfasını açın.</h3>
         <p>
-          <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome 웹 스토어의 “がぞうみまもり” 페이지</a>를 열고 “Chrome에 추가”를 클릭합니다.
+          <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store'daki “Gazou Mimamori” sayfasını</a> açın ve ardından “Add to Chrome” düğmesine tıklayın.
         </p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../manual_install_image_001.png"
-         alt="Chrome에 추가 버튼의 스크린샷" />
+         alt="Chrome'a ekle düğmesinin ekran görüntüsü" />
     </div>
 
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>확인 창이 표시되면 설치를 계속하는 버튼을 클릭합니다.</h3>
-        <p>확인 창에서 설치를 진행하는 버튼을 클릭해 주세요.</p>
+        <h3>Onay penceresi göründüğünde kuruluma devam etmek için düğmeye tıklayın.</h3>
+        <p>Bir onay penceresi gösterilir. Kuruluma devam etmek için düğmeye tıklayın.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../manual_install_image_002.png"
-         alt="설치 계속 버튼의 스크린샷" />
+         alt="Kuruluma devam etme düğmesinin ekran görüntüsü" />
     </div>
 
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>다음 확인 창이 표시되면 “확장 프로그램 추가”를 클릭합니다.</h3>
-        <p>권한 안내를 확인한 후 “확장 프로그램 추가”를 클릭합니다.</p>
+        <h3>Sonraki onay penceresi göründüğünde “Add extension” düğmesine tıklayın.</h3>
+        <p>İzin istemini kontrol edin ve “Add extension” düğmesine tıklayın.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../manual_install_image_003.png"
-         alt="확장 프로그램 추가 버튼의 스크린샷" />
+         alt="Uzantı ekleme düğmesinin ekran görüntüsü" />
     </div>
 
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>Chrome에 がぞうみまもり가 추가되었다는 메시지가 표시되는지 확인합니다.</h3>
-        <p>화면 오른쪽 상단에 “がぞうみまもり | X 민감한 이미지 필터”가 Chrome에 추가되었다는 메시지가 표시됩니다.</p>
+        <h3>Chrome'un Gazou Mimamori'nin eklendiğini bildiren mesajı gösterdiğini doğrulayın.</h3>
+        <p>Ekranın sağ üst tarafında “Gazou Mimamori | Sensitive image filter for X” uzantısının Chrome'a eklendiğini belirten bir mesaj görünür.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../manual_install_image_004.png"
-         alt="がぞうみまもり가 추가되었다는 메시지의 스크린샷" />
+         alt="Gazou Mimamori'nin eklendiğini gösteren mesajın ekran görüntüsü" />
     </div>
 
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h3>오른쪽 상단의 확장 프로그램 메뉴를 열고 がぞうみまもり를 고정합니다.</h3>
-        <p>오른쪽 상단의 확장 프로그램 버튼을 클릭한 다음 “がぞうみまもり”의 고정 아이콘을 클릭하여 Chrome에 아이콘이 표시되도록 합니다.</p>
+        <h3>Sağ üstteki uzantılar menüsünü açın ve Gazou Mimamori'yi sabitleyin.</h3>
+        <p>Sağ üstteki uzantılar düğmesine tıklayın, ardından simgesinin Chrome'da görünmesi için “Gazou Mimamori” yanındaki sabitleme düğmesine tıklayın.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../manual_install_image_005.png"
-         alt="がぞうみまもり를 고정하는 방법의 스크린샷" />
+         alt="Gazou Mimamori'yi sabitleme yöntemini gösteren ekran görüntüsü" />
     </div>
 
     <div class="step">
       <div class="step-num">6</div>
       <div class="step-body">
-        <h3>Chrome에 がぞうみまもり 아이콘이 표시되는지 확인합니다.</h3>
-        <p>Chrome에 아이콘이 표시되면 본 확장 프로그램을 사용할 준비가 완료된 것입니다.</p>
+        <h3>Gazou Mimamori simgesinin Chrome'da göründüğünü doğrulayın.</h3>
+        <p>Simge Chrome'da göründüğünde Uzantı kullanıma hazırdır.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../manual_install_image_006.png"
-         alt="がぞうみまもり 아이콘이 표시된 화면의 스크린샷" />
+         alt="Gazou Mimamori simgesinin göründüğünü doğrulayan ekran görüntüsü" />
     </div>
   </div>
 
 
   <!-- ===== 3. Sensitivity ===== -->
-  <h2 id="sensitivity">3. 이미지 차단 민감도(임계값)</h2>
-  <p>본 확장 프로그램은 AI(기계 학습 모델)를 사용하여 이미지가 불쾌감을 줄 수 있거나 노골적일 가능성을 0~100%의 점수로 계산합니다. 설정한 임계값보다 점수가 높은 이미지는 차단됩니다.</p>
+  <h2 id="sensitivity">3. Görüntü Engelleme Hassasiyet Eşiği</h2>
+  <p>Uzantı, bir görüntünün rahatsız edici, hassas veya cinsel içerikli olma olasılığını 0 ile 100% arasında gösteren bir puan hesaplamak için AI makine öğrenimi modelini kullanır. Seçtiğiniz eşikten daha yüksek puana sahip görüntüler engellenir.</p>
 
   <div class="info-grid">
     <div class="info-card">
-      <div class="label">초기 설정(기본값)</div>
+      <div class="label">Varsayılan ayar</div>
       <div class="value">30%</div>
-      <p>설치 직후의 임계값은 <strong>30%(엄격 모드)</strong>로 설정됩니다. 이 설정에서는 수영복 또는 노출이 많은 이미지도 차단될 수 있습니다.</p>
+      <p>Kurulumdan hemen sonra eşik <strong>30% (katı mod)</strong> olarak ayarlanır. Bu ayar mayo veya yüksek açıklık içeren görüntüleri de engelleyebilir.</p>
     </div>
     <div class="info-card">
-      <div class="label">점수 확인 방법</div>
-      <div class="value">0 ~ 100%</div>
-      <p>AI가 계산한 불쾌감을 줄 수 있거나 노골적인 이미지일 가능성입니다. 점수가 높을수록 이미지가 차단될 가능성이 높습니다.</p>
+      <div class="label">Puan nasıl okunur</div>
+      <div class="value">0 - 100%</div>
+      <p>Bu değer, AI tarafından hesaplanan ve bir görüntünün rahatsız edici, hassas veya cinsel içerikli olabileceğini gösteren olasılıktır. Puan yükseldikçe görüntünün engellenme olasılığı artar.</p>
     </div>
   </div>
 
   <div class="sens-bar-wrap">
     <div class="sens-labels">
-      <span>🔴 엄격 (0%)</span>
-      <span>🟡 균형 (50%)</span>
-      <span>🟢 완화 (100%)</span>
+      <span>🔴 Katı (0%)</span>
+      <span>🟡 Dengeli (50%)</span>
+      <span>🟢 Yumuşak (100%)</span>
     </div>
     <div class="sens-bar">
       <div class="marker" style="left: 50%;"></div>
@@ -649,159 +653,159 @@
 
   <table>
     <tr>
-      <th>모드</th>
-      <th>임계값 기준</th>
-      <th>동작</th>
+      <th>Mod</th>
+      <th>Eşik kılavuzu</th>
+      <th>Davranış</th>
     </tr>
     <tr>
-      <td><span class="tag tag-red">엄격</span></td>
-      <td>0~40%</td>
-      <td>수영복 또는 노출이 많은 이미지를 포함해 더 많은 이미지를 차단합니다. 강한 필터링을 원할 때 사용하세요.</td>
+      <td><span class="tag tag-red">Katı</span></td>
+      <td>0 - 40%</td>
+      <td>Mayo veya yüksek açıklık içeren görüntüler dahil daha fazla görüntüyü engeller. Daha güçlü filtreleme istediğinizde kullanın.</td>
     </tr>
     <tr>
-      <td><span class="tag tag-yellow">균형</span></td>
-      <td>50%(표준)</td>
-      <td>명확하게 불쾌감을 줄 수 있거나 노골적인 이미지를 차단하는 표준 설정입니다.</td>
+      <td><span class="tag tag-yellow">Dengeli</span></td>
+      <td>50% (standart)</td>
+      <td>Açıkça rahatsız edici, hassas veya cinsel içerikli görüntüleri engelleyen standart ayardır.</td>
     </tr>
     <tr>
-      <td><span class="tag tag-green">완화</span></td>
-      <td>60~100%</td>
-      <td>확신도가 높은 이미지만 차단합니다. 오탐지를 줄이고 싶을 때 사용하세요.</td>
+      <td><span class="tag tag-green">Yumuşak</span></td>
+      <td>60 - 100%</td>
+      <td>Yalnızca güven düzeyi daha yüksek görüntüleri engeller. Yanlış pozitifleri azaltmak istiyorsanız kullanın.</td>
     </tr>
   </table>
 
   <div class="warn-box">
-    <p>⚠️ <strong>주의:</strong> AI가 자동으로 판정하므로 불쾌감을 주거나 노골적이지 않은 이미지가 잘못 차단되거나, 불쾌감을 줄 수 있거나 노골적인 이미지가 차단되지 않을 수 있습니다. 필요에 맞게 민감도 슬라이더를 조정하여 사용해 주세요.</p>
+    <p>⚠️ <strong>Lütfen dikkat:</strong> Görüntüler AI tarafından otomatik değerlendirildiği için rahatsız edici veya cinsel içerikli olmayan görüntüler yanlışlıkla engellenebilir; bazı rahatsız edici veya cinsel içerikli görüntüler ise engellenmeyebilir. Hassasiyet kaydırıcısını ihtiyacınıza göre ayarlayın.</p>
   </div>
 
 
   <!-- ===== 4. Slider ===== -->
-  <h2 id="slider">4. 슬라이더로 민감도 변경하기</h2>
-  <p>브라우저 오른쪽 상단의 확장 프로그램 아이콘을 클릭하면 민감도 설정 패널이 열립니다.</p>
+  <h2 id="slider">4. Hassasiyeti Kaydırıcıyla Değiştirme</h2>
+  <p>Hassasiyet ayarları panelini açmak için tarayıcınızın sağ üst kısmındaki uzantı simgesine tıklayın.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>확장 프로그램 아이콘을 클릭합니다</h3>
-        <p>Chrome 오른쪽 상단 주소 표시줄 옆의 <strong>🛡️ 방패 아이콘</strong>을 클릭합니다. 필요한 경우 퍼즐 아이콘(🧩)에서 본 확장 프로그램을 고정하면 빠르게 열 수 있습니다.</p>
+        <h3>Uzantı simgesine tıklayın</h3>
+        <p>Chrome'un sağ üst kısmında, adres çubuğunun yanındaki <strong>🛡️ kalkan simgesine</strong> tıklayın. Gerekirse uzantıya hızlı erişmek için yapboz simgesinden (🧩) Uzantı'yı sabitleyin.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>“필터링” 토글을 확인합니다</h3>
-        <p>패널 상단의 <strong>“필터링”</strong> 토글이 <span class="tag tag-blue">켜짐(파란색)</span> 상태인지 확인하세요. 꺼져 있으면 이미지가 차단되지 않습니다.</p>
+        <h3>“Filtering” anahtarını kontrol edin</h3>
+        <p>Panelin üst kısmındaki <strong>“Filtering”</strong> anahtarının <span class="tag tag-blue">açık (mavi)</span> olduğundan emin olun. Kapalıysa görüntüler engellenmez.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>슬라이더를 좌우로 움직여 민감도를 설정합니다</h3>
-        <p>“민감도 설정” 슬라이더를 좌우로 드래그합니다. <strong>왼쪽(엄격)</strong>으로 이동할수록 더 많은 이미지가 차단됩니다. <strong>오른쪽(완화)</strong>으로 이동할수록 이미지가 차단될 가능성이 낮아집니다.</p>
+        <h3>Hassasiyeti ayarlamak için kaydırıcıyı sola veya sağa taşıyın</h3>
+        <p>“Sensitivity” kaydırıcısını sola veya sağa sürükleyin. <strong>Sola (katı)</strong> taşımak daha fazla görüntüyü engeller. <strong>Sağa (yumuşak)</strong> taşımak görüntülerin engellenme olasılığını azaltır.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>패널에 “작동 중”이 표시되는지 확인합니다</h3>
-        <p>패널 하단에 <span class="tag tag-green">● 작동 중</span>이 표시되면 설정이 활성화된 상태입니다. 새 민감도를 적용하려면 X 페이지를 새로고침하세요.</p>
+        <h3>Panelde “Running” yazdığını doğrulayın</h3>
+        <p>Panelin alt kısmında <span class="tag tag-green">● Running</span> görünüyorsa ayar aktiftir. Yeni hassasiyeti uygulamak için X sayfasını yeniden yükleyin.</p>
       </div>
     </div>
   </div>
 
   <div class="screenshot-frame" style="max-width: 420px; margin: 24px auto 6px;">
     <img src="../sensitivity_adjust_filter_x_block_images.png"
-         alt="민감도 조정 패널의 스크린샷" />
+         alt="Hassasiyet ayar panelinin ekran görüntüsü" />
   </div>
-  <p class="screenshot-caption">▲ 엄격 모드 30%로 설정된 민감도 패널 예시</p>
+  <p class="screenshot-caption">▲ Katı modda 30% olarak ayarlanmış hassasiyet paneli örneği</p>
 
 
   <!-- ===== 5. DM ===== -->
-  <h2 id="dm">5. X 다이렉트 메시지의 차단 이미지 예시</h2>
-  <p>X 다이렉트 메시지에서 불쾌감을 줄 수 있거나 노골적인 이미지로 판정되면 아래 예시와 같이 어두운 오버레이로 대체되어 표시됩니다.</p>
+  <h2 id="dm">5. Örnek: X Doğrudan Mesajlarında Engellenen Görüntüler</h2>
+  <p>X doğrudan mesajındaki bir görüntü rahatsız edici, hassas veya cinsel içerikli olarak değerlendirilirse aşağıdaki örnekteki gibi koyu bir kaplama ile değiştirilir.</p>
 
   <div class="screenshot-frame">
     <img src="../x_dm_blockd_images_example.png"
-         alt="X 다이렉트 메시지에서 이미지가 차단된 화면의 스크린샷" />
+         alt="X doğrudan mesajında engellenen görüntüyü gösteren ekran görüntüsü" />
   </div>
-  <p class="screenshot-caption">▲ 다이렉트 메시지 화면의 이미지 차단 예시(점수: 46.2%)</p>
+  <p class="screenshot-caption">▲ DM ekranında engellenen görüntü örneği (puan: 46.2%)</p>
 
   <div class="tip-box">
-    <p>💡 <strong>표시 내용:</strong> 차단된 이미지 위에는 “🚫 부적절한 이미지”와 AI가 계산한 점수가 표시됩니다. 점수는 이미지가 설정한 민감도 임계값을 얼마나 초과했는지 보여 줍니다.</p>
+    <p>💡 <strong>Göreceğiniz şey:</strong> Engellenen görüntünün üzerinde Uzantı “🚫 Inappropriate image” metnini ve AI tarafından hesaplanan puanı gösterir. Puan, görüntünün seçtiğiniz hassasiyet eşiğini ne kadar aştığını gösterir.</p>
   </div>
 
 
   <!-- ===== 6. Timeline ===== -->
-  <h2 id="timeline">6. X 타임라인의 차단 이미지 예시</h2>
-  <p>불쾌감을 줄 수 있거나 노골적인 이미지로 판정된 이미지는 X 타임라인, 검색 결과 및 기타 이미지 영역에서도 차단됩니다.</p>
+  <h2 id="timeline">6. Örnek: X Zaman Akışında Engellenen Görüntüler</h2>
+  <p>Rahatsız edici, hassas veya cinsel içerikli olarak değerlendirilen görüntüler X zaman akışında, arama sonuçlarında ve diğer görüntü alanlarında da engellenir.</p>
 
   <div class="screenshot-frame">
     <img src="../x_timeline_blockd_images_example.png"
-         alt="X 타임라인에서 이미지가 차단된 화면의 스크린샷" />
+         alt="X zaman akışında engellenen görüntüyü gösteren ekran görüntüsü" />
   </div>
-  <p class="screenshot-caption">▲ 타임라인 검색 결과의 이미지 차단 예시(점수: 56.8%)</p>
+  <p class="screenshot-caption">▲ Zaman akışı arama sonuçlarında engellenen görüntü örneği (puan: 56.8%)</p>
 
   <div class="tip-box">
-    <p>💡 <strong>지원 영역:</strong> 본 확장 프로그램은 홈 타임라인, 검색 결과, 프로필 미디어 탭, 다이렉트 메시지 등 X의 이미지 표시 영역에서 작동합니다.</p>
+    <p>💡 <strong>Desteklenen alanlar:</strong> Uzantı, ana zaman akışı, arama sonuçları, profil medya sekmeleri ve doğrudan mesajlar dahil X üzerindeki görüntü alanlarında çalışır.</p>
   </div>
 
 
   <!-- ===== 7. Show image ===== -->
-  <h2 id="show-image">7. 차단된 이미지 표시 방법</h2>
-  <p>이미지가 차단된 경우에도 필요한 때에는 한 장씩 표시하여 확인할 수 있습니다.</p>
+  <h2 id="show-image">7. Engellenen Görüntüyü Gösterme</h2>
+  <p>Bir görüntü engellenmiş olsa bile, gerektiğinde onu tek tek göstermeyi seçebilirsiniz.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>“클릭하여 표시” 버튼을 확인합니다</h3>
-        <p>불쾌감을 줄 수 있거나 노골적인 이미지로 판정된 이미지의 오버레이 중앙에 아래와 같은 버튼이 표시됩니다.</p>
+        <h3>“Click to show” düğmesini bulun</h3>
+        <p>Rahatsız edici, hassas veya cinsel içerikli olarak değerlendirilen görüntülerin üzerindeki kaplamanın ortasında aşağıdakine benzer bir düğme görünür.</p>
         <div class="demo-btn-wrap">
-          <span class="demo-btn demo-btn-outline">클릭하여 표시</span>
-          <span style="font-size: 13px; color: #718096;">또는</span>
-          <span class="demo-btn demo-btn-fill">클릭하여 표시</span>
+          <span class="demo-btn demo-btn-outline">Click to show</span>
+          <span style="font-size: 13px; color: #718096;">veya</span>
+          <span class="demo-btn demo-btn-fill">Click to show</span>
         </div>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>“클릭하여 표시” 버튼을 클릭합니다</h3>
-        <p>버튼을 클릭하면 해당 이미지의 차단이 해제되어 원본 이미지가 표시됩니다. 다른 이미지에는 영향을 주지 않습니다.</p>
+        <h3>“Click to show” düğmesine tıklayın</h3>
+        <p>Düğmeye tıklamak yalnızca o görüntünün engelini kaldırır ve özgün görüntüyü gösterir. Diğer görüntüler etkilenmez.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>페이지를 새로고침하면 차단이 다시 적용됩니다</h3>
-        <p>“클릭하여 표시”는 일시적인 해제입니다. 페이지를 새로고침하면 동일한 이미지가 임계값을 계속 초과하는 경우 다시 차단됩니다.</p>
+        <h3>Sayfayı yeniden yüklemek engellemeyi yeniden uygular</h3>
+        <p>“Click to show” geçicidir. Sayfayı yeniden yüklerseniz aynı görüntü eşiği hâlâ aşıyorsa tekrar engellenir.</p>
       </div>
     </div>
   </div>
 
   <div class="warn-box">
-    <p>⚠️ <strong>오탐지가 신경 쓰이는 경우:</strong> 특정 이미지가 반복해서 잘못 차단되는 경우 민감도 슬라이더를 “완화” 방향으로 조정하면 차단될 가능성이 낮아집니다. → <a href="#slider">슬라이더 조정 방법(4절)</a></p>
+    <p>⚠️ <strong>Yanlış pozitif fark ederseniz:</strong> Belirli bir görüntü yanlışlıkla tekrar tekrar engelleniyorsa, engellenme olasılığını azaltmak için hassasiyet kaydırıcısını “Yumuşak” yönüne taşıyın. → <a href="#slider">Kaydırıcıyı ayarlama yöntemi (Bölüm 4)</a></p>
   </div>
 
   <!-- ===== 8. Contact ===== -->
-  <h2 id="inquiry">8. 문의</h2>
-  <p>본 확장 프로그램에 관한 질문, 의견 또는 소감이 있으시면 개인정보 처리방침 페이지의 문의처로 연락해 주세요.</p>
-  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 문의처</a></p>
+  <h2 id="inquiry">8. İletişim</h2>
+  <p>Uzantı hakkında sorularınız, geri bildirimleriniz veya yorumlarınız varsa lütfen Gizlilik Politikası sayfasındaki iletişim bilgilerini kullanın.</p>
+  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 İletişim</a></p>
 
   <!-- ===== BACK LINK & FOOTER ===== -->
-  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← 개인정보 처리방침 보기</a>
+  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← Gizlilik Politikası'nı görüntüle</a>
   <br>
-  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← GitHub 리포지토리 보기</a>
+  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← GitHub deposunu görüntüle</a>
 
   <div class="footer">
-    <p>&copy; がぞうみまもり 2026 Naohisa Aoki (@na0AaooQ) 모든 권리 보유.</p>
+    <p>&copy; Gazou Mimamori 2026 Naohisa Aoki (@na0AaooQ) All Rights Reserved.</p>
   </div>
 
 </div>
 <div class="image-modal" id="imageModal" hidden>
-  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="확대 이미지 보기">
-    <button type="button" class="image-modal__close" aria-label="확대 이미지 닫기">×</button>
+  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="Büyütülmüş görüntü görünümü">
+    <button type="button" class="image-modal__close" aria-label="Büyütülmüş görüntüyü kapat">×</button>
     <img class="image-modal__image" alt="" />
   </div>
 </div>
@@ -834,12 +838,12 @@
     };
 
     manualImages.forEach((image) => {
-      const imageAlt = image.getAttribute('alt') || '이미지';
+      const imageAlt = image.getAttribute('alt') || 'görüntü';
 
       image.classList.add('manual-zoomable-image');
       image.tabIndex = 0;
       image.setAttribute('role', 'button');
-      image.setAttribute('aria-label', imageAlt + ' 확대 보기');
+      image.setAttribute('aria-label', 'Büyütülmüş görünümü aç: ' + imageAlt);
       image.addEventListener('click', () => openModal(image));
       image.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
