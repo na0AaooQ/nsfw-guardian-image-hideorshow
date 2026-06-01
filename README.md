@@ -1,8 +1,9 @@
 # nsfw-guardian-image-hideorshow
+Google Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フィルター」のソースコード管理リポジトリです。
 
-Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フィルター」  
+- GitHubリポジトリURL: [https://github.com/na0AaooQ/kotoba-uke-mimamori-for-x/](https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow)
 
-X(旧Twitter)のDMやタイムライン上で流れてくるセンシティブ画像(不快な画像や過激な画像)をAI(TensorFlow x NSFWJS)で自動検出します。  
+X（旧Twitter）のDMやタイムライン上で流れてくるセンシティブ画像(不快な画像、過激な画像)をAI(TensorFlow x NSFWJS)で自動検出します。  
 X（Twitter）のタイムライン・DMの不快な画像や過激な画像をAIで自動検出しブロック。クリックで個別表示、感度調整も可能。画像データは外部送信しません。
 
 X（旧Twitter）の利用者さま向けの無料の[Google Chrome拡張機能](https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb)です。  
