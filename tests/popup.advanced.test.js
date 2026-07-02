@@ -5,8 +5,20 @@
 
 // DOM セットアップ（require より前に実行）
 document.body.innerHTML = `
+  <h2 data-i18n="title">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</h2>
+  <span class="row-label" data-i18n="filtering">フィルタリング</span>
   <input type="checkbox" id="enabledToggle" checked>
+  <span class="row-label" data-i18n="displayLanguage">表示言語</span>
+  <select id="languageSelect">
+    <option value="auto" data-i18n="languageAuto">自動</option>
+    <option value="ja" data-i18n="languageJa">日本語</option>
+    <option value="en" data-i18n="languageEn">English</option>
+  </select>
+  <div class="section-title" data-i18n="sensitivity">感度設定</div>
   <input type="range"    id="thresholdRange" min="0.30" max="0.90" step="0.05" value="0.65">
+  <span data-i18n="levelStrict">厳しめ</span>
+  <span data-i18n="levelBalanced">バランス</span>
+  <span data-i18n="levelLoose">緩め</span>
   <span  id="thresholdVal">65%</span>
   <span  class="level-badge" id="levelBadge">バランス</span>
   <div   id="levelDesc">説明</div>
@@ -15,7 +27,7 @@ document.body.innerHTML = `
   <div   id="toast"></div>
 `;
 
-const { showToast, saveSettings } = require('../popup.js');
+const { showToast, saveSettings, applyI18n } = require('../popup.js');
 
 // ─────────────────────────────────────────────
 // showToast
@@ -68,6 +80,7 @@ describe('saveSettings()', () => {
     jest.clearAllMocks();
     // chrome.tabs.sendMessage を Promise を返すように設定
     chrome.tabs.sendMessage.mockResolvedValue(undefined);
+    document.getElementById('languageSelect').value = 'auto';
   });
 
   afterEach(() => {
@@ -82,10 +95,18 @@ describe('saveSettings()', () => {
   test('storage.set に enabled と threshold が渡される', () => {
     document.getElementById('enabledToggle').checked = true;
     document.getElementById('thresholdRange').value  = '0.65';
+    document.getElementById('languageSelect').value   = 'auto';
     saveSettings();
     const [settings] = chrome.storage.sync.set.mock.calls[0];
     expect(settings.enabled).toBe(true);
     expect(settings.threshold).toBeCloseTo(0.65);
+  });
+
+  test('storage.set に language が含まれる', () => {
+    document.getElementById('languageSelect').value = 'en';
+    saveSettings();
+    const [settings] = chrome.storage.sync.set.mock.calls[0];
+    expect(settings.language).toBe('en');
   });
 
   test('enabled=false のとき storage.set に false が渡される', () => {
@@ -116,11 +137,13 @@ describe('saveSettings()', () => {
   test('sendMessage に enabled と threshold が含まれる', () => {
     document.getElementById('enabledToggle').checked = true;
     document.getElementById('thresholdRange').value  = '0.50';
+    document.getElementById('languageSelect').value   = 'ja';
     saveSettings();
     const [, msg] = chrome.tabs.sendMessage.mock.calls[0];
     expect(msg.type).toBe('UPDATE_SETTINGS');
     expect(msg.enabled).toBe(true);
     expect(msg.threshold).toBeCloseTo(0.50);
+    expect(msg.language).toBe('ja');
   });
 });
 
@@ -132,6 +155,7 @@ describe('thresholdRange input イベント', () => {
     jest.useFakeTimers();
     jest.clearAllMocks();
     chrome.tabs.sendMessage.mockResolvedValue(undefined);
+    document.getElementById('languageSelect').value = 'auto';
   });
 
   afterEach(() => {
@@ -161,6 +185,7 @@ describe('enabledToggle change イベント', () => {
     jest.useFakeTimers();
     jest.clearAllMocks();
     chrome.tabs.sendMessage.mockResolvedValue(undefined);
+    document.getElementById('languageSelect').value = 'auto';
   });
 
   afterEach(() => {
@@ -190,3 +215,39 @@ describe('enabledToggle change イベント', () => {
   });
 });
 
+// ─────────────────────────────────────────────
+// languageSelect change イベント
+// ─────────────────────────────────────────────
+describe('languageSelect change イベント', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    jest.clearAllMocks();
+    chrome.tabs.sendMessage.mockResolvedValue(undefined);
+    applyI18n('auto');
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  test('言語を en に変更すると英語表示になり保存される', () => {
+    const select = document.getElementById('languageSelect');
+    select.value = 'en';
+    select.dispatchEvent(new Event('change'));
+
+    expect(document.querySelector('[data-i18n="filtering"]').textContent).toBe('Filtering');
+    expect(chrome.storage.sync.set).toHaveBeenCalledWith(
+      expect.objectContaining({ language: 'en' }),
+      expect.any(Function)
+    );
+  });
+
+  test('言語変更の UPDATE_SETTINGS に language が含まれる', () => {
+    const select = document.getElementById('languageSelect');
+    select.value = 'ja';
+    select.dispatchEvent(new Event('change'));
+
+    const [, msg] = chrome.tabs.sendMessage.mock.calls[0];
+    expect(msg).toEqual(expect.objectContaining({ type: 'UPDATE_SETTINGS', language: 'ja' }));
+  });
+});

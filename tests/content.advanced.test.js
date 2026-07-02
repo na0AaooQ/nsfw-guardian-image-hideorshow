@@ -45,9 +45,16 @@ function captureNextRequestId() {
 
 // ─── メッセージリスナー ──────────────────────────────
 describe('onMessage: UPDATE_SETTINGS', () => {
+  test('初期読み込みで language を取得する', () => {
+    expect(chrome.storage.sync.get).toHaveBeenCalledWith(
+      expect.objectContaining({ language: 'auto' }),
+      expect.any(Function)
+    );
+  });
+
   test('enabled=false に変更するとisEnabledが変わる', () => {
     _setState({ enabled: true });
-    messageListener({ type: 'UPDATE_SETTINGS', enabled: false, threshold: 0.5 });
+    messageListener({ type: 'UPDATE_SETTINGS', enabled: false, threshold: 0.5, language: 'auto' });
     expect(_getState().isEnabled).toBe(false);
     expect(_getState().threshold).toBe(0.5);
     _setState({ enabled: true, threshold: 0.3 }); // 後始末
@@ -55,14 +62,20 @@ describe('onMessage: UPDATE_SETTINGS', () => {
 
   test('enabled=true に戻せる', () => {
     _setState({ enabled: false });
-    messageListener({ type: 'UPDATE_SETTINGS', enabled: true, threshold: 0.3 });
+    messageListener({ type: 'UPDATE_SETTINGS', enabled: true, threshold: 0.3, language: 'auto' });
     expect(_getState().isEnabled).toBe(true);
   });
 
   test('threshold だけ変えられる', () => {
-    messageListener({ type: 'UPDATE_SETTINGS', enabled: true, threshold: 0.8 });
+    messageListener({ type: 'UPDATE_SETTINGS', enabled: true, threshold: 0.8, language: 'auto' });
     expect(_getState().threshold).toBe(0.8);
     _setState({ threshold: 0.3 });
+  });
+
+  test('language を更新できる', () => {
+    messageListener({ type: 'UPDATE_SETTINGS', enabled: true, threshold: 0.3, language: 'en' });
+    expect(_getState().language).toBe('en');
+    _setState({ language: 'auto' });
   });
 });
 
@@ -235,6 +248,18 @@ describe('checkImage(): 判定と表示', () => {
     expect(img.dataset.nsfwCheckedUrl).toBeUndefined();
   });
 
+  test('sendMessage が context invalidated で reject しても例外化せずフラグをリセットする', async () => {
+    const img = makeImg({ src: 'https://pbs.twimg.com/media/context-invalidated.jpg' });
+    container.appendChild(img);
+    chrome.runtime.sendMessage.mockRejectedValueOnce(new Error('Extension context invalidated.'));
+
+    await expect(checkImage(img)).resolves.toBeUndefined();
+
+    expect(container.querySelector('.nsfw-guardian-block')).toBeNull();
+    expect(img.dataset.nsfwChecked).toBeUndefined();
+    expect(img.dataset.nsfwCheckedUrl).toBeUndefined();
+  });
+
   test('判定後に approvedUrls に追加されていたらブロックしない', async () => {
     const url = 'https://pbs.twimg.com/media/race.jpg';
     const img = makeImg({ src: url });
@@ -271,4 +296,3 @@ describe('checkImage(): 判定と表示', () => {
     await checkPromise;
   });
 });
-

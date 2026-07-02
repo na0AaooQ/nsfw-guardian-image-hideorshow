@@ -29,6 +29,17 @@
     /* 有効/無効トグル行 */
     .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
     .row-label { font-size: 13px; color: #e7e9ea; }
+    .language-select {
+      max-width: 130px;
+      padding: 5px 8px;
+      border: 1px solid #2f3336;
+      border-radius: 8px;
+      background: #1e2732;
+      color: #e7e9ea;
+      font-size: 12px;
+      outline: none;
+    }
+    .language-select:focus { border-color: #1d9bf0; box-shadow: 0 0 0 2px rgba(29,155,240,0.18); }
 
     /* トグルスイッチ */
     .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
@@ -96,19 +107,28 @@
 </head>
 <body>
   <div class="header">
-    <h2>🛡️ がぞうみまもり | Xセンシティブ画像フィルター</h2>
-    <span class="version">v2.1.0</span>
+    <h2 data-i18n="title">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</h2>
+    <span class="version">v2.2.0</span>
   </div>
 
   <div class="row">
-    <span class="row-label">フィルタリング</span>
+    <span class="row-label" data-i18n="filtering">フィルタリング</span>
     <label class="toggle">
       <input type="checkbox" id="enabledToggle" checked>
       <span class="toggle-track"></span>
     </label>
   </div>
 
-  <div class="section-title">感度設定</div>
+  <div class="row">
+    <span class="row-label" data-i18n="displayLanguage">表示言語</span>
+    <select class="language-select" id="languageSelect">
+      <option value="auto" data-i18n="languageAuto">自動</option>
+      <option value="ja" data-i18n="languageJa">日本語</option>
+      <option value="en" data-i18n="languageEn">English</option>
+    </select>
+  </div>
+
+  <div class="section-title" data-i18n="sensitivity">感度設定</div>
   <div class="threshold-section">
     <div class="level-row">
       <span class="level-badge strict" id="levelBadge">厳しめ</span>
@@ -116,9 +136,9 @@
     </div>
     <input type="range" id="thresholdRange" min="0.30" max="0.90" step="0.05" value="0.30">
     <div class="slider-labels">
-      <span>厳しめ</span>
-      <span>バランス</span>
-      <span>緩め</span>
+      <span data-i18n="levelStrict">厳しめ</span>
+      <span data-i18n="levelBalanced">バランス</span>
+      <span data-i18n="levelLoose">緩め</span>
     </div>
     <div class="level-desc" id="levelDesc">水着・露出度の高い画像もブロックします</div>
   </div>

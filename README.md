@@ -18,8 +18,17 @@ Google ChromeでX（旧Twitter）をご利用いただく方が、本拡張機�
 ・AIが画像を自動判定。  
 ・ブロック画像はクリックで個別表示可能。  
 ・感度を3段階＋細かく調整可能。  
+・ポップアップUIと画像ブロック表示は日本語・英語・自動表示に対応。<br>
 ・すべての判定はPC内で完結。  
 ・画像データは外部サーバーへ送信しません。  
+
+## v2.2.0 の変更概要
+
+- ポップアップUIに表示言語設定を追加しました。
+- 日本語 / English / 自動表示に対応しました。
+- 画像ブロック表示の日本語・英語切り替えに対応しました。
+- 表示言語設定は Chrome の `storage.sync` に保存します。
+- 画像データや判定結果を外部送信しない既存方針を維持しています。
 
 # 機能
 
@@ -272,12 +281,18 @@ npm install --save-dev jest jest-environment-jsdom
 # 全テストを実行
 npm test
 
+# 全テストを直列実行（Codexでの確認や、ログ順を安定させたい場合に推奨）
+npm test -- --runInBand
+
 # カバレッジレポート付きで実行
 npm run test:coverage
 
 # ファイル変更を監視して自動実行
 npm run test:watch
 ```
+
+`npm test` は `jest` を通常実行します。`--runInBand` は自動では付与されないため、直列実行したい場合は `npm test -- --runInBand` を指定してください。<br>
+テスト対象自体は同じため、`models/tf-wasm-bundle.js` の生成漏れ検出は `npm test` でも `npm test -- --runInBand` でも実行されます。
 
 ### テスト構成
 
@@ -289,6 +304,7 @@ npm run test:watch
 | `tests/popup.advanced.test.js` | `popup.js` | `showToast` / `saveSettings` / イベント発火 |
 | `tests/offscreen.test.js` | `offscreen.js` | `base64ToBlob` / `calcNsfwScore` |
 | `tests/offscreen.advanced.test.js` | `offscreen.js` | `bitmapToTensor` / 判定ハンドラー |
+| `tests/offscreen.html.test.js` | `offscreen.html` | `models/tf-wasm-bundle.js` など script 参照先の存在確認 |
 
 ### カバレッジ
 

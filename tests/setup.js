@@ -14,6 +14,10 @@ global.chrome = {
     sendMessage: jest.fn(),
     getURL: jest.fn((path) => `chrome-extension://fake-extension-id/${path}`),
   },
+  i18n: {
+    getUILanguage: jest.fn(() => 'ja-JP'),
+    getMessage: jest.fn((key) => key === '@@ui_locale' ? 'ja' : ''),
+  },
   tabs: {
     query: jest.fn((_, callback) => {
       if (typeof callback === 'function') callback([{ id: 1 }]);
