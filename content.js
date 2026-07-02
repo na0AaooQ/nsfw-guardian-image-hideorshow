@@ -6,15 +6,58 @@
 const CONFIG = { threshold: 0.3, minImageSize: 100 };
 const approvedUrls = new Set();
 let isEnabled = true;
+let currentLanguage = 'auto';
 const pendingRequests = new Map();
 let requestCounter = 0;
+
+const CONTENT_MESSAGES = {
+  ja: {
+    sensitiveImage: '不適切な画像',
+    score: 'スコア',
+    clickToShow: 'クリックで表示'
+  },
+  en: {
+    sensitiveImage: 'Sensitive image',
+    score: 'Score',
+    clickToShow: 'Click to show'
+  }
+};
+
+function normalizeLanguage(language) {
+  return ['auto', 'ja', 'en'].includes(language) ? language : 'auto';
+}
+
+function getUILanguage() {
+  if (typeof chrome === 'undefined' || !chrome.i18n) return '';
+  if (typeof chrome.i18n.getUILanguage === 'function') {
+    const uiLanguage = chrome.i18n.getUILanguage();
+    if (uiLanguage) return uiLanguage;
+  }
+  if (typeof chrome.i18n.getMessage === 'function') {
+    return chrome.i18n.getMessage('@@ui_locale') || '';
+  }
+  return '';
+}
+
+function resolveLanguage(language = currentLanguage) {
+  const normalized = normalizeLanguage(language);
+  if (normalized === 'ja' || normalized === 'en') return normalized;
+
+  const uiLanguage = getUILanguage().toLowerCase().replace('_', '-');
+  return uiLanguage === 'ja' || uiLanguage.startsWith('ja-') ? 'ja' : 'en';
+}
+
+function getContentMessages(language = currentLanguage) {
+  return CONTENT_MESSAGES[resolveLanguage(language)] || CONTENT_MESSAGES.en;
+}
 
 console.log('[NSFW Guardian] content.js 起動');
 
 // 設定読み込み完了後にスキャン開始（threshold確定前に動かない）
-chrome.storage.sync.get({ enabled: true, threshold: 0.3 }, (items) => {
+chrome.storage.sync.get({ enabled: true, threshold: 0.3, language: 'auto' }, (items) => {
   isEnabled = items.enabled;
   CONFIG.threshold = items.threshold;
+  currentLanguage = normalizeLanguage(items.language);
   console.log('[NSFW Guardian] 設定読み込み完了:', items);
   document.querySelectorAll('img').forEach((img) => {
     checkImage(img);
@@ -26,6 +69,7 @@ chrome.runtime.onMessage.addListener((message) => {
   if (message.type === 'UPDATE_SETTINGS') {
     isEnabled = message.enabled;
     CONFIG.threshold = message.threshold;
+    currentLanguage = normalizeLanguage(message.language);
   }
   if (message.type === 'CLASSIFICATION_RESULT') {
     const handler = pendingRequests.get(message.requestId);
@@ -92,7 +136,20 @@ function classifyImage(imageUrl, base64Data) {
     const requestId = ++requestCounter;
     pendingRequests.set(requestId, resolve);
     console.log('[NSFW Guardian] 判定リクエスト送信 requestId:', requestId, imageUrl.slice(0, 60));
-    chrome.runtime.sendMessage({ type: 'CLASSIFY_IMAGE', imageUrl, requestId, base64Data });
+    const handleSendError = (error) => {
+      if (!pendingRequests.has(requestId)) return;
+      pendingRequests.delete(requestId);
+      const message = error?.message || String(error);
+      resolve({ nsfwScore: 0, error: message.includes('Extension context invalidated') ? 'context_invalidated' : 'send_message_failed' });
+    };
+    try {
+      const result = chrome.runtime.sendMessage({ type: 'CLASSIFY_IMAGE', imageUrl, requestId, base64Data });
+      if (result && typeof result.catch === 'function') {
+        result.catch(handleSendError);
+      }
+    } catch (error) {
+      handleSendError(error);
+    }
     setTimeout(() => {
       if (pendingRequests.has(requestId)) {
         pendingRequests.delete(requestId);
@@ -107,6 +164,7 @@ async function classifyImageWithRetry(imageUrl, base64Data, maxRetry = 3) {
   for (let attempt = 1; attempt <= maxRetry; attempt++) {
     const result = await classifyImage(imageUrl, base64Data);
     if (!result.error) return result; // 成功
+    if (result.error === 'context_invalidated' || result.error === 'send_message_failed') return result;
     console.log(`[NSFW Guardian] タイムアウト (${attempt}/${maxRetry})、2秒後にリトライ...`);
     if (attempt < maxRetry) await new Promise(r => setTimeout(r, 2000));
   }
@@ -174,9 +232,11 @@ async function checkImage(imgElement) {
   const result = await classifyImageWithRetry(imageUrl, base64Data); // リトライ付き関数を使用
   console.log('[NSFW Guardian] 判定結果:', result.nsfwScore?.toFixed(3), imageUrl.slice(0, 60));
 
-  // 全リトライ失敗時はフラグをリセットして再チェック可能にする
-  if (result.error === 'timeout') {
-    console.warn('[NSFW Guardian] 全リトライ失敗 → フラグリセット:', imageUrl.slice(0, 60));
+  // エラー時はフラグをリセットして再チェック可能にする
+  if (result.error) {
+    if (result.error !== 'context_invalidated') {
+      console.warn('[NSFW Guardian] 判定エラー → フラグリセット:', imageUrl.slice(0, 60));
+    }
     delete imgElement.dataset.nsfwChecked;
     delete imgElement.dataset.nsfwCheckedUrl;
     // タイムアウト時は表示を戻す（非表示のまま放置しない）
@@ -205,6 +265,7 @@ async function checkImage(imgElement) {
 function replaceWithWarning(imgElement, score, mediaId) {
   const width  = imgElement.offsetWidth  || imgElement.naturalWidth  || 200;
   const height = imgElement.offsetHeight || imgElement.naturalHeight || 200;
+  const messages = getContentMessages(currentLanguage);
 
   const wrapper = document.createElement('div');
   wrapper.className = 'nsfw-guardian-block';
@@ -213,9 +274,9 @@ function replaceWithWarning(imgElement, score, mediaId) {
   wrapper.innerHTML = `
     <div class="nsfw-guardian-inner">
       <span class="nsfw-guardian-icon">🚫</span>
-      <span class="nsfw-guardian-text">不適切な画像</span>
-      <span class="nsfw-guardian-score">スコア: ${(score * 100).toFixed(1)}%</span>
-      <button class="nsfw-guardian-btn">クリックで表示</button>
+      <span class="nsfw-guardian-text">${messages.sensitiveImage}</span>
+      <span class="nsfw-guardian-score">${messages.score}: ${(score * 100).toFixed(1)}%</span>
+      <button class="nsfw-guardian-btn">${messages.clickToShow}</button>
     </div>
   `;
 
@@ -276,12 +337,14 @@ function startObserver() {
 if (typeof module !== 'undefined') {
   module.exports = {
     getMediaId, getBestImageUrl, blobUrlToBase64, replaceWithWarning, checkImage,
+    resolveLanguage, getContentMessages,
     // テスト用状態操作ヘルパー
-    _setState: ({ enabled, threshold } = {}) => {
+    _setState: ({ enabled, threshold, language } = {}) => {
       if (enabled   !== undefined) isEnabled = enabled;
       if (threshold !== undefined) CONFIG.threshold = threshold;
+      if (language  !== undefined) currentLanguage = normalizeLanguage(language);
     },
-    _getState: () => ({ isEnabled, threshold: CONFIG.threshold }),
+    _getState: () => ({ isEnabled, threshold: CONFIG.threshold, language: currentLanguage }),
     _approvedUrls: approvedUrls,
     _resolveClassification: (requestId, result) => {
       const handler = pendingRequests.get(requestId);

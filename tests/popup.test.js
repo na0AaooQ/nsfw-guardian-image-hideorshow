@@ -8,8 +8,20 @@
 
 // ① require より先に DOM を構築する（beforeAll では遅い）
 document.body.innerHTML = `
+  <h2 data-i18n="title">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</h2>
+  <span class="row-label" data-i18n="filtering">フィルタリング</span>
   <input type="checkbox" id="enabledToggle" checked>
+  <span class="row-label" data-i18n="displayLanguage">表示言語</span>
+  <select id="languageSelect">
+    <option value="auto" data-i18n="languageAuto">自動</option>
+    <option value="ja" data-i18n="languageJa">日本語</option>
+    <option value="en" data-i18n="languageEn">English</option>
+  </select>
+  <div class="section-title" data-i18n="sensitivity">感度設定</div>
   <input type="range"    id="thresholdRange" min="0.30" max="0.90" step="0.05" value="0.30">
+  <span data-i18n="levelStrict">厳しめ</span>
+  <span data-i18n="levelBalanced">バランス</span>
+  <span data-i18n="levelLoose">緩め</span>
   <span  id="thresholdVal">30%</span>
   <span  class="level-badge" id="levelBadge">厳しめ</span>
   <div   id="levelDesc">説明</div>
@@ -19,7 +31,60 @@ document.body.innerHTML = `
 `;
 
 // ② DOM 構築後に require する
-const { getLevelInfo, updateThresholdUI, updateStatusUI } = require('../popup.js');
+const {
+  getLevelInfo, updateThresholdUI, updateStatusUI,
+  resolveLanguage, getPopupMessages, applyI18n
+} = require('../popup.js');
+
+describe('language settings', () => {
+  afterEach(() => {
+    chrome.i18n.getUILanguage.mockReturnValue('ja-JP');
+    applyI18n('auto');
+  });
+
+  test('language 初期値が auto で読み込まれる', () => {
+    expect(chrome.storage.sync.get).toHaveBeenCalledWith(
+      expect.objectContaining({ language: 'auto' }),
+      expect.any(Function)
+    );
+  });
+
+  test('言語 select と auto / ja / en の選択肢が存在する', () => {
+    const select = document.getElementById('languageSelect');
+    expect(select).not.toBeNull();
+    expect([...select.options].map((option) => option.value)).toEqual(['auto', 'ja', 'en']);
+  });
+
+  test('日本語表示に切り替えられる', () => {
+    applyI18n('ja');
+    expect(document.querySelector('[data-i18n="filtering"]').textContent).toBe('フィルタリング');
+    expect(document.getElementById('statusText').textContent).toBe('動作中');
+  });
+
+  test('英語表示に切り替えられる', () => {
+    applyI18n('en');
+    expect(document.querySelector('[data-i18n="filtering"]').textContent).toBe('Filtering');
+    expect(document.querySelector('[data-i18n="displayLanguage"]').textContent).toBe('Display language');
+    expect(document.getElementById('statusText').textContent).toBe('Active');
+  });
+
+  test('auto + ja環境で日本語表示になる', () => {
+    chrome.i18n.getUILanguage.mockReturnValue('ja-JP');
+    expect(resolveLanguage('auto')).toBe('ja');
+    expect(getPopupMessages('auto').filtering).toBe('フィルタリング');
+  });
+
+  test('auto + 非ja環境で英語表示になる', () => {
+    chrome.i18n.getUILanguage.mockReturnValue('en-US');
+    expect(resolveLanguage('auto')).toBe('en');
+    expect(getPopupMessages('auto').filtering).toBe('Filtering');
+  });
+
+  test('未知の language 値でも安全にフォールバックする', () => {
+    chrome.i18n.getUILanguage.mockReturnValue('en-US');
+    expect(resolveLanguage('fr')).toBe('en');
+  });
+});
 
 // ─────────────────────────────────────────────
 // getLevelInfo
@@ -121,4 +186,3 @@ describe('updateStatusUI()', () => {
     expect(document.getElementById('statusText').classList.contains('active')).toBe(false);
   });
 });
-

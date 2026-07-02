@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Gazou Mimamori | X Sensitive Image Filter"
+  },
+  "extDescription": {
+    "message": "Automatically detects and blocks disturbing or explicit images on X (Twitter) timelines and DMs. You can show each blocked image with a click and adjust sensitivity. Image data is never sent externally."
+  }
+}

@@ -1,6 +1,46 @@
 // ユニットテスト
-const { getMediaId, getBestImageUrl, blobUrlToBase64, replaceWithWarning } =
+const {
+  getMediaId, getBestImageUrl, blobUrlToBase64, replaceWithWarning,
+  resolveLanguage, getContentMessages, _setState
+} =
   require('../content.js');
+
+describe('content language helpers', () => {
+  afterEach(() => {
+    chrome.i18n.getUILanguage.mockReturnValue('ja-JP');
+    _setState({ language: 'auto' });
+  });
+
+  test('初期読み込みで language を取得する', () => {
+    expect(chrome.storage.sync.get).toHaveBeenCalledWith(
+      expect.objectContaining({ language: 'auto' }),
+      expect.any(Function)
+    );
+  });
+
+  test('日本語メッセージを返す', () => {
+    expect(getContentMessages('ja').sensitiveImage).toBe('不適切な画像');
+  });
+
+  test('英語メッセージを返す', () => {
+    expect(getContentMessages('en').sensitiveImage).toBe('Sensitive image');
+  });
+
+  test('auto + ja環境で日本語表示になる', () => {
+    chrome.i18n.getUILanguage.mockReturnValue('ja-JP');
+    expect(resolveLanguage('auto')).toBe('ja');
+  });
+
+  test('auto + 非ja環境で英語表示になる', () => {
+    chrome.i18n.getUILanguage.mockReturnValue('en-US');
+    expect(resolveLanguage('auto')).toBe('en');
+  });
+
+  test('未知の language 値でも安全にフォールバックする', () => {
+    chrome.i18n.getUILanguage.mockReturnValue('en-US');
+    expect(resolveLanguage('unknown')).toBe('en');
+  });
+});
 
 describe('getMediaId()', () => {
   test('blob: URL はURLそのものをIDとして返す', () => {
@@ -95,7 +135,11 @@ describe('blobUrlToBase64()', () => {
 
 describe('replaceWithWarning()', () => {
   let container;
-  beforeEach(() => { container = document.createElement('div'); document.body.appendChild(container); });
+  beforeEach(() => {
+    _setState({ language: 'auto' });
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
   afterEach(() => { document.body.removeChild(container); });
 
   test('img 要素が .nsfw-guardian-block に置き換えられる', () => {
@@ -117,6 +161,23 @@ describe('replaceWithWarning()', () => {
     replaceWithWarning(img, 0.5, 'test-id');
     expect(container.querySelector('.nsfw-guardian-btn').textContent).toBe('クリックで表示');
   });
+  test('英語設定では英語のブロック表示になる', () => {
+    _setState({ language: 'en' });
+    const img = document.createElement('img');
+    container.appendChild(img);
+    replaceWithWarning(img, 0.5, 'test-id');
+    expect(container.querySelector('.nsfw-guardian-text').textContent).toBe('Sensitive image');
+    expect(container.querySelector('.nsfw-guardian-score').textContent).toContain('Score: 50.0%');
+    expect(container.querySelector('.nsfw-guardian-btn').textContent).toBe('Click to show');
+  });
+  test('日本語設定では日本語のブロック表示になる', () => {
+    _setState({ language: 'ja' });
+    const img = document.createElement('img');
+    container.appendChild(img);
+    replaceWithWarning(img, 0.5, 'test-id');
+    expect(container.querySelector('.nsfw-guardian-text').textContent).toBe('不適切な画像');
+    expect(container.querySelector('.nsfw-guardian-score').textContent).toContain('スコア: 50.0%');
+  });
   test('「クリックで表示」クリックで img が復元される', () => {
     const img = document.createElement('img');
     container.appendChild(img);
@@ -135,4 +196,3 @@ describe('replaceWithWarning()', () => {
     expect(block.style.height).toBe('200px');
   });
 });
-
