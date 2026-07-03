@@ -411,10 +411,12 @@ Offscreen DocumentからはBlob URLにアクセスできないため、content.j
 ## 開発者について
 
 - **na0AaooQ（青木 直之）**
-  - Qiita: [https://qiita.com/na0AaooQ](https://qiita.com/na0AaooQ)
 
-- 開発の詳細は Qiita の記事をご覧ください。  
-  - 👉 [TensorFlow.js × NSFWJS × Chrome拡張機能で、センシティブ画像を自動ブロックする機能を自作しました](https://qiita.com/na0AaooQ/items/128f68328497683332cb)
+Qiita: [https://qiita.com/na0AaooQ](https://qiita.com/na0AaooQ)
+
+- 開発の詳細は Qiita の記事をご覧ください。
+
+👉 [TensorFlow.js × NSFWJS × Chrome拡張機能で、センシティブ画像を自動ブロックする機能を自作しました](https://qiita.com/na0AaooQ/items/128f68328497683332cb)
 
 ## お問い合わせ先
 
