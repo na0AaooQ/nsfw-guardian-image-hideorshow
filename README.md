@@ -3,8 +3,9 @@ Google Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フ
 
 - GitHubリポジトリURL: [https://github.com/na0AaooQ/kotoba-uke-mimamori-for-x/](https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow)
 
-X（旧Twitter）のDMやタイムライン上で流れてくるセンシティブ画像(不快な画像、過激な画像)をAI(TensorFlow x NSFWJS)で自動検出します。  
-X（Twitter）のタイムライン・DMの不快な画像や過激な画像をAIで自動検出しブロック。クリックで個別表示、感度調整も可能。画像データは外部送信しません。
+[X（旧Twitter）](https://x.com/)のDM(ダイレクトメッセージ)やタイムライン上に流れてくるセンシティブ画像(不快な画像、過激な画像)をAI(TensorFlow x NSFWJS)で自動検出します。  
+
+X（旧Twitter）のタイムライン・DMの不快な画像や過激な画像をAIで自動検出しブロック。クリックで個別表示、感度調整も可能。画像データは外部送信しません。
 
 X（旧Twitter）の利用者さま向けの無料の[Google Chrome拡張機能](https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb)です。  
 X（旧Twitter）のDMやタイムライン上の画像をAIで自動判定し、不快な画像や過激な画像を「不適切な画像」としてブロック表示します。  
@@ -410,10 +411,20 @@ Offscreen DocumentからはBlob URLにアクセスできないため、content.j
 ## 開発者について
 
 - **na0AaooQ（青木 直之）**
-- Qiita: [https://qiita.com/na0AaooQ](https://qiita.com/na0AaooQ)
+  - Qiita: [https://qiita.com/na0AaooQ](https://qiita.com/na0AaooQ)
 
-開発の詳細は Qiita の記事をご覧ください。  
-👉 [TensorFlow.js × NSFWJS × Chrome拡張機能で、センシティブ画像を自動ブロックする機能を自作しました](https://qiita.com/na0AaooQ/items/128f68328497683332cb)
+- 開発の詳細は Qiita の記事をご覧ください。  
+  - 👉 [TensorFlow.js × NSFWJS × Chrome拡張機能で、センシティブ画像を自動ブロックする機能を自作しました](https://qiita.com/na0AaooQ/items/128f68328497683332cb)
+
+## お問い合わせ先
+
+以下のいずれかの方法で、お問い合わせください。
+
+開発者（青木直之）のポートフォリオサイトの「お問い合わせ画面」 https://portfolio.na0aaooq.com/contact.html
+
+　または
+
+X（旧Twitter）のポストやリプ（[@na0AaooQ](https://x.com/na0AaooQ)）
 
 ## License
 
