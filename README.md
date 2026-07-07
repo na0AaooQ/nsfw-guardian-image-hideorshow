@@ -218,6 +218,7 @@ zip -r nsfw-guardian-official-version.zip nsfw-guardian-image-hideorshow \
   --exclude "*/STORE_LISTING.md" \
   --exclude "*/coverage/*" \
   --exclude "*/biome.json" \
+  --exclude "*/tools/*" \
   --exclude "*/LICENSE" \
   --exclude "*/README.md"
 ```
@@ -294,6 +295,19 @@ npm run test:watch
 
 `npm test` は `jest` を通常実行します。`--runInBand` は自動では付与されないため、直列実行したい場合は `npm test -- --runInBand` を指定してください。<br>
 テスト対象自体は同じため、`models/tf-wasm-bundle.js` の生成漏れ検出は `npm test` でも `npm test -- --runInBand` でも実行されます。
+
+## Chrome Web Store images
+
+Chrome Web Store 掲載用画像は、`tools/webstore_icons_sources/` と `tools/webstore_screenshot_sources/` の素材から生成できます。
+
+```bash
+tools/make_webstore_upload_images.sh
+tools/make_webstore_screenshots_1400_560.sh
+tools/make_webstore_screenshots_640_400.sh
+tools/make_webstore_screenshots_440_280.sh
+```
+
+生成ファイルは `tools/webstore_screenshot_outputs/` に出力されます。`tools/` は開発補助用のため、Chrome Web Store 提出用 ZIP には含めない方針です。
 
 ### テスト構成
 
