@@ -142,3 +142,5 @@ vite.config.ts.timestamp-*
 node_modules/
 models/tf-wasm-bundle.js
 .DS_Store
+tools/webstore_screenshot_outputs/*
+!tools/webstore_screenshot_outputs/.gitkeep
