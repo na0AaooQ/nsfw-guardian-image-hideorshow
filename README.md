@@ -226,39 +226,49 @@ zip -r nsfw-guardian-official-version.zip nsfw-guardian-image-hideorshow \
 
 ```
 # ZIPファイルが正常に生成できたか確認
-unzip -l nsfw-guardian-official-version.zip
+
+% unzip -l nsfw-guardian-official-version.zip | grep "nsfw-guardian-image-hideorshow/" | wc -l
+      31
+% 
+
+% unzip -l nsfw-guardian-official-version.zip
 
 Archive:  nsfw-guardian-official-version.zip
   Length      Date    Time    Name
 ---------  ---------- -----   ----
-        0  03-18-2026 23:02   nsfw-guardian-image-hideorshow/
-     3107  03-18-2026 22:50   nsfw-guardian-image-hideorshow/popup.js
-      168  03-18-2026 22:50   nsfw-guardian-image-hideorshow/offscreen.html
-      901  03-18-2026 22:50   nsfw-guardian-image-hideorshow/styles.css
-     2708  03-18-2026 22:50   nsfw-guardian-image-hideorshow/background.js
-     5416  03-18-2026 22:50   nsfw-guardian-image-hideorshow/popup.html
-        0  03-18-2026 22:51   nsfw-guardian-image-hideorshow/models/
-  1294424  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tf.min.js
-   128949  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/model.json
-  6798317  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/nsfwjs_bundle.js
-  4515615  03-18-2026 22:51   nsfw-guardian-image-hideorshow/models/tf-wasm-bundle.js
-   275675  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm.wasm
-  2619461  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/group1-shard1of1.bin
-  2692917  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/nsfwjs.min.js
-   386833  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm-threaded-simd.wasm
-   118554  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tf-backend-wasm.min.js
-   274215  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tf-core.min.js
-   377757  03-18-2026 22:50   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm-simd.wasm
-        0  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/
-     1046  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/icon16.png
-     4760  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/icon48.png
-    20861  03-18-2026 22:50   nsfw-guardian-image-hideorshow/icons/icon128.png
-     1598  03-18-2026 23:02   nsfw-guardian-image-hideorshow/manifest.json
-     5291  03-18-2026 22:50   nsfw-guardian-image-hideorshow/offscreen.js
-     9650  03-18-2026 22:50   nsfw-guardian-image-hideorshow/content.js
-      173  03-18-2026 22:50   nsfw-guardian-image-hideorshow/entry.js
+        0  07-08-2026 15:53   nsfw-guardian-image-hideorshow/
+     7050  07-08-2026 15:51   nsfw-guardian-image-hideorshow/popup.js
+      168  07-08-2026 15:51   nsfw-guardian-image-hideorshow/offscreen.html
+      901  07-08-2026 15:51   nsfw-guardian-image-hideorshow/styles.css
+     3145  07-08-2026 15:51   nsfw-guardian-image-hideorshow/background.js
+     6258  07-08-2026 15:51   nsfw-guardian-image-hideorshow/popup.html
+        0  07-08-2026 15:52   nsfw-guardian-image-hideorshow/models/
+  1294424  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/tf.min.js
+   128949  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/model.json
+  6798317  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/nsfwjs_bundle.js
+  4515623  07-08-2026 15:52   nsfw-guardian-image-hideorshow/models/tf-wasm-bundle.js
+   275675  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm.wasm
+  2619461  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/group1-shard1of1.bin
+  2692917  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/nsfwjs.min.js
+   386833  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm-threaded-simd.wasm
+   118554  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/tf-backend-wasm.min.js
+   274215  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/tf-core.min.js
+   377757  07-08-2026 15:51   nsfw-guardian-image-hideorshow/models/tfjs-backend-wasm-simd.wasm
+        0  07-08-2026 15:51   nsfw-guardian-image-hideorshow/icons/
+     1046  07-08-2026 15:51   nsfw-guardian-image-hideorshow/icons/icon16.png
+     4760  07-08-2026 15:51   nsfw-guardian-image-hideorshow/icons/icon48.png
+    20861  07-08-2026 15:51   nsfw-guardian-image-hideorshow/icons/icon128.png
+     1352  07-08-2026 15:51   nsfw-guardian-image-hideorshow/manifest.json
+     4897  07-08-2026 15:51   nsfw-guardian-image-hideorshow/offscreen.js
+        0  07-08-2026 15:51   nsfw-guardian-image-hideorshow/_locales/
+        0  07-08-2026 15:51   nsfw-guardian-image-hideorshow/_locales/ja/
+      363  07-08-2026 15:51   nsfw-guardian-image-hideorshow/_locales/ja/messages.json
+        0  07-08-2026 15:51   nsfw-guardian-image-hideorshow/_locales/en/
+      329  07-08-2026 15:51   nsfw-guardian-image-hideorshow/_locales/en/messages.json
+    12964  07-08-2026 15:51   nsfw-guardian-image-hideorshow/content.js
+      173  07-08-2026 15:51   nsfw-guardian-image-hideorshow/entry.js
 ---------                     -------
- 19538396                     26 files
+ 19546992                     31 files
 ```
 
 ### Chromeへの読み込み
