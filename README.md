@@ -216,6 +216,7 @@ zip -r nsfw-guardian-official-version.zip nsfw-guardian-image-hideorshow \
   --exclude "*/.gitignore" \
   --exclude "*/jest.config.js" \
   --exclude "*/STORE_LISTING.md" \
+  --exclude "*/AGENTS.md" \
   --exclude "*/coverage/*" \
   --exclude "*/biome.json" \
   --exclude "*/tools/*" \
