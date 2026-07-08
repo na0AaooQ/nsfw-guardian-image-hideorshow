@@ -226,12 +226,13 @@ zip -r nsfw-guardian-official-version.zip nsfw-guardian-image-hideorshow \
 
 ```
 # ZIPファイルが正常に生成できたか確認
-
-% unzip -l nsfw-guardian-official-version.zip | grep "nsfw-guardian-image-hideorshow/" | wc -l
+unzip -l nsfw-guardian-official-version.zip | grep "nsfw-guardian-image-hideorshow/" | wc -l
       31
-% 
+```
 
-% unzip -l nsfw-guardian-official-version.zip
+```
+# ZIPファイルの内容を確認
+unzip -l nsfw-guardian-official-version.zip
 
 Archive:  nsfw-guardian-official-version.zip
   Length      Date    Time    Name
