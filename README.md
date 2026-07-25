@@ -1,4 +1,4 @@
-# nsfw-guardian-image-hideorshow
+# がぞうみまもり | Xセンシティブ画像フィルター (英語表記: Gazou Mimamori｜X Sensitive Image Filter)
 Google Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フィルター」(英語表記: Gazou Mimamori | X Sensitive Image Filter)のソースコード管理リポジトリです。
 
 - GitHubリポジトリURL: [https://github.com/na0AaooQ/kotoba-uke-mimamori-for-x/](https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow)
