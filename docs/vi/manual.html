@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>使用手册 | がぞうみまもり</title>
-  <meta name="description" content="Chrome扩展程序「がぞうみまもり | Xセンシティブ画像フィルター」的使用手册。说明安装步骤、灵敏度设置、被屏蔽图片的显示方法，以及图片判断在浏览器内完成的机制。">
-  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/zh-Hans/manual.html">
+  <title>Hướng dẫn sử dụng | がぞうみまもり</title>
+  <meta name="description" content="Hướng dẫn sử dụng tiện ích mở rộng Chrome “がぞうみまもり | Bộ lọc hình ảnh nhạy cảm cho X”. Trang này giải thích cách cài đặt, điều chỉnh độ nhạy và hiển thị hình ảnh bị chặn.">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/vi/manual.html">
   <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
   <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
   <link rel="alternate" hreflang="hi" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/hi/manual.html">
@@ -494,157 +494,152 @@
 <body>
 <div class="container">
 
-  <nav class="language-switch" aria-label="语言切换">
-    <span class="language-switch__label">显示语言</span>
-    <select aria-label="选择语言" onchange="if (this.value) window.location.href = this.value;">
+  <nav class="language-switch" aria-label="Bộ chuyển đổi ngôn ngữ">
+    <span class="language-switch__label">Ngôn ngữ hiển thị</span>
+    <select aria-label="Chọn ngôn ngữ" onchange="if (this.value) window.location.href = this.value;">
       <option value="../manual.html">日本語</option>
       <option value="../en/manual.html">English</option>
       <option value="../hi/manual.html">हिन्दी</option>
       <option value="../ko/manual.html">한국어</option>
-      <option value="./manual.html" selected>简体中文</option>
+      <option value="../zh-Hans/manual.html">简体中文</option>
       <option value="../zh-Hant/manual.html">繁體中文</option>
       <option value="../tr/manual.html">Türkçe</option>
       <option value="../ar/manual.html">العربية</option>
-      <option value="../vi/manual.html">Tiếng Việt</option>
+      <option value="./manual.html" selected>Tiếng Việt</option>
     </select>
   </nav>
 
   <!-- ===== HEADER ===== -->
   <div class="header">
     <div class="product-name">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</div>
-    <h1>使用手册</h1>
-    <div class="updated">最后更新：2026年7月2日 / 支持版本：v2.2.0</div>
+    <h1>Hướng dẫn sử dụng</h1>
+    <div class="updated">Cập nhật lần cuối: ngày 12 tháng 8 năm 2026 / Phiên bản được hỗ trợ: v2.2.0</div>
   </div>
 
   <!-- ===== SUMMARY ===== -->
   <div class="summary-box">
-    <p>📌 本 Google Chrome 扩展程序不会将您的图片数据或个人信息发送到任何外部服务器。所有处理都只在您的浏览器内完成。本扩展程序可免费使用。</p>
+    <p>📌 Tiện ích mở rộng Google Chrome này không gửi dữ liệu hình ảnh hoặc thông tin cá nhân của bạn đến bất kỳ máy chủ bên ngoài nào. Mọi quá trình xử lý đều được hoàn tất trong trình duyệt bạn đang sử dụng. Bạn có thể sử dụng miễn phí tính năng này.</p>
   </div>
 
   <!-- ===== TOC ===== -->
-  <h2>目录</h2>
+  <h2>Mục lục</h2>
   <ul>
-    <li><a href="#introduction">1. 前言</a></li>
-    <li><a href="#install">2. Chrome 扩展程序的安装方法</a></li>
-    <li><a href="#sensitivity">3. 图片屏蔽灵敏度（阈值）</a></li>
-    <li><a href="#slider">4. 使用滑块调整灵敏度</a></li>
-    <li><a href="#dm">5. X 私信中图片被屏蔽的示例</a></li>
-    <li><a href="#timeline">6. X 时间线中图片被屏蔽的示例</a></li>
-    <li><a href="#show-image">7. 如何显示被屏蔽的图片</a></li>
-    <li><a href="#inquiry">8. 联系方式</a></li>
+    <li><a href="#introduction">1. Giới thiệu</a></li>
+    <li><a href="#install">2. Cách cài đặt tiện ích mở rộng Chrome</a></li>
+    <li><a href="#sensitivity">3. Về độ nhạy chặn hình ảnh (ngưỡng)</a></li>
+    <li><a href="#slider">4. Thay đổi độ nhạy bằng thanh trượt</a></li>
+    <li><a href="#dm">5. Ví dụ hình ảnh bị chặn trong tin nhắn trực tiếp X</a></li>
+    <li><a href="#timeline">6. Ví dụ hình ảnh bị chặn trên dòng thời gian X</a></li>
+    <li><a href="#show-image">7. Cách hiển thị hình ảnh bị chặn</a></li>
+    <li><a href="#inquiry">8. Liên hệ về tiện ích mở rộng này</a></li>
   </ul>
 
-  <!-- ===== 1. Introduction ===== -->
-  <h2 id="introduction">1. 前言</h2>
-  <p>「がぞうみまもり | Xセンシティブ画像フィルター」（以下简称“本扩展程序”）是一款 Chrome 扩展程序，用于自动判断并屏蔽 X（原 Twitter）时间线和私信中可能令人不适或含有露骨内容的图片。</p>
-  <p>本页面说明本扩展程序的使用方法。</p>
-  <p>关于本扩展程序的功能概要，请参阅 <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 がぞうみまもり 介绍资料（PDF）</a>。</p>
-  <p>关于信息处理方式，请参阅 <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 隐私政策</a>。</p>
+  <!-- ===== 1. はじめに ===== -->
+  <h2 id="introduction">1. Giới thiệu</h2>
+  <p>“がぞうみまもり | Xセンシティブ画像フィルター” (sau đây gọi là “tiện ích mở rộng này”) là tiện ích mở rộng Chrome tự động phát hiện và chặn những hình ảnh gây khó chịu hoặc có nội dung nhạy cảm hiển thị trên dòng thời gian và tin nhắn trực tiếp (DM) của X (trước đây là Twitter).</p>
+  <p>Trang này giải thích loại thông tin mà tiện ích mở rộng này xử lý và cách thông tin đó được xử lý.</p>
+  <p>Để biết tổng quan về các tính năng của tiện ích mở rộng này, <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 Tài liệu giới thiệu がぞうみまもり (PDF)</a> vui lòng tham khảo.</p>
+  <p>Để biết cách tiện ích mở rộng này xử lý thông tin, <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 trang Chính sách quyền riêng tư</a>.</p>
 
-  <!-- ===== 2. Install ===== -->
-  <h2 id="install">2. Chrome 扩展程序的安装方法</h2>
-  <p>本扩展程序已经过 Google 审核，可从 <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a> 安装。</p>
-  <p>请按照以下步骤将「がぞうみまもり」添加到 Chrome。</p>
+  <!-- ===== 2. インストール ===== -->
+  <h2 id="install">2. Cách cài đặt tiện ích mở rộng Chrome</h2>
+  <p>Tiện ích mở rộng này đã được Google xem xét. Bạn có thể thêm tiện ích vào Chrome từ <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a>.</p>
+  <p>Hãy làm theo các bước dưới đây để thêm tiện ích mở rộng “がぞうみまもり” vào Chrome.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>在 Chrome 中打开 Chrome Web Store 的「がぞうみまもり」页面。</h3>
+        <h3>Truy cập trang “がぞうみまもり” trên Chrome Web Store từ Chrome.</h3>
         <p>
-          打开 <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store 的「がぞうみまもり」页面</a>，然后点击“添加至 Chrome”。
+          Mở <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">trang “がぞうみまもり” trên Chrome Web Store</a> và nhấp vào “Add to Chrome”.
         </p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../assets/img/manual/001_manual_load_extension_ja.png"
-         alt="“添加至 Chrome”按钮的截图" />
+         alt="Ảnh chụp màn hình nút “Add to Chrome”" />
     </div>
-
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>出现确认窗口后，点击按钮继续安装。</h3>
-        <p>系统会显示确认窗口。请点击按钮继续安装。</p>
+        <h3>Khi cửa sổ xác nhận xuất hiện, hãy nhấp vào nút “Proceed to install”.</h3>
+        <p>Khi cửa sổ xác nhận xuất hiện, hãy nhấp vào nút “Proceed to install”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../assets/img/manual/002_manual_load_extension_ja.png"
-         alt="继续安装按钮的截图" />
+         alt="Ảnh chụp màn hình nút “Proceed to install”" />
     </div>
-
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>出现下一个确认窗口后，点击“添加扩展程序”。</h3>
-        <p>确认权限提示后，点击“添加扩展程序”。</p>
+        <h3>Khi cửa sổ xác nhận xuất hiện, hãy nhấp vào nút “Add extension”.</h3>
+        <p>Khi cửa sổ xác nhận xuất hiện, hãy nhấp vào nút “Add extension”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../assets/img/manual/003_manual_load_extension_ja.png"
-         alt="“添加扩展程序”按钮的截图" />
+         alt="Ảnh chụp màn hình nút “Add extension”" />
     </div>
-
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>确认 Chrome 显示「がぞうみまもり」已添加的提示。</h3>
-        <p>屏幕右上方会显示「がぞうみまもり | Xセンシティブ画像フィルター」已添加到 Chrome 的提示。</p>
+        <h3>Thông báo “がぞうみまもり đã được thêm” sẽ xuất hiện ở phía trên bên phải màn hình.</h3>
+        <p>Ở phía trên bên phải màn hình sẽ hiển thị thông báo “がぞうみまもり | Xセンシティブ画像フィルター đã được thêm vào Chrome”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../assets/img/manual/004_manual_load_extension_ja.png"
-         alt="显示「がぞうみまもり」已添加提示的截图" />
+         alt="Ảnh chụp màn hình thông báo がぞうみまもり đã được thêm" />
     </div>
-
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h3>打开右上角的扩展程序菜单，并固定「がぞうみまもり」。</h3>
-        <p>点击右上角的扩展程序按钮，然后点击「がぞうみまもり」旁的固定图钉，让图标显示在 Chrome 中。</p>
+        <h3>Nhấp vào nút ở phía trên bên phải màn hình, sau đó nhấp vào ghim của “がぞうみまもり”.</h3>
+        <p>Nhấp vào nút ở phía trên bên phải màn hình, rồi nhấp vào ghim của “がぞうみまもり” để hiển thị biểu tượng “がぞうみまもり” trên Chrome.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../assets/img/manual/005_manual_load_extension_ja.png"
-         alt="固定「がぞうみまもり」的操作截图" />
+         alt="Ảnh chụp màn hình thao tác nhấp vào ghim của がぞうみまもり" />
     </div>
-
     <div class="step">
       <div class="step-num">6</div>
       <div class="step-body">
-        <h3>确认 Chrome 中显示了「がぞうみまもり」图标。</h3>
-        <p>图标显示在 Chrome 中后，本扩展程序即可开始使用。</p>
+        <h3>Xác nhận rằng biểu tượng “がぞうみまもり” đã hiển thị trên Chrome.</h3>
+        <p>Xác nhận rằng biểu tượng “がぞうみまもり” đã hiển thị trên Chrome.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
        <img src="../assets/img/manual/006_manual_load_extension_ja.png"
-         alt="确认「がぞうみまもり」图标已显示的截图" />
+         alt="Ảnh chụp màn hình xác nhận biểu tượng がぞうみまもり đã hiển thị" />
     </div>
   </div>
 
 
-  <!-- ===== 3. Sensitivity ===== -->
-  <h2 id="sensitivity">3. 图片屏蔽灵敏度（阈值）</h2>
-  <p>本扩展程序会使用 AI 机器学习模型计算 0 到 100% 的分数，表示图片可能令人不适或含有露骨内容的程度。分数高于您设置的阈值时，该图片会被屏蔽。</p>
+  <!-- ===== 3. 感度 ===== -->
+  <h2 id="sensitivity">3. Về độ nhạy chặn hình ảnh (ngưỡng)</h2>
+  <p>Tiện ích mở rộng này sử dụng AI (mô hình máy học) để tính xác suất một hình ảnh là hình ảnh gây khó chịu hoặc có nội dung nhạy cảm thành điểm số (0–100%). Hình ảnh có điểm số vượt quá ngưỡng đã cài đặt sẽ bị chặn.</p>
 
   <div class="info-grid">
     <div class="info-card">
-      <div class="label">默认设置</div>
+      <div class="label">Cài đặt ban đầu (giá trị mặc định)</div>
       <div class="value">30%</div>
-      <p>安装后，阈值默认设为 <strong>30%（严格模式）</strong>。该设置也可能屏蔽泳装或暴露度较高的图片。</p>
+      <p>Ngay sau khi cài đặt, ngưỡng là <strong>30% (chế độ nghiêm ngặt)</strong>. Cài đặt này cũng chặn hình ảnh đồ bơi và hình ảnh hở nhiều.</p>
     </div>
     <div class="info-card">
-      <div class="label">如何理解分数</div>
-      <div class="value">0 to 100%</div>
-      <p>这是 AI 计算出的图片可能令人不适或含有露骨内容的概率。分数越高，图片越可能被屏蔽。</p>
+      <div class="label">Cách đọc điểm số</div>
+      <div class="value">0–100%</div>
+      <p>Đây là xác suất hình ảnh gây khó chịu hoặc có nội dung nhạy cảm do AI tính toán. Điểm số càng cao thì khả năng hình ảnh bị chặn càng lớn.</p>
     </div>
   </div>
 
   <div class="sens-bar-wrap">
     <div class="sens-labels">
-      <span>🔴 严格（0%）</span>
-      <span>🟡 平衡（50%）</span>
-      <span>🟢 宽松（100%）</span>
+      <span>🔴 Nghiêm ngặt (0%)</span>
+      <span>🟡 Cân bằng (50%)</span>
+      <span>🟢 Nới lỏng (100%)</span>
     </div>
     <div class="sens-bar">
       <div class="marker" style="left: 50%;"></div>
@@ -653,136 +648,142 @@
 
   <table>
     <tr>
-      <th>模式</th>
-      <th>阈值参考</th>
-      <th>效果</th>
+      <th>Chế độ</th>
+      <th>Ngưỡng tham khảo</th>
+      <th>Đặc điểm</th>
     </tr>
     <tr>
-      <td><span class="tag tag-red">严格</span></td>
-      <td>0 to 40%</td>
-      <td>会屏蔽更多图片，包括泳装或暴露度较高的图片。适合希望过滤更强时使用。</td>
+      <td><span class="tag tag-red">Nghiêm ngặt</span></td>
+      <td>0〜40%</td>
+      <td>Cũng chặn hình ảnh đồ bơi và hình ảnh hở nhiều. Dùng khi bạn muốn chặn nhiều hình ảnh hơn.</td>
     </tr>
     <tr>
-      <td><span class="tag tag-yellow">平衡</span></td>
-      <td>50%（标准）</td>
-      <td>标准设置。用于屏蔽明显令人不适或含有露骨内容的图片。</td>
+      <td><span class="tag tag-yellow">Cân bằng</span></td>
+      <td>50% (giá trị ban đầu)</td>
+      <td>Đây là cài đặt tiêu chuẩn. Chặn những hình ảnh rõ ràng gây khó chịu hoặc có nội dung nhạy cảm.</td>
     </tr>
     <tr>
-      <td><span class="tag tag-green">宽松</span></td>
-      <td>60 to 100%</td>
-      <td>仅屏蔽置信度较高的图片。适合希望减少误判时使用。</td>
+      <td><span class="tag tag-green">Nới lỏng</span></td>
+      <td>60–100%</td>
+      <td>Chỉ chặn những hình ảnh có độ tin cậy cao. Dùng khi bạn muốn giảm nhận diện nhầm.</td>
     </tr>
   </table>
 
   <div class="warn-box">
-    <p>⚠️ <strong>请注意：</strong>由于图片由 AI 自动判断，非不适或非露骨图片也可能被误屏蔽，也可能存在部分不适或露骨图片未被屏蔽的情况。请根据需要调整灵敏度滑块。</p>
+    <p>⚠️ <strong>Lưu ý:</strong> Vì hình ảnh được AI tự động đánh giá, hình ảnh không gây khó chịu hoặc không có nội dung nhạy cảm có thể bị chặn (nhận diện nhầm), hoặc hình ảnh gây khó chịu hay có nội dung nhạy cảm có thể không bị chặn. Hãy điều chỉnh thanh trượt độ nhạy cho phù hợp với nhu cầu của bạn.</p>
   </div>
 
 
-  <!-- ===== 4. Slider ===== -->
-  <h2 id="slider">4. 使用滑块调整灵敏度</h2>
-  <p>点击浏览器右上角的扩展程序图标，即可打开灵敏度设置面板。</p>
+  <!-- ===== 4. スライダー ===== -->
+  <h2 id="slider">4. Thay đổi độ nhạy bằng thanh trượt</h2>
+  <p>Nhấp vào biểu tượng tiện ích mở rộng ở phía trên bên phải trình duyệt để mở bảng cài đặt độ nhạy.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>点击扩展程序图标</h3>
-        <p>点击 Chrome 右上角地址栏旁的 <strong>🛡️ 盾牌图标</strong>。如有需要，可从拼图图标（🧩）中固定本扩展程序，以便快速访问。</p>
+        <h3>Nhấp vào biểu tượng tiện ích mở rộng</h3>
+        <p>Nhấp vào <strong>🛡️ biểu tượng hình khiên</strong> bên cạnh thanh địa chỉ ở phía trên bên phải trình duyệt Chrome. Bạn có thể ghim tiện ích từ biểu tượng câu đố (🧩) để truy cập nhanh.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>确认“Filtering”开关</h3>
-        <p>请确认面板顶部的 <strong>“Filtering”</strong> 开关处于 <span class="tag tag-blue">开启（蓝色）</span> 状态。如果关闭，图片不会被屏蔽。</p>
+        <h3>Kiểm tra nút chuyển “Filtering”</h3>
+        <p>Hãy đảm bảo nút chuyển <strong>“Filtering”</strong> ở đầu bảng đang ở trạng thái <span class="tag tag-blue">on (màu xanh)</span>. Khi tắt, hình ảnh sẽ không bị chặn.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>选择 “Display language”</h3>
-        <p>Display language 可切换弹出窗口和图片屏蔽提示的显示语言。选项为 “Auto”、“Japanese” 和 “English”。选择 Auto 时，如果 PC（电脑）和 Chrome UI 语言均为日语，则显示日语；其他情况则显示英语。</p>
+        <h3>Chọn “Display language”</h3>
+        <p>“Display language” cho phép bạn chuyển đổi ngôn ngữ hiển thị của cửa sổ bật lên và thông báo khi hình ảnh bị chặn. Các lựa chọn là “Auto”, “Japanese” và “English”. Khi chọn “Auto”, tiện ích sử dụng tiếng Nhật nếu cả ngôn ngữ hiển thị của máy tính và Chrome đều là tiếng Nhật; trong các trường hợp khác, tiện ích sử dụng tiếng Anh.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>左右移动滑块来设置灵敏度</h3>
-        <p>拖动 “Sensitivity” 滑块。向 <strong>左侧（严格）</strong> 移动会屏蔽更多图片；向 <strong>右侧（宽松）</strong> 移动则更不容易屏蔽图片。</p>
+        <h3>Di chuyển thanh trượt sang trái hoặc phải để cài đặt độ nhạy</h3>
+        <p>Kéo thanh trượt “Sensitivity” sang trái hoặc phải. Càng kéo về <strong>bên trái (strict)</strong>, càng nhiều hình ảnh bị chặn. Càng kéo về <strong>bên phải (gentle)</strong>, hình ảnh càng ít có khả năng bị chặn.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h3>确认面板显示 “Active”</h3>
-        <p>如果面板底部显示 <span class="tag tag-green">● Active</span>，表示设置已启用。请重新加载 X 页面，以应用新的灵敏度。</p>
+        <h3>Xác nhận bảng hiển thị “Active”</h3>
+        <p>Nếu phía dưới bảng hiển thị <span class="tag tag-green">● Active</span>, cài đặt đang có hiệu lực. Tải lại trang X để áp dụng độ nhạy mới.</p>
       </div>
     </div>
   </div>
 
   <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;">
-    <img src="../assets/img/manual/013_manual_popup_settings_select_en.png"
-         alt="弹出窗口中的显示语言选择器截图" />
+    <img src="../assets/img/manual/007_manual_popup_settings_select_auto.png"
+         alt="Cửa sổ bật lên với Display language được đặt thành Auto" />
   </div>
-  <p class="screenshot-caption">▲ 弹出窗口中的 Display language 选择器</p>
+  <p class="screenshot-caption">▲ Display language đang ở trạng thái “Auto”</p>
 
   <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;">
-    <img src="../assets/img/manual/014_manual_popup_settings_select_en.png"
-         alt="在显示语言菜单中选择 English 的截图" />
+    <img src="../assets/img/manual/008_manual_popup_settings_select_ja.png"
+         alt="Màn hình chuyển Display language sang Japanese" />
   </div>
-  <p class="screenshot-caption">▲ 在 Display language 菜单中选择 English</p>
+  <p class="screenshot-caption">▲ Ví dụ chọn “Japanese” từ các lựa chọn Display language</p>
 
   <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;">
-    <img src="../assets/img/manual/015_manual_popup_settings_en.png"
-         alt="Gazou Mimamori 弹出设置画面" />
+    <img src="../assets/img/manual/009_manual_popup_settings_ja.png"
+         alt="Màn hình cài đặt cửa sổ bật lên của がぞうみまもり" />
   </div>
-  <p class="screenshot-caption">▲ 英语显示的弹出设置画面，严格模式 30%</p>
+  <p class="screenshot-caption">▲ Màn hình cài đặt cửa sổ bật lên bằng tiếng Nhật</p>
+
+  <div class="screenshot-frame" style="max-width: 520px; margin: 24px auto 6px;">
+    <img src="../assets/img/manual/010_manual_sensitivity_adjust_filter_x_block_images_ja.png"
+         alt="Cửa sổ bật lên để điều chỉnh Filtering và Sensitivity" />
+  </div>
+  <p class="screenshot-caption">▲ Ví dụ hiển thị Filtering và Sensitivity (strict, 30%)</p>
 
 
   <!-- ===== 5. DM ===== -->
-  <h2 id="dm">5. X 私信中图片被屏蔽的示例</h2>
-  <p>当 X 私信中的图片被判断为可能令人不适或含有露骨内容时，会像下方示例一样被深色遮罩替换。</p>
+  <h2 id="dm">5. Ví dụ hình ảnh bị chặn trong DM của X</h2>
+  <p>Hình ảnh trong tin nhắn trực tiếp (DM) của X bị đánh giá là gây khó chịu hoặc có nội dung nhạy cảm sẽ được thay thế bằng lớp phủ tối như ví dụ dưới đây.</p>
 
   <div class="screenshot-frame">
-    <img src="../assets/img/manual/016_manual_x_dm_blocked_images_example_en.png"
-         alt="X 私信中图片被屏蔽状态的截图" />
+    <img src="../assets/img/manual/011_manual_x_dm_blocked_images_example_ja.png"
+         alt="Ảnh chụp màn hình hình ảnh bị chặn trong DM của X" />
   </div>
-  <p class="screenshot-caption">▲ 私信界面中的图片屏蔽示例（分数：46.2%）</p>
+  <p class="screenshot-caption">▲ Ví dụ hình ảnh bị chặn trong màn hình DM (điểm số: 46.2%)</p>
 
   <div class="tip-box">
-    <p>💡 <strong>显示内容：</strong>英语显示时，在被屏蔽的图片上，本扩展程序会显示 “🚫 Sensitive image” 以及 AI 计算出的分数。该分数表示图片超过所选灵敏度阈值的程度。</p>
+    <p>💡 <strong>Nội dung hiển thị:</strong> Trên hình ảnh bị chặn sẽ hiển thị “🚫 Sensitive image” và điểm số do AI tính toán. Điểm số cho biết mức độ hình ảnh vượt quá ngưỡng độ nhạy đã cài đặt.</p>
   </div>
 
 
-  <!-- ===== 6. Timeline ===== -->
-  <h2 id="timeline">6. X 时间线中图片被屏蔽的示例</h2>
-  <p>被判断为可能令人不适或含有露骨内容的图片，也会在 X 时间线、搜索结果等图片区域中被屏蔽。</p>
+  <!-- ===== 6. タイムライン ===== -->
+  <h2 id="timeline">6. Ví dụ hình ảnh bị chặn trên dòng thời gian X</h2>
+  <p>Những hình ảnh bị đánh giá là gây khó chịu hoặc có nội dung nhạy cảm cũng sẽ bị chặn tương tự trên dòng thời gian và kết quả tìm kiếm của X.</p>
 
   <div class="screenshot-frame">
-    <img src="../assets/img/manual/017_manual_x_timeline_blocked_images_example_en.png"
-         alt="X 时间线中图片被屏蔽状态的截图" />
+    <img src="../assets/img/manual/012_manual_x_timeline_blocked_images_example_ja.png"
+         alt="Ảnh chụp màn hình hình ảnh bị chặn trên dòng thời gian X" />
   </div>
-  <p class="screenshot-caption">▲ 时间线搜索结果中的图片屏蔽示例（分数：50.4%）</p>
+  <p class="screenshot-caption">▲ Ví dụ hình ảnh bị chặn trong dòng thời gian (kết quả tìm kiếm) (điểm số: 73.5%)</p>
 
   <div class="tip-box">
-    <p>💡 <strong>支持区域：</strong>本扩展程序适用于 X 上的各类图片显示区域，包括主页时间线、搜索结果、个人资料的媒体标签页和私信。</p>
+    <p>💡 <strong>Khu vực được hỗ trợ:</strong> Tiện ích hoạt động trên mọi khu vực hiển thị hình ảnh của X, bao gồm dòng thời gian trang chủ, kết quả tìm kiếm, các tab phương tiện trên hồ sơ và DM.</p>
   </div>
 
 
-  <!-- ===== 7. Show image ===== -->
-  <h2 id="show-image">7. 如何显示被屏蔽的图片</h2>
-  <p>即使图片被屏蔽，您也可以在需要时逐张选择显示。</p>
+  <!-- ===== 7. 画像のブロック解除 ===== -->
+  <h2 id="show-image">7. Cách hiển thị hình ảnh bị chặn</h2>
+  <p>Ngay cả khi hình ảnh bị chặn, bạn vẫn có thể chọn hiển thị từng hình ảnh khi cần.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>找到 “Click to show” 按钮</h3>
-        <p>被判断为可能令人不适或含有露骨内容的图片遮罩中央，会显示如下按钮。</p>
+        <h3>Tìm nút “Click to show”</h3>
+        <p>Một nút như dưới đây sẽ xuất hiện ở giữa lớp phủ trên hình ảnh bị đánh giá là gây khó chịu hoặc có nội dung nhạy cảm.</p>
         <div class="demo-btn-wrap">
           <span class="demo-btn demo-btn-outline">Click to show</span>
-          <span style="font-size: 13px; color: #718096;">或</span>
+          <span style="font-size: 13px; color: #718096;">or</span>
           <span class="demo-btn demo-btn-fill">Click to show</span>
         </div>
       </div>
@@ -790,32 +791,32 @@
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>点击 “Click to show” 按钮</h3>
-        <p>点击该按钮后，当前图片的屏蔽会被解除，并显示原始图片。其他图片不会受到影响。</p>
+        <h3>Nhấp vào nút “Click to show”</h3>
+        <p>Nhấp vào nút sẽ bỏ chặn hình ảnh đó và hiển thị hình ảnh gốc. Các hình ảnh khác không bị ảnh hưởng.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>重新加载页面后会重新应用屏蔽</h3>
-        <p>“Click to show” 只是临时显示。重新加载页面后，如果同一图片仍超过阈值，将再次被屏蔽。</p>
+        <h3>Tải lại trang sẽ áp dụng lại việc chặn</h3>
+        <p>“Click to show” chỉ bỏ chặn tạm thời. Khi tải lại trang, hình ảnh đó sẽ bị chặn lại.</p>
       </div>
     </div>
   </div>
 
   <div class="warn-box">
-    <p>⚠️ <strong>如果遇到误判：</strong>如果某张图片反复被错误屏蔽，请将灵敏度滑块调向“宽松”，以降低被屏蔽的可能性。→ <a href="#slider">滑块调整方法（第 4 节）</a></p>
+    <p>⚠️ <strong>Nếu bạn nhận thấy nhận diện nhầm:</strong> Nếu một hình ảnh cụ thể liên tục bị chặn nhầm, hãy điều chỉnh thanh trượt độ nhạy về phía “gentle” để hình ảnh ít có khả năng bị chặn hơn. → <a href="#slider">Cách điều chỉnh thanh trượt (Mục 4)</a></p>
   </div>
 
-  <!-- ===== 8. Contact ===== -->
-  <h2 id="inquiry">8. 联系方式</h2>
-  <p>如您对本扩展程序有任何问题、反馈或意见，请使用隐私政策页面中的联系方式。</p>
-  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 联系方式</a></p>
+  <!-- ===== 8. 本拡張機能に関するお問い合わせ先 ===== -->
+  <h2 id="inquiry">8. Liên hệ về tiện ích mở rộng này</h2>
+  <p>Nếu bạn có câu hỏi, ý kiến hoặc phản hồi về tiện ích mở rộng này, vui lòng liên hệ theo thông tin trong mục “Liên hệ” trên trang Chính sách quyền riêng tư.</p>
+  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 Liên hệ</a></p>
 
   <!-- ===== BACK LINK & FOOTER ===== -->
-  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← 查看隐私政策</a>
+  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← Xem Chính sách quyền riêng tư</a>
   <br>
-  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← 查看 GitHub 仓库</a>
+  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← Xem kho lưu trữ GitHub của tiện ích</a>
 
   <div class="footer">
     <p>&copy; がぞうみまもり 2026 青木直之 (@na0AaooQ) All Rights Reserved.</p>
@@ -823,8 +824,8 @@
 
 </div>
 <div class="image-modal" id="imageModal" hidden>
-  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="图片放大视图">
-    <button type="button" class="image-modal__close" aria-label="关闭放大图片">×</button>
+  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="Xem hình ảnh phóng to">
+    <button type="button" class="image-modal__close" aria-label="Đóng hình ảnh phóng to">×</button>
     <img class="image-modal__image" alt="" />
   </div>
 </div>
@@ -857,12 +858,12 @@
     };
 
     manualImages.forEach((image) => {
-      const imageAlt = image.getAttribute('alt') || '图片';
+      const imageAlt = image.getAttribute('alt') || 'hình ảnh';
 
       image.classList.add('manual-zoomable-image');
       image.tabIndex = 0;
       image.setAttribute('role', 'button');
-      image.setAttribute('aria-label', imageAlt + '的放大视图');
+      image.setAttribute('aria-label', `${imageAlt} để xem phóng to`);
       image.addEventListener('click', () => openModal(image));
       image.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
