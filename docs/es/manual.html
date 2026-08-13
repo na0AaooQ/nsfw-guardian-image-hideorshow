@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Manual | Gazou Mimamori</title>
-  <meta name="description" content="User manual for Gazou Mimamori | Sensitive image filter for X, a Chrome extension that detects and blocks sensitive images on X while processing images locally in your browser.">
-  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
+  <title>Manual de uso | がぞうみまもり</title>
+  <meta name="description" content="Manual de uso de la extensión de Chrome “がぞうみまもり | Filtro de imágenes sensibles para X”. Explica cómo instalarla, ajustar la sensibilidad y mostrar imágenes bloqueadas.">
+  <link rel="canonical" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/es/manual.html">
   <link rel="alternate" hreflang="ja" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html">
   <link rel="alternate" hreflang="en" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html">
   <link rel="alternate" hreflang="es" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/es/manual.html">
@@ -489,18 +489,20 @@
       .language-switch { justify-content: center; margin: -8px 0 24px; }
       h1 { font-size: 22px; }
       h2 { font-size: 16px; }
+      table { table-layout: fixed; width: 100%; }
+      th, td { overflow-wrap: anywhere; word-break: break-word; }
     }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <nav class="language-switch" aria-label="Language switcher">
-    <span class="language-switch__label">Language</span>
-    <select aria-label="Select language" onchange="if (this.value) window.location.href = this.value;">
+  <nav class="language-switch" aria-label="Selector de idioma">
+    <span class="language-switch__label">Idioma de visualización</span>
+    <select aria-label="Seleccionar idioma" onchange="if (this.value) window.location.href = this.value;">
       <option value="../manual.html">日本語</option>
-      <option value="./manual.html" selected>English</option>
-      <option value="./es/manual.html">Español</option>
+      <option value="../en/manual.html">English</option>
+      <option value="./manual.html" selected>Español</option>
       <option value="../hi/manual.html">हिन्दी</option>
       <option value="../ko/manual.html">한국어</option>
       <option value="../zh-Hans/manual.html">简体中文</option>
@@ -511,322 +513,196 @@
     </select>
   </nav>
 
-  <!-- ===== HEADER ===== -->
   <div class="header">
-    <div class="product-name">🛡️ Gazou Mimamori | Sensitive image filter for X</div>
-    <h1>User Manual</h1>
-    <div class="updated">Last updated: July 2, 2026 / Supported version: v2.2.0</div>
+    <div class="product-name">🛡️ がぞうみまもり | Xセンシティブ画像フィルター</div>
+    <h1>Manual de uso</h1>
+    <div class="updated">Última actualización: 2 de julio de 2026 / Versión compatible: v2.2.0</div>
   </div>
 
-  <!-- ===== SUMMARY ===== -->
   <div class="summary-box">
-    <p>📌 This Google Chrome extension never sends your image data or personal information to any external server. All processing is completed inside your browser. The extension is free to use.</p>
+    <p>📌 Esta extensión de Google Chrome no envía sus datos de imagen ni su información personal a ningún servidor externo. Todo el procesamiento se completa únicamente dentro de su navegador. Esta función es gratuita.</p>
   </div>
 
-  <!-- ===== TOC ===== -->
-  <h2>Table of Contents</h2>
+  <h2>Contenido</h2>
   <ul>
-    <li><a href="#introduction">1. Introduction</a></li>
-    <li><a href="#install">2. How to Install the Chrome Extension</a></li>
-    <li><a href="#sensitivity">3. Image Blocking Sensitivity Threshold</a></li>
-    <li><a href="#slider">4. Change Sensitivity with the Slider</a></li>
-    <li><a href="#dm">5. Example: Blocked Images in X Direct Messages</a></li>
-    <li><a href="#timeline">6. Example: Blocked Images in the X Timeline</a></li>
-    <li><a href="#show-image">7. How to Show a Blocked Image</a></li>
-    <li><a href="#inquiry">8. Contact</a></li>
+    <li><a href="#introduction">1. Introducción</a></li>
+    <li><a href="#install">2. Cómo instalar la extensión de Chrome</a></li>
+    <li><a href="#sensitivity">3. Umbral de sensibilidad para bloquear imágenes</a></li>
+    <li><a href="#slider">4. Cambiar la sensibilidad con el control deslizante</a></li>
+    <li><a href="#dm">5. Ejemplo de imágenes bloqueadas en los mensajes directos de X</a></li>
+    <li><a href="#timeline">6. Ejemplo de imágenes bloqueadas en la cronología de X</a></li>
+    <li><a href="#show-image">7. Cómo mostrar una imagen bloqueada</a></li>
+    <li><a href="#inquiry">8. Contacto sobre esta extensión</a></li>
   </ul>
 
-  <!-- ===== 1. Introduction ===== -->
-  <h2 id="introduction">1. Introduction</h2>
-  <p>“Gazou Mimamori | Sensitive image filter for X” (the “Extension”) is a Chrome extension that automatically detects and blocks uncomfortable or explicit images displayed in your X (formerly Twitter) timeline and direct messages.</p>
-  <p>This page explains how to use the Extension.</p>
-  <p>For an overview of the Extension, please see the <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 Gazou Mimamori overview PDF</a>.</p>
-  <p>For details about how information is handled, please see the <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 Privacy Policy</a>.</p>
+  <h2 id="introduction">1. Introducción</h2>
+  <p>“がぞうみまもり | Xセンシティブ画像フィルター” (en adelante, “esta extensión”) es una extensión de Chrome que detecta y bloquea automáticamente las imágenes desagradables o explícitas que aparecen en la cronología y en los mensajes directos (DM) de X (antes Twitter).</p>
+  <p>Esta página explica qué información trata la extensión y cómo la gestiona.</p>
+  <p>Para consultar una descripción general de sus funciones, consulte el <a href="../gazou_mimamori_overview.pdf" target="_blank" rel="noopener">📖 PDF de presentación de がぞうみまもり</a>.</p>
+  <p>Para obtener información sobre el tratamiento de datos, consulte la <a href="./privacy-policy.html" target="_blank" rel="noopener">📖 Política de privacidad</a>.</p>
 
-  <!-- ===== 2. Install ===== -->
-  <h2 id="install">2. How to Install the Chrome Extension</h2>
-  <p>The Extension has been reviewed by Google and is available from the <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a>.</p>
-  <p>Please follow the steps below to add “Gazou Mimamori” to Chrome.</p>
+  <h2 id="install">2. Cómo instalar la extensión de Chrome</h2>
+  <p>Esta extensión ha sido revisada por Google. Puede añadirla a Chrome desde la <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store</a>.</p>
+  <p>Siga estos pasos para añadir “がぞうみまもり” a Chrome.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-body">
-        <h3>Open the “Gazou Mimamori” page in the Chrome Web Store from Chrome.</h3>
-        <p>
-          Open the <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">“Gazou Mimamori” page in the Chrome Web Store</a>, then click “Add to Chrome”.
-        </p>
+        <h3>Abra desde Chrome la página de “がぞうみまもり” en Chrome Web Store.</h3>
+        <p>Abra la <a href="https://chromewebstore.google.com/detail/hcegagndgkhkghagpahffblnljmfcpbj?utm_source=item-share-cb" target="_blank" rel="noopener">página de “がぞうみまもり” en Chrome Web Store</a> y haga clic en “Chrome に追加”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="../assets/img/manual/001_manual_load_extension_ja.png"
-         alt="Screenshot of the Add to Chrome button" />
+       <img src="../assets/img/manual/001_manual_load_extension_ja.png" alt="Captura de pantalla de “Chrome に追加”" />
     </div>
 
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>When the confirmation window appears, click the button to continue installation.</h3>
-        <p>A confirmation window will be shown. Click the button to proceed with installation.</p>
+        <h3>Cuando aparezca la ventana de confirmación, haga clic en “インストールに進む”.</h3>
+        <p>Cuando aparezca la ventana de confirmación, haga clic en el botón “インストールに進む”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="../assets/img/manual/002_manual_load_extension_ja.png"
-         alt="Screenshot of the continue installation button" />
+       <img src="../assets/img/manual/002_manual_load_extension_ja.png" alt="Captura de pantalla de “インストールに進む”" />
     </div>
 
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>When the next confirmation window appears, click “Add extension”.</h3>
-        <p>Confirm the permission prompt and click “Add extension”.</p>
+        <h3>Cuando aparezca la siguiente ventana de confirmación, haga clic en “拡張機能を追加”.</h3>
+        <p>Cuando aparezca la ventana de confirmación, haga clic en el botón “拡張機能を追加”.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="../assets/img/manual/003_manual_load_extension_ja.png"
-         alt="Screenshot of the Add extension button" />
+       <img src="../assets/img/manual/003_manual_load_extension_ja.png" alt="Captura de pantalla del botón “拡張機能を追加”" />
     </div>
 
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-body">
-        <h3>Confirm that Chrome shows a message saying Gazou Mimamori has been added.</h3>
-        <p>A message will appear in the top-right area of the screen indicating that “Gazou Mimamori | Sensitive image filter for X” has been added to Chrome.</p>
+        <h3>Compruebe que Chrome muestre el mensaje de que “がぞうみまもり” se ha añadido.</h3>
+        <p>En la parte superior derecha de la pantalla aparecerá un mensaje que indica que “がぞうみまもり | Xセンシティブ画像フィルター” se ha añadido a Chrome.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="../assets/img/manual/004_manual_load_extension_ja.png"
-         alt="Screenshot of the message showing Gazou Mimamori was added" />
+       <img src="../assets/img/manual/004_manual_load_extension_ja.png" alt="Captura de pantalla del mensaje de que “がぞうみまもり” se ha añadido" />
     </div>
 
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-body">
-        <h3>Open the extensions menu at the top right and pin Gazou Mimamori.</h3>
-        <p>Click the extensions button in the top-right area, then click the pin for “Gazou Mimamori” so that its icon is visible in Chrome.</p>
+        <h3>Abra el menú de extensiones y fije “がぞうみまもり”.</h3>
+        <p>Haga clic en el botón de extensiones de la parte superior derecha y, a continuación, en el icono de fijar de “がぞうみまもり” para mostrar su icono en Chrome.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="../assets/img/manual/005_manual_load_extension_ja.png"
-         alt="Screenshot showing how to pin Gazou Mimamori" />
+       <img src="../assets/img/manual/005_manual_load_extension_ja.png" alt="Captura de pantalla de cómo fijar “がぞうみまもり”" />
     </div>
 
     <div class="step">
       <div class="step-num">6</div>
       <div class="step-body">
-        <h3>Confirm that the Gazou Mimamori icon is visible in Chrome.</h3>
-        <p>Once the icon is shown in Chrome, the Extension is ready to use.</p>
+        <h3>Compruebe que el icono de “がぞうみまもり” sea visible en Chrome.</h3>
+        <p>Cuando el icono aparezca en Chrome, la extensión estará lista para usarse.</p>
       </div>
     </div>
     <div class="screenshot-frame" style="max-width: 1800px; margin: 24px auto 6px;">
-       <img src="../assets/img/manual/006_manual_load_extension_ja.png"
-         alt="Screenshot confirming the Gazou Mimamori icon is visible" />
+       <img src="../assets/img/manual/006_manual_load_extension_ja.png" alt="Captura de pantalla que confirma que el icono de “がぞうみまもり” es visible" />
     </div>
   </div>
 
-
-  <!-- ===== 3. Sensitivity ===== -->
-  <h2 id="sensitivity">3. Image Blocking Sensitivity Threshold</h2>
-  <p>The Extension uses an AI machine-learning model to calculate a score from 0 to 100% that represents how likely an image is to be uncomfortable or explicit. Images whose score is higher than your selected threshold are blocked.</p>
+  <h2 id="sensitivity">3. Umbral de sensibilidad para bloquear imágenes</h2>
+  <p>Esta extensión utiliza un modelo de aprendizaje automático basado en IA para calcular, mediante una puntuación de 0 a 100 %, la probabilidad de que una imagen sea desagradable o explícita. Se bloquean las imágenes cuya puntuación supera el umbral configurado.</p>
 
   <div class="info-grid">
     <div class="info-card">
-      <div class="label">Default setting</div>
+      <div class="label">Configuración inicial</div>
       <div class="value">30%</div>
-      <p>Immediately after installation, the threshold is set to <strong>30% (strict mode)</strong>. This setting may also block images with swimwear or high exposure.</p>
+      <p>Inmediatamente después de instalar la extensión, el umbral es <strong>30 % (modo estricto)</strong>. Con esta configuración también se pueden bloquear imágenes de personas en traje de baño o con mucha piel expuesta.</p>
     </div>
     <div class="info-card">
-      <div class="label">How to read the score</div>
-      <div class="value">0 to 100%</div>
-      <p>This is the probability calculated by AI that an image may be uncomfortable or explicit. The higher the score, the more likely the image is to be blocked.</p>
+      <div class="label">Cómo interpretar la puntuación</div>
+      <div class="value">0 a 100%</div>
+      <p>Es la probabilidad calculada por la IA de que una imagen sea desagradable o explícita. Cuanto mayor sea la puntuación, más probable será que la imagen se bloquee.</p>
     </div>
   </div>
 
   <div class="sens-bar-wrap">
     <div class="sens-labels">
-      <span>🔴 Strict (0%)</span>
-      <span>🟡 Balanced (50%)</span>
-      <span>🟢 Gentle (100%)</span>
+      <span>🔴 Estricto (0%)</span>
+      <span>🟡 Equilibrado (50%)</span>
+      <span>🟢 Flexible (100%)</span>
     </div>
-    <div class="sens-bar">
-      <div class="marker" style="left: 50%;"></div>
-    </div>
+    <div class="sens-bar"><div class="marker" style="left: 50%;"></div></div>
   </div>
 
   <table>
-    <tr>
-      <th>Mode</th>
-      <th>Threshold guide</th>
-      <th>Behavior</th>
-    </tr>
-    <tr>
-      <td><span class="tag tag-red">Strict</span></td>
-      <td>0 to 40%</td>
-      <td>Blocks more images, including swimwear or images with high exposure. Use this when you want stronger filtering.</td>
-    </tr>
-    <tr>
-      <td><span class="tag tag-yellow">Balanced</span></td>
-      <td>50% (standard)</td>
-      <td>A standard setting that blocks images that are clearly uncomfortable or explicit.</td>
-    </tr>
-    <tr>
-      <td><span class="tag tag-green">Gentle</span></td>
-      <td>60 to 100%</td>
-      <td>Blocks only images with higher confidence. Use this if you want to reduce false positives.</td>
-    </tr>
+    <tr><th>Modo</th><th>Orientación del umbral</th><th>Características</th></tr>
+    <tr><td><span class="tag tag-red">Estricto</span></td><td>0 a 40%</td><td>Bloquea más imágenes, incluidas las de personas en traje de baño o con mucha piel expuesta. Úselo si desea bloquear más imágenes.</td></tr>
+    <tr><td><span class="tag tag-yellow">Equilibrado</span></td><td>50% (inicial)</td><td>Es la configuración estándar. Bloquea imágenes claramente desagradables o explícitas.</td></tr>
+    <tr><td><span class="tag tag-green">Flexible</span></td><td>60 a 100%</td><td>Solo bloquea imágenes con una mayor certeza. Úselo si desea reducir los falsos positivos.</td></tr>
   </table>
 
   <div class="warn-box">
-    <p>⚠️ <strong>Please note:</strong> Because images are judged automatically by AI, images that are not uncomfortable or explicit may be blocked by mistake, and some uncomfortable or explicit images may not be blocked. Please adjust the sensitivity slider to match your needs.</p>
+    <p>⚠️ <strong>Nota:</strong> Como la evaluación la realiza automáticamente una IA, algunas imágenes que no son desagradables ni explícitas pueden bloquearse por error (falsos positivos), y algunas imágenes desagradables o explícitas pueden no bloquearse. Ajuste el control deslizante de sensibilidad según sus necesidades.</p>
   </div>
 
-
-  <!-- ===== 4. Slider ===== -->
-  <h2 id="slider">4. Change Sensitivity with the Slider</h2>
-  <p>Click the extension icon in the top-right area of your browser to open the sensitivity settings panel.</p>
+  <h2 id="slider">4. Cambiar la sensibilidad con el control deslizante</h2>
+  <p>Haga clic en el icono de la extensión en la parte superior derecha del navegador para abrir el panel de configuración de sensibilidad.</p>
 
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <h3>Click the extension icon</h3>
-        <p>Click the <strong>🛡️ shield icon</strong> next to the address bar in the top-right area of Chrome. If needed, pin the Extension from the puzzle icon (🧩) so that you can access it quickly.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <h3>Check the “Filtering” toggle</h3>
-        <p>Make sure the <strong>“Filtering”</strong> toggle at the top of the panel is <span class="tag tag-blue">on (blue)</span>. If it is off, images will not be blocked.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <h3>Choose “Display language”</h3>
-        <p>Display language lets you switch the popup and blocked-image messages. The choices are “Auto,” “Japanese,” and “English.” When Auto is selected, the extension uses Japanese when both the PC and Chrome display languages are Japanese, and English otherwise.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <h3>Move the slider left or right to set sensitivity</h3>
-        <p>Drag the “Sensitivity” slider left or right. Moving it <strong>left (strict)</strong> blocks more images. Moving it <strong>right (gentle)</strong> makes images less likely to be blocked.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">5</div>
-      <div class="step-body">
-        <h3>Confirm that the panel says “Active”</h3>
-        <p>If <span class="tag tag-green">● Active</span> appears at the bottom of the panel, the setting is active. Reload the X page to apply the new sensitivity.</p>
-      </div>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Haga clic en el icono de la extensión</h3><p>Haga clic en el <strong>🛡️ icono de escudo</strong> situado junto a la barra de direcciones, en la parte superior derecha de Chrome. Si es necesario, fije la extensión desde el icono de rompecabezas (🧩) para acceder a ella rápidamente.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Compruebe el interruptor “Filtering”</h3><p>Compruebe que el interruptor <strong>“Filtering”</strong> de la parte superior del panel esté <span class="tag tag-blue">activado (azul)</span>. Si está desactivado, las imágenes no se bloquearán.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Seleccione “Display language”</h3><p>“Display language” permite cambiar los mensajes del panel emergente y de las imágenes bloqueadas. Las opciones disponibles en la extensión son “Auto”, “Japanese” y “English”. Al seleccionar “Auto”, la extensión muestra japonés cuando el idioma de visualización del ordenador y de Chrome es japonés, y muestra inglés en los demás casos.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Mueva el control deslizante para configurar la sensibilidad</h3><p>Arrastre el control deslizante “Sensitivity” hacia la izquierda o hacia la derecha. Cuanto más lo mueva hacia la <strong>izquierda (strict)</strong>, más imágenes se bloquearán. Cuanto más lo mueva hacia la <strong>derecha (gentle)</strong>, menos probable será que se bloqueen.</p></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Compruebe que el panel muestre “Active”</h3><p>Si en la parte inferior del panel aparece <span class="tag tag-green">● Active</span>, la configuración está activa. Recargue la página de X para aplicar la nueva sensibilidad.</p></div></div>
   </div>
 
-  <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;">
-    <img src="../assets/img/manual/013_manual_popup_settings_select_en.png"
-         alt="Display language selector in the popup" />
-  </div>
-  <p class="screenshot-caption">▲ Display language selector in the popup</p>
+  <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;"><img src="../assets/img/manual/007_manual_popup_settings_select_auto.png" alt="Panel emergente con Display language configurado como Auto" /></div>
+  <p class="screenshot-caption">▲ Display language en el estado “Auto”</p>
+  <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;"><img src="../assets/img/manual/008_manual_popup_settings_select_ja.png" alt="Pantalla para cambiar Display language a Japanese" /></div>
+  <p class="screenshot-caption">▲ Ejemplo de selección de “Japanese” en Display language</p>
+  <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;"><img src="../assets/img/manual/009_manual_popup_settings_ja.png" alt="Pantalla de configuración del panel emergente de がぞうみまもり" /></div>
+  <p class="screenshot-caption">▲ Pantalla de configuración del panel emergente en japonés</p>
+  <div class="screenshot-frame" style="max-width: 520px; margin: 24px auto 6px;"><img src="../assets/img/manual/010_manual_sensitivity_adjust_filter_x_block_images_ja.png" alt="Panel emergente para ajustar Filtering y Sensitivity" /></div>
+  <p class="screenshot-caption">▲ Ejemplo de Filtering y Sensitivity (strict, 30%)</p>
 
-  <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;">
-    <img src="../assets/img/manual/014_manual_popup_settings_select_en.png"
-         alt="Selecting English from the display language menu" />
-  </div>
-  <p class="screenshot-caption">▲ Selecting English from the display language menu</p>
+  <h2 id="dm">5. Ejemplo de imágenes bloqueadas en los mensajes directos de X</h2>
+  <p>Cuando una imagen de un mensaje directo (DM) de X se considera desagradable o explícita, se sustituye por una superposición oscura como en el ejemplo siguiente.</p>
+  <div class="screenshot-frame"><img src="../assets/img/manual/011_manual_x_dm_blocked_images_example_ja.png" alt="Captura de pantalla de una imagen bloqueada en un mensaje directo de X" /></div>
+  <p class="screenshot-caption">▲ Ejemplo de una imagen bloqueada en la pantalla de DM (puntuación: 46.2%)</p>
+  <div class="tip-box"><p>💡 <strong>Qué se muestra:</strong> Sobre la imagen bloqueada, la extensión muestra “🚫 Sensitive image” en la interfaz en inglés (o “🚫 不適切な画像” en la interfaz en japonés) y la puntuación calculada por la IA. La puntuación indica cuánto superó la imagen el umbral de sensibilidad configurado.</p></div>
 
-  <div class="screenshot-frame" style="max-width: 960px; margin: 24px auto 6px;">
-    <img src="../assets/img/manual/015_manual_popup_settings_en.png"
-         alt="Gazou Mimamori popup settings screen" />
-  </div>
-  <p class="screenshot-caption">▲ Popup settings screen in English, strict mode at 30%</p>
+  <h2 id="timeline">6. Ejemplo de imágenes bloqueadas en la cronología de X</h2>
+  <p>Las imágenes consideradas desagradables o explícitas también se bloquean en la cronología y en los resultados de búsqueda de X.</p>
+  <div class="screenshot-frame"><img src="../assets/img/manual/012_manual_x_timeline_blocked_images_example_ja.png" alt="Captura de pantalla de una imagen bloqueada en la cronología de X" /></div>
+  <p class="screenshot-caption">▲ Ejemplo de una imagen bloqueada en la cronología (resultado de búsqueda) (puntuación: 73.5%)</p>
+  <div class="tip-box"><p>💡 <strong>Áreas compatibles:</strong> La extensión funciona en las áreas de X donde se muestran imágenes, incluida la cronología de inicio, los resultados de búsqueda, las pestañas multimedia de los perfiles y los mensajes directos.</p></div>
 
-
-  <!-- ===== 5. DM ===== -->
-  <h2 id="dm">5. Example: Blocked Images in X Direct Messages</h2>
-  <p>When an image in an X direct message is judged to be uncomfortable or explicit, it is replaced with a dark overlay like the example below.</p>
-
-  <div class="screenshot-frame">
-    <img src="../assets/img/manual/016_manual_x_dm_blocked_images_example_en.png"
-         alt="Screenshot showing a blocked image in an X direct message" />
-  </div>
-  <p class="screenshot-caption">▲ Example blocked image in a DM screen (score: 46.2%)</p>
-
-  <div class="tip-box">
-    <p>💡 <strong>What you see:</strong> Over a blocked image, the Extension displays “🚫 Sensitive image” and the score calculated by AI. The score shows how far the image exceeded your selected sensitivity threshold.</p>
-  </div>
-
-
-  <!-- ===== 6. Timeline ===== -->
-  <h2 id="timeline">6. Example: Blocked Images in the X Timeline</h2>
-  <p>Images judged to be uncomfortable or explicit are also blocked in the X timeline, search results, and other image areas.</p>
-
-  <div class="screenshot-frame">
-    <img src="../assets/img/manual/017_manual_x_timeline_blocked_images_example_en.png"
-         alt="Screenshot showing a blocked image in the X timeline" />
-  </div>
-  <p class="screenshot-caption">▲ Example blocked image in timeline search results (score: 50.4%)</p>
-
-  <div class="tip-box">
-    <p>💡 <strong>Supported areas:</strong> The Extension works across image areas on X, including the home timeline, search results, profile media tabs, and direct messages.</p>
-  </div>
-
-
-  <!-- ===== 7. Show image ===== -->
-  <h2 id="show-image">7. How to Show a Blocked Image</h2>
-  <p>Even when an image is blocked, you can choose to show it one image at a time when necessary.</p>
-
+  <h2 id="show-image">7. Cómo mostrar una imagen bloqueada</h2>
+  <p>Aunque una imagen esté bloqueada, puede elegir mostrarla individualmente cuando sea necesario.</p>
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <h3>Find the “Click to show” button</h3>
-        <p>A button like the one below appears in the center of the overlay on images judged to be uncomfortable or explicit.</p>
-        <div class="demo-btn-wrap">
-          <span class="demo-btn demo-btn-outline">Click to show</span>
-          <span style="font-size: 13px; color: #718096;">or</span>
-          <span class="demo-btn demo-btn-fill">Click to show</span>
-        </div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <h3>Click the “Click to show” button</h3>
-        <p>Clicking the button removes the block for that image and shows the original image. Other images are not affected.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <h3>Reloading the page reapplies the block</h3>
-        <p>“Click to show” is temporary. If you reload the page, the same image will be blocked again if it still exceeds the threshold.</p>
-      </div>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Busque el botón “Click to show”</h3><p>En el centro de la superposición de las imágenes consideradas desagradables o explícitas aparecerá un botón como el siguiente.</p><div class="demo-btn-wrap"><span class="demo-btn demo-btn-outline">Click to show</span><span style="font-size: 13px; color: #718096;">o</span><span class="demo-btn demo-btn-fill">Click to show</span></div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Haga clic en el botón “Click to show”</h3><p>Al hacer clic en el botón, se quita el bloqueo de esa imagen y se muestra la imagen original. Las demás imágenes no se ven afectadas.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Al recargar la página, el bloqueo se aplica de nuevo</h3><p>“Click to show” solo quita el bloqueo temporalmente. Al recargar la página, la misma imagen volverá a bloquearse.</p></div></div>
   </div>
+  <div class="warn-box"><p>⚠️ <strong>Si observa falsos positivos:</strong> Si una imagen concreta se bloquea repetidamente por error, mueva el control deslizante hacia “gentle” para que sea menos probable que se bloquee. → <a href="#slider">Cómo ajustar el control deslizante (sección 4)</a></p></div>
 
-  <div class="warn-box">
-    <p>⚠️ <strong>If you notice false positives:</strong> If a specific image is blocked repeatedly by mistake, move the sensitivity slider toward “Gentle” to make it less likely to be blocked. → <a href="#slider">How to adjust the slider (Section 4)</a></p>
-  </div>
+  <h2 id="inquiry">8. Contacto sobre esta extensión</h2>
+  <p>Si tiene preguntas, comentarios o sugerencias sobre esta extensión, utilice la información de contacto de la Política de privacidad.</p>
+  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 Contacto</a></p>
 
-  <!-- ===== 8. Contact ===== -->
-  <h2 id="inquiry">8. Contact</h2>
-  <p>If you have any questions, feedback, or comments about the Extension, please use the contact information on the Privacy Policy page.</p>
-  <p><a href="./privacy-policy.html#inquiry" target="_blank" rel="noopener">📖 Contact</a></p>
-
-  <!-- ===== BACK LINK & FOOTER ===== -->
-  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← View the Privacy Policy</a>
+  <a class="back-link" href="./privacy-policy.html" target="_blank" rel="noopener">← Ver la Política de privacidad</a>
   <br>
-  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← View the GitHub repository</a>
-
-  <div class="footer">
-    <p>&copy; Gazou Mimamori 2026 Naohisa Aoki (@na0AaooQ) All Rights Reserved.</p>
-  </div>
+  <a class="back-link" href="https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow" target="_blank" rel="noopener">← Ver el repositorio de GitHub de la extensión</a>
+  <div class="footer"><p>&copy; がぞうみまもり 2026 青木直之 (@na0AaooQ) All Rights Reserved.</p></div>
 
 </div>
 <div class="image-modal" id="imageModal" hidden>
-  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="Enlarged image view">
-    <button type="button" class="image-modal__close" aria-label="Close enlarged image">×</button>
+  <div class="image-modal__content" role="dialog" aria-modal="true" aria-label="Vista ampliada de la imagen">
+    <button type="button" class="image-modal__close" aria-label="Cerrar la imagen ampliada">×</button>
     <img class="image-modal__image" alt="" />
   </div>
 </div>
@@ -852,19 +728,15 @@
       document.body.classList.remove('image-modal-open');
       modalImage.removeAttribute('src');
       modalImage.alt = '';
-
-      if (lastFocusedImage) {
-        lastFocusedImage.focus();
-      }
+      if (lastFocusedImage) lastFocusedImage.focus();
     };
 
     manualImages.forEach((image) => {
-      const imageAlt = image.getAttribute('alt') || 'image';
-
+      const imageAlt = image.getAttribute('alt') || 'imagen';
       image.classList.add('manual-zoomable-image');
       image.tabIndex = 0;
       image.setAttribute('role', 'button');
-      image.setAttribute('aria-label', 'Open enlarged view for ' + imageAlt);
+      image.setAttribute('aria-label', imageAlt + ' para ver en tamaño ampliado');
       image.addEventListener('click', () => openModal(image));
       image.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
@@ -876,14 +748,10 @@
 
     closeButton.addEventListener('click', closeModal);
     modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        closeModal();
-      }
+      if (event.target === modal) closeModal();
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !modal.hidden) {
-        closeModal();
-      }
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
     });
   })();
 </script>
