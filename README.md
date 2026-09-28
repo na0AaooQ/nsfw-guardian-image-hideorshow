@@ -1,7 +1,7 @@
 # がぞうみまもり | Xセンシティブ画像フィルター (英語表記: Gazou Mimamori｜X Sensitive Image Filter)
 Google Chrome拡張機能「がぞうみまもり | Xセンシティブ画像フィルター」(英語表記: Gazou Mimamori | X Sensitive Image Filter)のソースコード管理リポジトリです。
 
-- GitHubリポジトリURL: [https://github.com/na0AaooQ/kotoba-uke-mimamori-for-x/](https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow)
+- GitHubリポジトリURL: [https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow](https://github.com/na0AaooQ/nsfw-guardian-image-hideorshow)
 
 [X（旧Twitter）](https://x.com/)のDM(ダイレクトメッセージ)やタイムライン上に流れてくるセンシティブ画像(不快な画像、過激な画像)をAI(TensorFlow x NSFWJS)で自動検出します。  
 
@@ -92,8 +92,8 @@ Google ChromeでX（旧Twitter）をご利用いただく方が、本拡張機�
 | [TensorFlow.js Layers](https://github.com/tensorflow/tfjs/tree/master/tfjs-layers) | 3.21.0 | Apache 2.0 | LayersModel読み込み |
 | [TensorFlow.js Converter](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter) | 3.21.0 | Apache 2.0 | GraphModel読み込み |
 | [NSFWJS](https://github.com/infinitered/nsfwjs) | 2.4.2 | MIT | NSFWモデル(MobileNet v2ベース) |
-| [Jest](https://jestjs.io/) | 29.x | MIT | ユニットテストフレームワーク |
-| [jest-environment-jsdom](https://github.com/jestjs/jest) | 29.x | MIT | JestのDOM環境シミュレーター |
+| [Jest](https://jestjs.io/) | 30.x | MIT | ユニットテストフレームワーク |
+| [jest-environment-jsdom](https://github.com/jestjs/jest) | 30.x | MIT | JestのDOM環境シミュレーター |
 | Node.js | 25.6.1 | MIT | 拡張機能の実装に利用 |
 
 ## ライセンスについて
