@@ -84,6 +84,17 @@
     .slider-labels { display: flex; justify-content: space-between; font-size: 10px; color: #536471; margin-top: 6px; }
     .level-desc { font-size: 11px; color: #8b98a5; margin-top: 10px; min-height: 14px; }
 
+    /* 操作マニュアルリンク */
+    .manual-link {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #1d9bf0;
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .manual-link:hover { color: #8ecdf8; text-decoration: underline; }
+    .manual-link:focus-visible { outline: 2px solid #1d9bf0; outline-offset: 2px; border-radius: 2px; }
+
     /* ステータス */
     .status-bar {
       display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -142,6 +153,15 @@
     </div>
     <div class="level-desc" id="levelDesc">水着・露出度の高い画像もブロックします</div>
   </div>
+
+  <a
+    class="manual-link"
+    id="manualLink"
+    href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-i18n="manualLink"
+  >操作マニュアルを見る ↗</a>
 
   <div class="status-bar">
     <div class="status-dot active" id="statusDot"></div>

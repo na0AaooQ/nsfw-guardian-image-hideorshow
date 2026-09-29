@@ -25,6 +25,7 @@ document.body.innerHTML = `
   <span  id="thresholdVal">30%</span>
   <span  class="level-badge" id="levelBadge">厳しめ</span>
   <div   id="levelDesc">説明</div>
+  <a id="manualLink" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html" data-i18n="manualLink">操作マニュアルを見る ↗</a>
   <div   class="status-dot active" id="statusDot"></div>
   <span  id="statusText" class="active">動作中</span>
   <div   id="toast"></div>
@@ -33,8 +34,11 @@ document.body.innerHTML = `
 // ② DOM 構築後に require する
 const {
   getLevelInfo, updateThresholdUI, updateStatusUI,
-  resolveLanguage, getPopupMessages, applyI18n
+  resolveLanguage, getPopupMessages, applyI18n, MANUAL_URLS
 } = require('../popup.js');
+
+const { readFileSync } = require('node:fs');
+const { join } = require('node:path');
 
 describe('language settings', () => {
   afterEach(() => {
@@ -66,23 +70,38 @@ describe('language settings', () => {
     expect(document.querySelector('[data-i18n="filtering"]').textContent).toBe('Filtering');
     expect(document.querySelector('[data-i18n="displayLanguage"]').textContent).toBe('Display language');
     expect(document.getElementById('statusText').textContent).toBe('Active');
+    expect(document.getElementById('manualLink').textContent).toBe('View the user manual ↗');
+    expect(document.getElementById('manualLink').href).toBe(MANUAL_URLS.en);
   });
 
   test('auto + ja環境で日本語表示になる', () => {
     chrome.i18n.getUILanguage.mockReturnValue('ja-JP');
     expect(resolveLanguage('auto')).toBe('ja');
     expect(getPopupMessages('auto').filtering).toBe('フィルタリング');
+    applyI18n('auto');
+    expect(document.getElementById('manualLink').href).toBe(MANUAL_URLS.ja);
   });
 
   test('auto + 非ja環境で英語表示になる', () => {
     chrome.i18n.getUILanguage.mockReturnValue('en-US');
     expect(resolveLanguage('auto')).toBe('en');
     expect(getPopupMessages('auto').filtering).toBe('Filtering');
+    applyI18n('auto');
+    expect(document.getElementById('manualLink').href).toBe(MANUAL_URLS.en);
   });
 
   test('未知の language 値でも安全にフォールバックする', () => {
     chrome.i18n.getUILanguage.mockReturnValue('en-US');
     expect(resolveLanguage('fr')).toBe('en');
+  });
+});
+
+describe('manual link markup', () => {
+  test('操作マニュアルリンクは安全な別タブリンクとして配置されている', () => {
+    const popupHtml = readFileSync(join(__dirname, '..', 'popup.html'), 'utf8');
+
+    expect(popupHtml).toMatch(/<a[\s\S]*?id="manualLink"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/);
+    expect(popupHtml).toContain(`href="${MANUAL_URLS.ja}"`);
   });
 });
 
