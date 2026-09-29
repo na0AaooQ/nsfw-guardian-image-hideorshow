@@ -102,6 +102,7 @@ describe('manual link markup', () => {
 
     expect(popupHtml).toMatch(/<a[\s\S]*?id="manualLink"[\s\S]*?target="_blank"[\s\S]*?rel="noopener noreferrer"/);
     expect(popupHtml).toContain(`href="${MANUAL_URLS.ja}"`);
+    expect(popupHtml).toMatch(/\.manual-link\s*\{[\s\S]*?font-size: 14px;[\s\S]*?font-weight: 600;[\s\S]*?text-decoration: underline;/);
   });
 });
 
