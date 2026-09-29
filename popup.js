@@ -7,6 +7,12 @@ const statusDot      = document.getElementById('statusDot');
 const statusText     = document.getElementById('statusText');
 const toast          = document.getElementById('toast');
 const languageSelect = document.getElementById('languageSelect');
+const manualLink     = document.getElementById('manualLink');
+
+const MANUAL_URLS = {
+  ja: 'https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html',
+  en: 'https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html'
+};
 
 const POPUP_MESSAGES = {
   ja: {
@@ -23,6 +29,7 @@ const POPUP_MESSAGES = {
     descStrict: '水着・露出度の高い画像もブロックします',
     descBalanced: '明らかにセンシティブな画像をブロックします',
     descLoose: '非常に露骨な画像のみブロックします',
+    manualLink: '操作マニュアルを見る ↗',
     active: '動作中',
     paused: '停止中',
     saved: '保存しました ✓'
@@ -41,6 +48,7 @@ const POPUP_MESSAGES = {
     descStrict: 'Blocks swimwear and highly revealing images as well',
     descBalanced: 'Blocks clearly sensitive images',
     descLoose: 'Blocks only very explicit images',
+    manualLink: 'View the user manual ↗',
     active: 'Active',
     paused: 'Paused',
     saved: 'Saved ✓'
@@ -92,6 +100,7 @@ function applyI18n(language = currentLanguage) {
   });
 
   if (languageSelect) languageSelect.value = currentLanguage;
+  if (manualLink) manualLink.href = MANUAL_URLS[resolvedLanguage];
   if (toast) toast.textContent = messages.saved;
   if (thresholdRange) updateThresholdUI(parseFloat(thresholdRange.value));
   if (enabledToggle) updateStatusUI(enabledToggle.checked);
@@ -210,6 +219,6 @@ function saveSettings() {
 if (typeof module !== 'undefined') {
   module.exports = {
     getLevelInfo, updateThresholdUI, updateStatusUI, showToast, saveSettings,
-    resolveLanguage, getPopupMessages, applyI18n
+    resolveLanguage, getPopupMessages, applyI18n, MANUAL_URLS
   };
 }

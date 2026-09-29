@@ -22,6 +22,7 @@ document.body.innerHTML = `
   <span  id="thresholdVal">65%</span>
   <span  class="level-badge" id="levelBadge">バランス</span>
   <div   id="levelDesc">説明</div>
+  <a id="manualLink" href="https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/manual.html" data-i18n="manualLink">操作マニュアルを見る ↗</a>
   <div   class="status-dot active" id="statusDot"></div>
   <span  id="statusText" class="active">動作中</span>
   <div   id="toast"></div>
@@ -239,6 +240,9 @@ describe('languageSelect change イベント', () => {
     expect(chrome.storage.sync.set).toHaveBeenCalledWith(
       expect.objectContaining({ language: 'en' }),
       expect.any(Function)
+    );
+    expect(document.getElementById('manualLink').href).toBe(
+      'https://na0aaooq.github.io/nsfw-guardian-image-hideorshow/en/manual.html'
     );
   });
 
