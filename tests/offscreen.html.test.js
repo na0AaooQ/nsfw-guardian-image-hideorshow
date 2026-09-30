@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 describe('offscreen.html script loading', () => {
   const rootDir = path.resolve(__dirname, '..');
