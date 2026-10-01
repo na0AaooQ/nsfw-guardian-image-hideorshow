@@ -9,6 +9,51 @@ let isEnabled = true;
 let currentLanguage = 'auto';
 const pendingRequests = new Map();
 let requestCounter = 0;
+const registeredRoots = new WeakSet();
+const retriedDmHosts = new WeakSet();
+const DM_HOST_SELECTOR = '[data-testid="xchatEmbedRoute"]';
+const DM_RETRY_TIMES = [0, 16, 50, 100, 250, 500, 1000, 2000];
+const SHADOW_STYLE_MARKER = 'data-nsfw-guardian-shadow-style';
+
+// Keep in sync with styles.css. Shadow DOM does not inherit the extension's
+// document-level stylesheet.
+const SHADOW_BLOCK_CSS = `
+.nsfw-guardian-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+  border: 2px solid #e94560;
+  border-radius: 12px;
+  box-sizing: border-box;
+  min-width: 120px;
+  min-height: 120px;
+  vertical-align: middle;
+  cursor: default;
+}
+.nsfw-guardian-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  text-align: center;
+}
+.nsfw-guardian-icon { font-size: 36px; }
+.nsfw-guardian-text { color: #e94560; font-size: 13px; font-weight: bold; font-family: sans-serif; }
+.nsfw-guardian-score { color: #888; font-size: 11px; font-family: sans-serif; }
+.nsfw-guardian-btn {
+  margin-top: 4px;
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  color: #e94560;
+  font-size: 11px;
+  cursor: pointer;
+}
+.nsfw-guardian-btn:hover { background: #e9456022; }
+`;
 
 const CONTENT_MESSAGES = {
   ja: {
@@ -59,9 +104,6 @@ chrome.storage.sync.get({ enabled: true, threshold: 0.3, language: 'auto' }, (it
   CONFIG.threshold = items.threshold;
   currentLanguage = normalizeLanguage(items.language);
   console.log('[NSFW Guardian] 設定読み込み完了:', items);
-  document.querySelectorAll('img').forEach((img) => {
-    checkImage(img);
-  });
   startObserver();
 });
 
@@ -112,6 +154,16 @@ function getBestImageUrl(imgElement) {
     if (bestUrl) return bestUrl;
   }
   return imgElement.src || null;
+}
+
+function hideImageWhileChecking(imgElement) {
+  const value = imgElement.style.getPropertyValue('visibility');
+  const priority = imgElement.style.getPropertyPriority('visibility');
+  imgElement.style.setProperty('visibility', 'hidden', 'important');
+  return () => {
+    if (value) imgElement.style.setProperty('visibility', value, priority);
+    else imgElement.style.removeProperty('visibility');
+  };
 }
 
 // blob: URL を canvas 経由で base64 に変換（content.js コンテキストなのでアクセス可能）
@@ -196,7 +248,7 @@ async function checkImage(imgElement) {
 
   // 判定が完了するまで画像を非表示にする（一瞬の表示を防ぐ）
   // visibility: hidden はレイアウト上のスペースを保持したまま視覚的に隠す
-  imgElement.style.visibility = 'hidden';
+  const restoreVisibility = hideImageWhileChecking(imgElement);
 
   // 画像ロード完了を待つ
   await new Promise(resolve => {
@@ -209,7 +261,7 @@ async function checkImage(imgElement) {
   const h = imgElement.naturalHeight;
   if (w < CONFIG.minImageSize || h < CONFIG.minImageSize) {
     // 小さい画像はスキップ → 表示を戻す
-    imgElement.style.visibility = '';
+    restoreVisibility();
     return;
   }
 
@@ -224,7 +276,7 @@ async function checkImage(imgElement) {
     } catch (e) {
       console.warn('[NSFW Guardian] blob変換失敗:', e.message);
       // 変換失敗時は表示を戻す
-      imgElement.style.visibility = '';
+      restoreVisibility();
       return;
     }
   }
@@ -240,25 +292,23 @@ async function checkImage(imgElement) {
     delete imgElement.dataset.nsfwChecked;
     delete imgElement.dataset.nsfwCheckedUrl;
     // タイムアウト時は表示を戻す（非表示のまま放置しない）
-    imgElement.style.visibility = '';
+    restoreVisibility();
     return;
   }
 
   if (approvedUrls.has(mediaId)) {
     // 判定中にユーザーが承認した場合は表示を戻す
-    imgElement.style.visibility = '';
+    restoreVisibility();
     return;
   }
 
   if (result.nsfwScore > CONFIG.threshold) {
-    // replaceWithWarning の前に visibility をリセットする
-    // （wrapper への差し替え後、「クリックで表示」時に imgElement.style.cssText='' で
-    //   再表示するため、ここでリセットしておく必要がある）
-    imgElement.style.visibility = '';
+    // ブロック前に、この拡張機能が変更した visibility だけを戻す
+    restoreVisibility();
     replaceWithWarning(imgElement, result.nsfwScore, mediaId);
   } else {
     // 安全な画像 → 表示を戻す
-    imgElement.style.visibility = '';
+    restoreVisibility();
   }
 }
 
@@ -285,7 +335,6 @@ function replaceWithWarning(imgElement, score, mediaId) {
     e.preventDefault();
     console.log('[NSFW Guardian] 承認クリック mediaId:', mediaId);
     approvedUrls.add(mediaId);
-    imgElement.style.cssText = '';
     imgElement.dataset.nsfwChecked = 'approved';
     wrapper.replaceWith(imgElement);
   });
@@ -293,43 +342,113 @@ function replaceWithWarning(imgElement, score, mediaId) {
   imgElement.replaceWith(wrapper);
 }
 
-function startObserver() {
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach(mutation => {
-      // ① 新しいノードが追加された場合
-      if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType !== Node.ELEMENT_NODE) return;
-          const images = [];
-          if (node.tagName === 'IMG') images.push(node);
-          node.querySelectorAll('img').forEach((img) => {
-            images.push(img);
-          });
-          images.forEach((img) => {
-            checkImage(img);
-          });
-        });
-      }
+function isShadowRoot(root) {
+  return typeof ShadowRoot !== 'undefined' && root instanceof ShadowRoot;
+}
 
-      // ② 既存imgのsrc/srcset属性が変わった場合（遅延ロード対応）
+function getOpenShadowRoot(element) {
+  try {
+    return element.shadowRoot || null;
+  } catch {
+    return null;
+  }
+}
+
+function ensureShadowStyle(root) {
+  if (!isShadowRoot(root)) return;
+  const hasStyle = Array.from(root.childNodes).some(node =>
+    node.nodeType === Node.ELEMENT_NODE && node.tagName === 'STYLE' && node.hasAttribute(SHADOW_STYLE_MARKER)
+  );
+  if (hasStyle) return;
+  const style = document.createElement('style');
+  style.setAttribute(SHADOW_STYLE_MARKER, '');
+  style.textContent = SHADOW_BLOCK_CSS;
+  root.appendChild(style);
+}
+
+function scanImages(root) {
+  root.querySelectorAll('img').forEach(checkImage);
+}
+
+function retryDmHost(host) {
+  if (retriedDmHosts.has(host)) return;
+  retriedDmHosts.add(host);
+  const startedAt = Date.now();
+
+  function checkAt(index) {
+    if (!host.isConnected) return;
+    const shadowRoot = getOpenShadowRoot(host);
+    if (shadowRoot) {
+      registerRoot(shadowRoot);
+      return;
+    }
+    if (index + 1 < DM_RETRY_TIMES.length) {
+      const delay = Math.max(0, DM_RETRY_TIMES[index + 1] - (Date.now() - startedAt));
+      setTimeout(() => checkAt(index + 1), delay);
+    }
+  }
+
+  checkAt(0);
+}
+
+function registerNestedRoots(root) {
+  const elements = root.nodeType === Node.ELEMENT_NODE
+    ? [root, ...root.querySelectorAll('*')]
+    : root.querySelectorAll('*');
+  for (const element of elements) {
+    const shadowRoot = getOpenShadowRoot(element);
+    if (shadowRoot) registerRoot(shadowRoot);
+    if (element.matches(DM_HOST_SELECTOR)) retryDmHost(element);
+  }
+}
+
+function processAddedNode(node) {
+  if (node.nodeType !== Node.ELEMENT_NODE) return;
+  if (node.tagName === 'IMG') checkImage(node);
+  scanImages(node);
+  registerNestedRoots(node);
+}
+
+function observeRoot(root) {
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(processAddedNode);
+      }
       if (mutation.type === 'attributes' && mutation.target.tagName === 'IMG') {
         const img = mutation.target;
-        if (img.dataset.nsfwChecked === 'approved') return;
+        if (img.dataset.nsfwChecked === 'approved') continue;
         const newUrl = getBestImageUrl(img);
         if (newUrl && newUrl !== img.dataset.nsfwCheckedUrl) {
           delete img.dataset.nsfwChecked;
           checkImage(img);
         }
       }
-    });
+    }
+    if (isShadowRoot(root)) ensureShadowStyle(root);
   });
-
-  observer.observe(document.body, {
+  observer.observe(root, {
     childList: true,
     subtree: true,
     attributes: true,
     attributeFilter: ['src', 'srcset'],
   });
+}
+
+function registerRoot(root) {
+  if (registeredRoots.has(root)) {
+    if (isShadowRoot(root)) ensureShadowStyle(root);
+    return;
+  }
+  registeredRoots.add(root);
+  observeRoot(root);
+  if (isShadowRoot(root)) ensureShadowStyle(root);
+  scanImages(root);
+  registerNestedRoots(root);
+}
+
+function startObserver() {
+  registerRoot(document.body);
   console.log('[NSFW Guardian] MutationObserver 開始（属性監視あり）');
 }
 
@@ -338,6 +457,8 @@ if (typeof module !== 'undefined') {
   module.exports = {
     getMediaId, getBestImageUrl, blobUrlToBase64, replaceWithWarning, checkImage,
     resolveLanguage, getContentMessages,
+    registerRoot, registerNestedRoots, ensureShadowStyle, retryDmHost,
+    hideImageWhileChecking, DM_RETRY_TIMES,
     // テスト用状態操作ヘルパー
     _setState: ({ enabled, threshold, language } = {}) => {
       if (enabled   !== undefined) isEnabled = enabled;

@@ -1,7 +1,7 @@
 // ユニットテスト
 const {
   getMediaId, getBestImageUrl, blobUrlToBase64, replaceWithWarning,
-  resolveLanguage, getContentMessages, _setState
+  resolveLanguage, getContentMessages, hideImageWhileChecking, _setState
 } =
   require('../content.js');
 
@@ -187,6 +187,16 @@ describe('replaceWithWarning()', () => {
     expect(container.querySelector('.nsfw-guardian-block')).toBeNull();
     expect(img.dataset.nsfwChecked).toBe('approved');
   });
+  test('クリックで表示してもX側のinline styleを保持する', () => {
+    const img = document.createElement('img');
+    img.style.transform = 'scale(1.5)';
+    img.style.transition = 'transform 0.2s ease-out';
+    container.appendChild(img);
+    replaceWithWarning(img, 0.9, 'styled-id');
+    container.querySelector('.nsfw-guardian-btn').click();
+    expect(img.style.transform).toBe('scale(1.5)');
+    expect(img.style.transition).toBe('transform 0.2s ease-out');
+  });
   test('サイズがすべて 0 の場合は 200px にフォールバックする', () => {
     const img = document.createElement('img');
     container.appendChild(img);
@@ -194,5 +204,38 @@ describe('replaceWithWarning()', () => {
     const block = container.querySelector('.nsfw-guardian-block');
     expect(block.style.width).toBe('200px');
     expect(block.style.height).toBe('200px');
+  });
+});
+
+describe('判定中のvisibility復元', () => {
+  test('元々指定がなければvisibility propertyを削除し、他のstyleを保持する', () => {
+    const img = document.createElement('img');
+    img.style.transform = 'scale(1)';
+    const restore = hideImageWhileChecking(img);
+    expect(img.style.visibility).toBe('hidden');
+    img.style.transition = 'transform 0.2s ease-out';
+    restore();
+    expect(img.style.getPropertyValue('visibility')).toBe('');
+    expect(img.style.cssText).not.toMatch(/visibility/);
+    expect(img.style.transform).toBe('scale(1)');
+    expect(img.style.transition).toBe('transform 0.2s ease-out');
+  });
+
+  test('元のvisibility valueと!important priorityを正確に戻す', () => {
+    const img = document.createElement('img');
+    img.style.setProperty('visibility', 'visible', 'important');
+    const restore = hideImageWhileChecking(img);
+    expect(img.style.getPropertyPriority('visibility')).toBe('important');
+    restore();
+    expect(img.style.getPropertyValue('visibility')).toBe('visible');
+    expect(img.style.getPropertyPriority('visibility')).toBe('important');
+  });
+
+  test('元のvisibility valueをpriorityなしで戻す', () => {
+    const img = document.createElement('img');
+    img.style.setProperty('visibility', 'collapse');
+    hideImageWhileChecking(img)();
+    expect(img.style.getPropertyValue('visibility')).toBe('collapse');
+    expect(img.style.getPropertyPriority('visibility')).toBe('');
   });
 });

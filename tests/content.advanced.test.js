@@ -13,6 +13,11 @@ const {
   _getState,
   _approvedUrls,
   _resolveClassification,
+  registerRoot,
+  registerNestedRoots,
+  ensureShadowStyle,
+  retryDmHost,
+  DM_RETRY_TIMES,
 } = require('../content.js');
 
 // メッセージリスナー（content.js が登録したもの）を取得
@@ -204,6 +209,34 @@ describe('checkImage(): 判定と表示', () => {
     expect(container.querySelector('img')).toBeNull();
   });
 
+  test('判定・ブロック・個別表示の間もX側のinline styleを保持する', async () => {
+    const img = makeImg({ src: 'https://pbs.twimg.com/media/styled.jpg' });
+    img.style.transform = 'scale(1)';
+    img.style.transition = 'transform 0.2s ease-out';
+    img.style.setProperty('visibility', 'visible', 'important');
+    container.appendChild(img);
+
+    const requestIdPromise = captureNextRequestId();
+    const checkPromise = checkImage(img);
+    const requestId = await requestIdPromise;
+    expect(img.style.getPropertyValue('visibility')).toBe('hidden');
+    img.style.transform = 'scale(1.5)';
+    img.style.width = '320px';
+    _resolveClassification(requestId, { nsfwScore: 0.9 });
+    await checkPromise;
+
+    expect(img.style.getPropertyValue('visibility')).toBe('visible');
+    expect(img.style.getPropertyPriority('visibility')).toBe('important');
+    expect(img.style.transform).toBe('scale(1.5)');
+    expect(img.style.transition).toBe('transform 0.2s ease-out');
+    expect(img.style.width).toBe('320px');
+    container.querySelector('.nsfw-guardian-btn').click();
+    expect(container.querySelector('img')).toBe(img);
+    expect(img.style.transform).toBe('scale(1.5)');
+    expect(img.style.transition).toBe('transform 0.2s ease-out');
+    expect(img.style.width).toBe('320px');
+  });
+
   test('スコアが閾値以下ならブロックされない', async () => {
     const img = makeImg({ src: 'https://pbs.twimg.com/media/safe.jpg' });
     container.appendChild(img);
@@ -294,5 +327,220 @@ describe('checkImage(): 判定と表示', () => {
 
     _resolveClassification(requestId, { nsfwScore: 0 });
     await checkPromise;
+  });
+});
+
+// jsdomのMutationObserverとcheckImageの非同期継続を進める。
+async function flushImageWork() {
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+}
+
+describe('通常DOM / open ShadowRoot の共通監視', () => {
+  let container;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    _setState({ enabled: true, threshold: 0.3 });
+    _approvedUrls.clear();
+    chrome.runtime.sendMessage.mockReset();
+    chrome.runtime.sendMessage.mockImplementation((message) => {
+      _resolveClassification(message.requestId, { nsfwScore: 0.9 });
+    });
+  });
+
+  afterEach(() => {
+    container.remove();
+    jest.restoreAllMocks();
+  });
+
+  test('既存open ShadowRootのblob IMGが従来のbase64判定経路でブロックされる', async () => {
+    const host = document.createElement('div');
+    const shadow = host.attachShadow({ mode: 'open' });
+    const img = makeImg({ src: 'blob:https://x.com/dm-image' });
+    shadow.appendChild(img);
+    container.appendChild(host);
+    const canvasContext = { drawImage: jest.fn() };
+    jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(canvasContext);
+    jest.spyOn(HTMLCanvasElement.prototype, 'toDataURL').mockReturnValue('data:image/jpeg;base64,dm');
+
+    registerRoot(container);
+    await flushImageWork();
+
+    expect(canvasContext.drawImage).toHaveBeenCalledWith(img, 0, 0);
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'CLASSIFY_IMAGE', imageUrl: 'blob:https://x.com/dm-image',
+      base64Data: 'data:image/jpeg;base64,dm',
+    }));
+    expect(shadow.querySelector('.nsfw-guardian-block')).not.toBeNull();
+    expect(shadow.querySelector('style[data-nsfw-guardian-shadow-style]')).not.toBeNull();
+  });
+
+  test('ShadowRoot登録後のIMG追加とsrc / srcset変更を再判定する', async () => {
+    const shadow = container.attachShadow({ mode: 'open' });
+    registerRoot(shadow);
+    const img = makeImg({ src: 'https://example.com/first.jpg' });
+    // 画像をDOMに残し、URLごとの判定要求を確認する。
+    chrome.runtime.sendMessage.mockImplementation((message) => {
+      _resolveClassification(message.requestId, { nsfwScore: 0.1 });
+    });
+    shadow.appendChild(img);
+    await flushImageWork();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(expect.objectContaining({ imageUrl: 'https://example.com/first.jpg' }));
+
+    img.src = 'https://example.com/second.jpg';
+    await flushImageWork();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(expect.objectContaining({ imageUrl: 'https://example.com/second.jpg' }));
+
+    img.srcset = 'https://example.com/third.jpg 2x';
+    await flushImageWork();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(expect.objectContaining({ imageUrl: 'https://example.com/third.jpg' }));
+  });
+
+  test('同じrootの再登録でobserverとCSSを増やさず、CSS削除時は再注入する', async () => {
+    const shadow = container.attachShadow({ mode: 'open' });
+    const observeSpy = jest.spyOn(MutationObserver.prototype, 'observe');
+    registerRoot(shadow);
+    registerRoot(shadow);
+    expect(observeSpy).toHaveBeenCalledTimes(1);
+    expect(shadow.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+    shadow.querySelector('style').remove();
+    await flushImageWork();
+    expect(shadow.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+    ensureShadowStyle(shadow);
+    expect(shadow.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+  });
+
+  test('既存nested open ShadowRootを再帰的に走査する', async () => {
+    const outerHost = document.createElement('div');
+    const outer = outerHost.attachShadow({ mode: 'open' });
+    const innerHost = document.createElement('div');
+    const inner = innerHost.attachShadow({ mode: 'open' });
+    inner.appendChild(makeImg({ src: 'https://example.com/nested.jpg' }));
+    outer.appendChild(innerHost);
+    container.appendChild(outerHost);
+    registerNestedRoots(container);
+    await flushImageWork();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(expect.objectContaining({ imageUrl: 'https://example.com/nested.jpg' }));
+    expect(outer.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+    expect(inner.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+  });
+
+  test('closed / アクセス不能なShadowRootでも例外にならない', () => {
+    const closedHost = document.createElement('div');
+    closedHost.attachShadow({ mode: 'closed' });
+    const inaccessible = document.createElement('div');
+    Object.defineProperty(inaccessible, 'shadowRoot', { get() { throw new Error('denied'); } });
+    container.append(closedHost, inaccessible);
+    expect(() => registerNestedRoots(container)).not.toThrow();
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+  });
+
+  test('通常DOMの画像は従来どおりstyles.css経路でブロックされる', async () => {
+    container.appendChild(makeImg({ src: 'https://example.com/normal.jpg' }));
+    registerRoot(container);
+    await flushImageWork();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(expect.objectContaining({ imageUrl: 'https://example.com/normal.jpg' }));
+    expect(container.querySelector('.nsfw-guardian-block')).not.toBeNull();
+    expect(container.querySelector('style[data-nsfw-guardian-shadow-style]')).toBeNull();
+  });
+
+  test('ShadowRootでも小画像・GIF・SVGの既存skip条件を維持する', async () => {
+    const shadow = container.attachShadow({ mode: 'open' });
+    shadow.append(
+      makeImg({ src: 'https://example.com/small.jpg', w: 50, h: 50 }),
+      makeImg({ src: 'https://example.com/animation.gif' }),
+      makeImg({ src: 'https://example.com/icon.svg' }),
+    );
+    registerRoot(shadow);
+    await flushImageWork();
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+  });
+});
+
+describe('X DM host限定retry', () => {
+  let container;
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    container.remove();
+    jest.useRealTimers();
+    jest.restoreAllMocks();
+  });
+
+  function makeHostWithProbe() {
+    const host = document.createElement('div');
+    host.dataset.testid = 'xchatEmbedRoute';
+    container.appendChild(host);
+    const nativeGetter = Object.getOwnPropertyDescriptor(Element.prototype, 'shadowRoot').get;
+    const start = Date.now();
+    const checks = [];
+    Object.defineProperty(host, 'shadowRoot', {
+      get() {
+        checks.push(Date.now() - start);
+        return nativeGetter.call(host);
+      },
+    });
+    return { host, checks };
+  }
+
+  test('既存ShadowRootは0msで登録し、後続retryを予約しない', async () => {
+    const { host, checks } = makeHostWithProbe();
+    const root = host.attachShadow({ mode: 'open' });
+    retryDmHost(host);
+    await jest.advanceTimersByTimeAsync(2000);
+    expect([...new Set(checks)]).toEqual([0]);
+    expect(root.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+  });
+
+  test('host追加後100msでShadowRootができたら100msで検出して停止する', async () => {
+    registerRoot(container);
+    const { host, checks } = makeHostWithProbe();
+    // DOM追加のMutationObserver経由で0msの試行を開始する。
+    await flushImageWork();
+    expect([...new Set(checks)]).toEqual([0]);
+    await jest.advanceTimersByTimeAsync(99);
+    expect([...new Set(checks)]).toEqual([0, 16, 50]);
+    const root = host.attachShadow({ mode: 'open' });
+    await jest.advanceTimersByTimeAsync(1);
+    expect([...new Set(checks)]).toEqual([0, 16, 50, 100]);
+    await jest.advanceTimersByTimeAsync(2000);
+    expect([...new Set(checks)]).toEqual([0, 16, 50, 100]);
+    expect(root.querySelectorAll('style[data-nsfw-guardian-shadow-style]')).toHaveLength(1);
+  });
+
+  test('未生成なら指定の絶対時刻で試行し2000msで終了する', async () => {
+    const { host, checks } = makeHostWithProbe();
+    retryDmHost(host);
+    await jest.advanceTimersByTimeAsync(2000);
+    expect([...new Set(checks)]).toEqual(DM_RETRY_TIMES);
+    await jest.advanceTimersByTimeAsync(2000);
+    expect([...new Set(checks)]).toEqual(DM_RETRY_TIMES);
+  });
+
+  test('host切断時は次の試行で停止する', async () => {
+    const { host, checks } = makeHostWithProbe();
+    retryDmHost(host);
+    await jest.advanceTimersByTimeAsync(50);
+    host.remove();
+    await jest.advanceTimersByTimeAsync(2000);
+    expect([...new Set(checks)]).toEqual([0, 16, 50]);
+  });
+
+  test('同じhostを再検知してもretryを二重起動しない', async () => {
+    const { host, checks } = makeHostWithProbe();
+    retryDmHost(host);
+    retryDmHost(host);
+    registerNestedRoots(container);
+    expect(jest.getTimerCount()).toBe(1);
+    await jest.advanceTimersByTimeAsync(2000);
+    expect(checks.filter(time => time > 0)).toEqual(DM_RETRY_TIMES.slice(1));
   });
 });
