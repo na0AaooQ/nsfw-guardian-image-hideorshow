@@ -99,7 +99,7 @@ Google ChromeでX（旧Twitter）をご利用いただく方が、本拡張機�
 | [NSFWJS](https://github.com/infinitered/nsfwjs) | 2.4.2 | MIT | NSFWモデル(MobileNet v2ベース) |
 | [Jest](https://jestjs.io/) | 30.x | MIT | ユニットテストフレームワーク |
 | [jest-environment-jsdom](https://github.com/jestjs/jest) | 30.x | MIT | JestのDOM環境シミュレーター |
-| Node.js | 25.6.1 | MIT | 拡張機能の実装に利用 |
+| Node.js | 24.22.3 | MIT | 拡張機能の開発・テスト・ビルドに利用（利用者のインストールは不要） |
 
 ## ライセンスについて
 
@@ -163,8 +163,10 @@ nsfw-guardian-image-hideorshow/
 
 ### 前提条件
 
-- Node.js 16以上
-- npm
+推奨する開発・テスト環境：
+
+- Node.js v24.22.3
+- npm 11.19.1
 
 ### 本リポジトリのclone
 
